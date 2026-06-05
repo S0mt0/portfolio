@@ -8,14 +8,12 @@ import {
 } from "lucide-react";
 
 import { PageShell } from "@/components/common/page-shell";
-import { RegistryCard } from "@/components/common/registry-card";
 import { SkillTags } from "@/components/common/skill-tags";
 import { StatusBadge } from "@/components/common/status-badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
   builds,
-  homeHighlights,
   profile,
   securityLab,
   skillGroups,
@@ -24,7 +22,20 @@ import {
 
 export function ProfileCommand() {
   const featuredBuilds = builds.slice(0, 2);
-  const primarySkillGroups = skillGroups.slice(0, 3);
+  const snapshotItems = [
+    {
+      label: "Since 2022",
+      value: "Fullstack developer shipping production web systems.",
+    },
+    {
+      label: "Current track",
+      value: "Learning Solidity, Foundry, EVM security, and audit-style review.",
+    },
+    {
+      label: "Open to",
+      value: "Fullstack, Web3 frontend, Solidity, and junior audit-facing work.",
+    },
+  ];
   const railItems = [
     { href: "/", label: "Home", icon: Sparkles, active: true },
     { href: "/experience", label: "Experience", icon: BookOpen },
@@ -75,28 +86,6 @@ export function ProfileCommand() {
               {profile.intro}
             </p>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-3">
-              {profile.stats.map((stat, index) => (
-                <div
-                  key={stat.label}
-                  className={[
-                    "rounded-xl border border-border/60 p-4",
-                    index === 0 && "bg-[#ffe07a]",
-                    index === 1 && "bg-[#b9ebf5]",
-                    index === 2 && "bg-[#eee8ff]",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                >
-                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
-                    {stat.label}
-                  </p>
-                  <p className="mt-2 text-3xl font-black">{stat.value}</p>
-                  <p className="mt-2 text-xs font-semibold leading-5">{stat.note}</p>
-                </div>
-              ))}
-            </div>
-
             <div className="mt-6 flex flex-wrap gap-3">
               <Button
                 asChild
@@ -122,63 +111,61 @@ export function ProfileCommand() {
             </div>
           </section>
 
-          <section className="grid gap-x-6 gap-y-4 border-y border-border/30 py-5 sm:grid-cols-2 xl:grid-cols-4">
-            {homeHighlights.map(({ icon: Icon, label, value }, index) => (
-              <div
-                key={label}
-                className={[
-                  "relative pl-12",
-                  index === 1 && "",
-                  index === 2 && "",
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
-              >
-                <span className="absolute left-0 top-0 flex h-9 w-9 items-center justify-center rounded-xl border border-border/70 bg-white/80">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <p className="font-bold">{label}</p>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  {value}
+          <section className="grid gap-3 border-y border-border/30 py-5 sm:grid-cols-3">
+            {snapshotItems.map((item) => (
+              <div key={item.label}>
+                <p className="text-xs font-black uppercase tracking-[0.14em] text-muted-foreground">
+                  {item.label}
+                </p>
+                <p className="mt-2 text-sm font-semibold leading-6 text-foreground/82">
+                  {item.value}
                 </p>
               </div>
             ))}
           </section>
 
-          <section className="rounded-2xl border border-border/60 bg-[#f8f5ff]/80 p-4 sm:p-5">
-            <div className="mb-5 flex items-center justify-between gap-4">
+          <section className="py-3">
+            <div className="mb-3 flex items-center justify-between gap-4">
               <div>
-                <p className="font-sketch text-3xl font-bold text-primary">Work table</p>
-                <h2 className="text-2xl font-extrabold">Selected proof</h2>
+                <p className="font-sketch text-3xl font-bold text-primary">Selected work</p>
+                <h2 className="text-2xl font-extrabold">Proof, not decoration</h2>
               </div>
               <Link href="/builds" className="inline-flex items-center gap-1 text-sm font-bold">
                 All builds
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </div>
-            <div className="grid gap-4 lg:grid-cols-2">
+            <div className="divide-y divide-border/30">
               {featuredBuilds.map((build) => (
-                <RegistryCard
-                  key={build.index}
-                  index={build.index}
-                  title={build.name}
-                  meta={build.category}
-                  status={build.status}
-                  className="bg-white"
-                >
-                  <p className="text-sm leading-7 text-muted-foreground">{build.description}</p>
-                  <div className="mt-5">
+                <article key={build.index} className="py-5 first:pt-2 last:pb-0">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <p className="text-xs font-black uppercase tracking-[0.14em] text-muted-foreground">
+                        {build.category}
+                      </p>
+                      <h3 className="mt-2 text-xl font-extrabold text-foreground">
+                        {build.name}
+                      </h3>
+                    </div>
+                    <span className="w-fit rounded-full border border-border/50 bg-white/70 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em]">
+                      {build.status}
+                    </span>
+                  </div>
+                  <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">
+                    {build.description}
+                  </p>
+                  <div className="mt-4">
                     <SkillTags items={build.stack} />
                   </div>
-                </RegistryCard>
+                </article>
               ))}
             </div>
           </section>
         </div>
 
         <aside className="order-3 grid gap-4 lg:order-none">
-          <section className="rounded-2xl bg-[#dff7ff]/82 p-5">
-            <p className="font-sketch text-3xl font-bold">Current focus</p>
+          <section className="rounded-2xl bg-[#dff7ff]/70 p-5">
+            <p className="font-sketch text-3xl font-bold">Now</p>
             <p className="mt-2 text-sm font-semibold leading-6">
               Fullstack proof stays visible while I build public Solidity and security-review artifacts.
             </p>
@@ -199,15 +186,15 @@ export function ProfileCommand() {
             </div>
           </section>
 
-          <section className="rounded-2xl border border-border/50 bg-white/70 p-5">
+          <section className="rounded-2xl border border-border/40 bg-white/64 p-5">
             <p className="font-sketch text-3xl font-bold text-primary">Toolbox</p>
-            <div className="mt-5 grid gap-4">
-              {primarySkillGroups.map((group) => (
+            <div className="mt-5 grid gap-5">
+              {skillGroups.map((group) => (
                 <div key={group.title}>
                   <p className="mb-3 text-xs font-black uppercase tracking-[0.14em]">
                     {group.title}
                   </p>
-                  <SkillTags items={group.skills.slice(0, 4)} />
+                  <SkillTags items={group.skills} />
                 </div>
               ))}
             </div>

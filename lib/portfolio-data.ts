@@ -120,19 +120,56 @@ export const socialLinks: SocialLink[] = [
 export const skillGroups: SkillGroup[] = [
   {
     title: "Fullstack Engineering",
-    skills: ["Next.js", "React", "TypeScript", "Node.js", "Prisma", "PostgreSQL"],
+    skills: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Node.js",
+      "NestJS",
+      "Express.js",
+      "Prisma",
+      "PostgreSQL",
+      "MongoDB",
+      "REST APIs",
+    ],
   },
   {
-    title: "Product Systems",
-    skills: ["Dashboards", "CMS flows", "Auth", "Payments", "Forms", "SEO"],
+    title: "Frontend State & UI",
+    skills: [
+      "Zustand",
+      "Redux Toolkit",
+      "React Query",
+      "React Hook Form",
+      "Zod",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Framer Motion",
+    ],
   },
   {
-    title: "Smart Contract Track",
-    skills: ["Solidity", "Foundry", "EVM", "Protocol design", "Threat modeling"],
+    title: "Web3 & Smart Contracts",
+    skills: [
+      "Solidity",
+      "Foundry",
+      "EVM",
+      "ethers.js",
+      "web3.js",
+      "Wagmi",
+      "Viem",
+      "RainbowKit",
+      "Hardhat",
+    ],
   },
   {
     title: "Security Practice",
-    skills: ["Invariant thinking", "Access control", "Reentrancy", "Testing", "Writeups"],
+    skills: [
+      "Invariant thinking",
+      "Access control",
+      "Reentrancy",
+      "Fuzz testing",
+      "Threat modeling",
+      "Writeups",
+    ],
   },
 ];
 
