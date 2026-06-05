@@ -1,5 +1,6 @@
 import { Code2, ExternalLink } from "lucide-react";
 
+import { MotionItem, MotionList } from "@/components/common/motion-primitives";
 import { PageShell } from "@/components/common/page-shell";
 import { SectionHeading } from "@/components/common/section-heading";
 import { SkillTags } from "@/components/common/skill-tags";
@@ -11,16 +12,16 @@ export function BuildRegistry() {
 
   return (
     <PageShell>
-      <SectionHeading {...intro} />
+      <SectionHeading {...intro} tag="LOGS" />
 
-      <section className="mt-10 border-y border-border/25">
+      <MotionList className="mt-10 border-y border-border/25">
         {builds.map((build) => (
-          <article
+          <MotionItem
             key={build.index}
-            className="grid gap-5 border-b border-border/20 py-8 last:border-b-0 md:grid-cols-[8rem_minmax(0,1fr)_14rem]"
+            className="group grid gap-5 border-b border-border/20 py-8 transition-colors hover:bg-accent/20 last:border-b-0 md:grid-cols-[8rem_minmax(0,1fr)_14rem]"
           >
             <div>
-              <span className="font-sketch text-4xl font-bold text-primary">
+              <span className="font-sketch text-4xl font-bold text-primary transition-transform group-hover:-rotate-3">
                 {build.index}
               </span>
               <p className="mt-2 text-xs font-black uppercase tracking-[0.14em] text-muted-foreground">
@@ -58,7 +59,11 @@ export function BuildRegistry() {
                     variant="outline"
                     className="rounded-none border-border/35 bg-transparent"
                   >
-                    <a href={build.githubHref} target="_blank" rel="noreferrer noopener">
+                    <a
+                      href={build.githubHref}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
                       GitHub
                       <Code2 className="h-3.5 w-3.5" />
                     </a>
@@ -70,7 +75,11 @@ export function BuildRegistry() {
                     size="sm"
                     className="rounded-none bg-foreground text-background hover:bg-foreground/85"
                   >
-                    <a href={build.liveHref} target="_blank" rel="noreferrer noopener">
+                    <a
+                      href={build.liveHref}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
                       View project
                       <ExternalLink className="h-3.5 w-3.5" />
                     </a>
@@ -78,9 +87,9 @@ export function BuildRegistry() {
                 ) : null}
               </div>
             </aside>
-          </article>
+          </MotionItem>
         ))}
-      </section>
+      </MotionList>
     </PageShell>
   );
 }

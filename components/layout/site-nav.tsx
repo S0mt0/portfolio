@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Cookie, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -25,6 +25,9 @@ export function SiteNav() {
     <header className="sticky top-0 z-40 border-b border-border/15 bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:px-8 lg:px-10">
         <Link href="/" className="group inline-flex min-w-0 items-center gap-3">
+          <span className="grid h-9 w-9 shrink-0 place-items-center border border-border/35 bg-accent text-accent-foreground transition-transform group-hover:-rotate-6">
+            <Cookie className="h-4 w-4" />
+          </span>
           <span className="min-w-0">
             <span className="block truncate text-sm font-black uppercase tracking-[0.16em] leading-none">
               {profile.handle}

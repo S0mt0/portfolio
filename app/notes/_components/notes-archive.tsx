@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
+import { MotionItem, MotionList } from "@/components/common/motion-primitives";
 import { PageShell } from "@/components/common/page-shell";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Badge } from "@/components/ui/badge";
@@ -11,16 +12,16 @@ export function NotesArchive() {
 
   return (
     <PageShell>
-      <SectionHeading {...intro} />
+      <SectionHeading {...intro} tag="NOTE" />
 
-      <section className="mt-8 divide-y divide-border/30">
+      <MotionList className="mt-8 divide-y divide-border/30">
         {notes.map((note) => (
-          <article
+          <MotionItem
             key={note.index}
-            className="grid gap-4 py-6 first:pt-0 md:grid-cols-[8rem_minmax(0,1fr)]"
+            className="group grid gap-4 py-6 transition-colors hover:bg-secondary/25 first:pt-0 md:grid-cols-[8rem_minmax(0,1fr)]"
           >
             <div>
-              <p className="font-sketch text-3xl font-bold text-primary">
+              <p className="font-sketch text-3xl font-bold text-primary transition-transform group-hover:-rotate-3">
                 {note.index}
               </p>
               <p className="mt-1 text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground">
@@ -43,9 +44,9 @@ export function NotesArchive() {
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </div>
-          </article>
+          </MotionItem>
         ))}
-      </section>
+      </MotionList>
     </PageShell>
   );
 }

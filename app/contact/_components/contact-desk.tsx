@@ -44,7 +44,7 @@ export function ContactDesk() {
 
   return (
     <PageShell>
-      <SectionHeading {...intro} />
+      <SectionHeading {...intro} tag="HOLA" />
 
       <section className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <motion.form

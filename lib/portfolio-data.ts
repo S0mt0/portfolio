@@ -3,6 +3,7 @@ import {
   Boxes,
   BriefcaseBusiness,
   Code2,
+  Gamepad2,
   Mail,
   Network,
   NotebookText,
@@ -74,12 +75,18 @@ export type NoteItem = {
   body: string[];
 };
 
+export type ExtraItem = {
+  title: string;
+  note: string;
+  color: string;
+};
+
 export const navItems: NavItem[] = [
   { href: "/", label: "Profile", code: "home" },
   { href: "/experience", label: "Experience", code: "xp" },
   { href: "/builds", label: "Builds", code: "builds" },
   { href: "/notes", label: "Notes", code: "notes" },
-  { href: "/contact", label: "Contact", code: "hello" },
+  { href: "/extra", label: "Extra", code: "extra" },
 ];
 
 export const profile: ProfileInfo = {
@@ -309,7 +316,37 @@ export const pageIntros = {
     description:
       "Send a clear note about the work, the timeline, and what kind of help you need. I read useful details faster than vague intros.",
   },
+  extra: {
+    icon: Gamepad2,
+    eyebrow: "after hours",
+    heading: "Not everything is work.",
+    description:
+      "A loose page for the parts of me that do not fit inside a project registry: games, music, taste, and random personal energy.",
+  },
 };
+
+export const extraItems: ExtraItem[] = [
+  {
+    title: "Chess",
+    note: "I like the quiet pressure of finding a clean move when the board looks messy.",
+    color: "bg-accent/65",
+  },
+  {
+    title: "8 ball",
+    note: "Angles, patience, and a little confidence. It scratches the same part of my brain as debugging.",
+    color: "bg-secondary/70",
+  },
+  {
+    title: "Music",
+    note: "I love music and make music. Some days the best commit is closing the laptop and catching a melody.",
+    color: "bg-primary/15",
+  },
+  {
+    title: "Internet corners",
+    note: "YouTube, TikTok, playlists, small ideas, strange videos, and whatever makes the day less stiff.",
+    color: "bg-card/70",
+  },
+];
 
 export const homeHighlights = [
   {

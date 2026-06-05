@@ -3,6 +3,11 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 
+import {
+  MotionBlock,
+  MotionItem,
+  MotionList,
+} from "@/components/common/motion-primitives";
 import { PageShell } from "@/components/common/page-shell";
 import { Badge } from "@/components/ui/badge";
 import { getNoteBySlug, notes } from "@/lib/portfolio-data";
@@ -45,7 +50,7 @@ export default async function NotePage({ params }: NotePageProps) {
 
   return (
     <PageShell>
-      <article className="border-y border-border/25 py-8 sm:py-12">
+      <MotionBlock className="border-y border-border/25 py-8 sm:py-12">
         <Link
           href="/notes"
           className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary"
@@ -75,12 +80,14 @@ export default async function NotePage({ params }: NotePageProps) {
           </p>
         </div>
 
-        <div className="mt-10 max-w-3xl space-y-6 text-base leading-8 text-foreground/85">
+        <MotionList className="mt-10 max-w-3xl space-y-6 text-base leading-8 text-foreground/85">
           {note.body.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
+            <MotionItem key={paragraph}>
+              <p>{paragraph}</p>
+            </MotionItem>
           ))}
-        </div>
-      </article>
+        </MotionList>
+      </MotionBlock>
     </PageShell>
   );
 }

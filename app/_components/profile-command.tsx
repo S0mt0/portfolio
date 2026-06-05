@@ -1,12 +1,19 @@
 import Link from "next/link";
 import { ArrowUpRight, Boxes, Code2, ExternalLink, Mail } from "lucide-react";
 
+import {
+  MotionBlock,
+  MotionItem,
+  MotionList,
+} from "@/components/common/motion-primitives";
 import { PageShell } from "@/components/common/page-shell";
 import { SkillTags } from "@/components/common/skill-tags";
 import { Button } from "@/components/ui/button";
+import { EmojiCursorArea } from "./emoji-cursor-area";
 import { HeroPortraitCursor } from "./hero-portrait-cursor";
 import {
   builds,
+  notes,
   profile,
   skillGroups,
   socialLinks,
@@ -14,6 +21,7 @@ import {
 
 export function ProfileCommand() {
   const featuredBuilds = builds.slice(0, 2);
+  const featuredNotes = notes.slice(0, 2);
   const snapshotItems = [
     {
       label: "Started",
@@ -41,14 +49,14 @@ export function ProfileCommand() {
     <PageShell className="py-10 sm:py-16">
       <HeroPortraitCursor className="border-b border-border/25 py-8 sm:py-12">
         <div className="relative z-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_17rem] lg:items-start cursor-default">
-          <div>
+          <MotionBlock>
             <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
               Page 01 / working note
             </p>
             <p className="font-sketch text-3xl font-bold text-primary">
               Hi, I&apos;m {profile.name}
             </p>
-            <h1 className="mt-4 max-w-4xl text-balance text-5xl font-black leading-[0.95] tracking-[-0.06em] text-foreground sm:text-7xl">
+            <h1 className="mt-4 max-w-4xl text-balance text-5xl font-black leading-[0.95] tracking-[-0.06em] text-foreground sm:text-6xl">
               I build useful web products and I&apos;m growing into smart
               contract security.
             </h1>
@@ -80,9 +88,9 @@ export function ProfileCommand() {
                 </Link>
               </Button>
             </div>
-          </div>
+          </MotionBlock>
 
-          <aside className="border-t border-border/25 pt-6 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
+          <MotionBlock className="border-t border-border/25 pt-6 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
             <p className="font-sketch text-3xl font-bold text-primary">
               Side notes
             </p>
@@ -98,11 +106,11 @@ export function ProfileCommand() {
                 </div>
               ))}
             </div>
-          </aside>
+          </MotionBlock>
         </div>
       </HeroPortraitCursor>
 
-      <section className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem]">
+      <EmojiCursorArea className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <div>
           <div className="flex items-end justify-between gap-4 border-b border-border/20 pb-3">
             <div>
@@ -122,11 +130,14 @@ export function ProfileCommand() {
             </Link>
           </div>
 
-          <div className="divide-y divide-border/20">
+          <MotionList className="divide-y divide-border/20">
             {featuredBuilds.map((build) => (
-              <article key={build.index} className="py-6">
+              <MotionItem
+                key={build.index}
+                className="group py-6 transition-colors hover:bg-accent/20"
+              >
                 <div className="grid gap-4 sm:grid-cols-[6rem_minmax(0,1fr)]">
-                  <p className="font-sketch text-3xl font-bold text-primary">
+                  <p className="font-sketch text-3xl font-bold text-primary transition-transform group-hover:-rotate-3">
                     {build.index}
                   </p>
                   <div>
@@ -179,13 +190,13 @@ export function ProfileCommand() {
                     </div>
                   </div>
                 </div>
-              </article>
+              </MotionItem>
             ))}
-          </div>
+          </MotionList>
         </div>
 
         <aside className="space-y-10">
-          <section>
+          <MotionBlock>
             <p className="font-sketch text-3xl font-bold text-primary">
               Current study
             </p>
@@ -200,9 +211,9 @@ export function ProfileCommand() {
                 </li>
               ))}
             </ul>
-          </section>
+          </MotionBlock>
 
-          <section>
+          <MotionBlock>
             <p className="font-sketch text-3xl font-bold text-primary">
               Toolbox
             </p>
@@ -218,9 +229,9 @@ export function ProfileCommand() {
                 </div>
               ))}
             </div>
-          </section>
+          </MotionBlock>
 
-          <section className="flex flex-wrap gap-3">
+          <MotionBlock className="flex flex-wrap gap-3">
             {socialLinks.map(({ href, label, icon: Icon }) => (
               <a
                 key={label}
@@ -235,9 +246,63 @@ export function ProfileCommand() {
                 {label}
               </a>
             ))}
-          </section>
+          </MotionBlock>
         </aside>
-      </section>
+      </EmojiCursorArea>
+
+      <EmojiCursorArea
+        item="🗒️"
+        className="mt-14 border-t border-border/20 pt-10"
+      >
+        <div className="flex items-end justify-between gap-4 border-b border-border/20 pb-3">
+          <div>
+            <p className="font-sketch text-3xl font-bold text-primary">
+              Selected notes
+            </p>
+            <h2 className="text-2xl font-black tracking-[-0.03em]">
+              Thoughts I am shaping in public
+            </h2>
+          </div>
+          <Link
+            href="/notes"
+            className="inline-flex items-center gap-1 text-sm font-bold"
+          >
+            All notes
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+        <MotionList className="grid gap-5 pt-6 md:grid-cols-2">
+          {featuredNotes.map((note) => (
+            <MotionItem
+              key={note.slug}
+              className="group border border-border/20 bg-card/35 p-5 transition-transform hover:-rotate-1 hover:bg-secondary/35"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <p className="font-sketch text-3xl font-bold text-primary transition-transform group-hover:-rotate-6">
+                  {note.index}
+                </p>
+                <span className="border border-border/25 bg-accent/65 px-2 py-1 text-[0.65rem] font-black uppercase tracking-[0.14em]">
+                  {note.status}
+                </span>
+              </div>
+              <h3 className="mt-6 text-2xl font-black tracking-[-0.03em]">
+                {note.title}
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                {note.excerpt}
+              </p>
+              <Link
+                href={`/notes/${note.slug}`}
+                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary"
+              >
+                Read note / {note.readTime}
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </MotionItem>
+          ))}
+        </MotionList>
+      </EmojiCursorArea>
     </PageShell>
   );
 }

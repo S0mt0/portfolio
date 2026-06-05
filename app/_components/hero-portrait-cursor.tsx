@@ -62,7 +62,7 @@ export function HeroPortraitCursor({
         <div
           className="h-full w-full -translate-x-1/2 -translate-y-1/2 overflow-hidden border border-border/30 bg-card shadow-sm"
           style={{
-            borderRadius: "58% 42% 64% 36% / 44% 62% 38% 56%",
+            borderRadius: "47% 53% 42% 58% / 55% 44% 56% 45%",
           }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
