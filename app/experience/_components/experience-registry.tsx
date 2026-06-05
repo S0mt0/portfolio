@@ -1,9 +1,7 @@
 import { CheckCircle2 } from "lucide-react";
 
 import { PageShell } from "@/components/common/page-shell";
-import { RegistryCard } from "@/components/common/registry-card";
 import { SectionHeading } from "@/components/common/section-heading";
-import { Separator } from "@/components/ui/separator";
 import { experience, pageIntros, profile } from "@/lib/portfolio-data";
 
 export function ExperienceRegistry() {
@@ -13,32 +11,46 @@ export function ExperienceRegistry() {
     <PageShell>
       <SectionHeading {...intro} />
 
-      <section className="mt-8 grid gap-5">
+      <section className="mt-8 grid gap-6">
         {experience.map((item) => (
-          <RegistryCard
+          <article
             key={item.index}
-            index={item.index}
-            title={item.role}
-            meta={item.period}
-            status={item.status}
+            className="grid gap-4 border-b border-border/30 pb-6 last:border-b-0 md:grid-cols-[9rem_minmax(0,1fr)]"
           >
-            <p className="text-sm leading-7 text-muted-foreground">{item.summary}</p>
-            <Separator className="my-5" />
-            <ul className="grid gap-3 sm:grid-cols-2">
-              {item.signals.map((signal) => (
-                <li key={signal} className="flex gap-3 text-sm leading-6 text-muted-foreground">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                  <span>{signal}</span>
-                </li>
-              ))}
-            </ul>
-          </RegistryCard>
+            <div>
+              <p className="font-sketch text-3xl font-bold text-primary">
+                {item.index}
+              </p>
+              <p className="mt-1 text-xs font-black uppercase tracking-[0.14em] text-muted-foreground">
+                {item.period}
+              </p>
+            </div>
+            <div>
+              <div className="flex flex-wrap items-center gap-3">
+                <h2 className="text-2xl font-extrabold">{item.role}</h2>
+                <span className="rounded-full bg-white/62 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em]">
+                  {item.status}
+                </span>
+              </div>
+              <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
+                {item.summary}
+              </p>
+              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+                {item.signals.map((signal) => (
+                  <li key={signal} className="flex gap-3 text-sm leading-6 text-muted-foreground">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <span>{signal}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
         ))}
       </section>
 
-      <section className="mt-8 border border-border bg-card/72 p-5">
+      <section className="mt-8 bg-white/42 p-5">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-          {"// operating note"}
+          Operating note
         </p>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground">
           {profile.summary}

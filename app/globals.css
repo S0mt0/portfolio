@@ -33,20 +33,20 @@
 }
 
 :root {
-  --background: oklch(0.957 0.026 244);
-  --foreground: oklch(0.19 0.018 248);
-  --card: oklch(0.995 0.004 95 / 0.9);
-  --card-foreground: oklch(0.19 0.018 248);
-  --popover: oklch(0.995 0.004 95);
-  --popover-foreground: oklch(0.19 0.018 248);
-  --primary: oklch(0.65 0.17 330);
-  --primary-foreground: oklch(0.99 0.004 95);
-  --secondary: oklch(0.875 0.073 241);
-  --secondary-foreground: oklch(0.19 0.018 248);
-  --muted: oklch(0.93 0.021 248);
-  --muted-foreground: oklch(0.45 0.025 248);
-  --accent: oklch(0.86 0.106 91);
-  --accent-foreground: oklch(0.19 0.018 248);
+  --background: oklch(0.982 0.012 78);
+  --foreground: oklch(0.16 0.013 260);
+  --card: oklch(0.982 0.012 78);
+  --card-foreground: oklch(0.16 0.013 260);
+  --popover: oklch(0.982 0.012 78);
+  --popover-foreground: oklch(0.16 0.013 260);
+  --primary: oklch(0.595 0.18 29);
+  --primary-foreground: oklch(0.982 0.012 78);
+  --secondary: oklch(0.94 0.023 78);
+  --secondary-foreground: oklch(0.16 0.013 260);
+  --muted: oklch(0.925 0.018 78);
+  --muted-foreground: oklch(0.45 0.018 260);
+  --accent: oklch(0.89 0.072 82);
+  --accent-foreground: oklch(0.16 0.013 260);
   --destructive: oklch(0.62 0.19 25);
   --border: oklch(0.25 0.02 248);
   --input: oklch(0.25 0.02 248);
@@ -78,19 +78,17 @@
   }
 
   .sketch-card {
-    border: 1.5px solid var(--border);
-    box-shadow: 0 12px 30px oklch(0.19 0.018 248 / 0.08);
+    border: 1px solid color-mix(in oklch, var(--border), transparent 72%);
+    box-shadow: none;
   }
 
   .sketch-card-soft {
-    border: 1.5px solid var(--border);
-    box-shadow: 0 8px 20px oklch(0.19 0.018 248 / 0.06);
+    border: 1px solid color-mix(in oklch, var(--border), transparent 78%);
+    box-shadow: none;
   }
 
   .scribble-bg {
-    background-image:
-      radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.82), transparent 34%),
-      linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(216, 237, 255, 0.62));
+    background-image: none;
   }
 
   .text-balance {

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, Palette, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -21,18 +21,15 @@ export function SiteNav() {
   const activeItem = navItems.find((item) => isActivePath(pathname, item.href));
 
   return (
-    <header className="sticky top-0 z-40 px-3 py-3">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 rounded-2xl border border-border/70 bg-white/78 px-4 shadow-sm backdrop-blur sm:px-5">
+    <header className="sticky top-0 z-40 border-b border-border/15 bg-background/90 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:px-8 lg:px-10">
         <Link href="/" className="group inline-flex min-w-0 items-center gap-3">
-          <span className="flex h-9 w-9 shrink-0 rotate-[-5deg] items-center justify-center rounded-xl border border-border bg-[#ffe07a]">
-            <Palette className="h-4 w-4" />
-          </span>
           <span className="min-w-0">
-            <span className="block truncate font-sketch text-xl font-bold leading-none">
-              {profile.name}
+            <span className="block truncate text-sm font-black uppercase tracking-[0.16em] leading-none">
+              {profile.handle}
             </span>
-            <span className="block truncate text-[0.68rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">
-              {profile.handle} / {activeItem?.code ?? "home"}
+            <span className="block truncate text-[0.68rem] font-bold uppercase tracking-[0.16em] text-muted-foreground">
+              {activeItem?.code ?? "home"} note
             </span>
           </span>
         </Link>
@@ -47,7 +44,7 @@ export function SiteNav() {
                 href={item.href}
                 className={cn(
                   "rounded-full border border-transparent px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:border-border/70 hover:bg-white",
-                  isActive && "border-border bg-[#ffc7e8] text-foreground"
+                  isActive && "text-primary"
                 )}
               >
                 {item.label}
@@ -62,7 +59,7 @@ export function SiteNav() {
           variant="outline"
           aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
-          className="rounded-xl border border-border bg-white lg:hidden"
+          className="rounded-none border border-border/30 bg-transparent lg:hidden"
           onClick={() => setOpen((value) => !value)}
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -70,8 +67,8 @@ export function SiteNav() {
       </div>
 
       {open ? (
-        <nav aria-label="Mobile navigation" className="mx-3 mt-2 rounded-2xl border border-border bg-white lg:hidden">
-          <div className="mx-auto grid max-w-7xl px-4 py-3 sm:px-6">
+        <nav aria-label="Mobile navigation" className="border-t border-border/15 bg-background lg:hidden">
+          <div className="mx-auto grid max-w-6xl px-5 py-3 sm:px-8">
             {navItems.map((item) => {
               const isActive = isActivePath(pathname, item.href);
 

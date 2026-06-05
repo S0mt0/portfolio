@@ -1,21 +1,12 @@
 import Link from "next/link";
-import {
-  ArrowUpRight,
-  BookOpen,
-  Boxes,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react";
+import { ArrowUpRight, Boxes, Mail } from "lucide-react";
 
 import { PageShell } from "@/components/common/page-shell";
 import { SkillTags } from "@/components/common/skill-tags";
-import { StatusBadge } from "@/components/common/status-badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import {
   builds,
   profile,
-  securityLab,
   skillGroups,
   socialLinks,
 } from "@/lib/portfolio-data";
@@ -36,157 +27,129 @@ export function ProfileCommand() {
       value: "Fullstack, Web3 frontend, Solidity, and junior audit-facing work.",
     },
   ];
-  const railItems = [
-    { href: "/", label: "Home", icon: Sparkles, active: true },
-    { href: "/experience", label: "Experience", icon: BookOpen },
-    { href: "/builds", label: "Builds", icon: Boxes },
-    { href: "/security-lab", label: "Lab", icon: ShieldCheck },
+  const currentStudy = [
+    "Solidity fundamentals",
+    "Foundry tests",
+    "Access control",
+    "Reentrancy",
+    "Protocol assumptions",
   ];
 
   return (
-    <PageShell>
-      <section className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_18rem]">
-        <nav
-          aria-label="Portfolio shortcut rail"
-          className="order-2 flex gap-2 overflow-x-auto border-y border-border/30 py-2 lg:col-span-2"
-        >
-          {railItems.map(({ href, label, icon: Icon, active }) => (
-            <Link
-              key={label}
-              href={href}
-              aria-label={label}
-              className={[
-                "inline-flex h-10 shrink-0 items-center gap-2 rounded-xl border px-3 text-sm font-bold transition-colors",
-                active
-                  ? "border-border bg-[#ffc7e8] text-foreground"
-                  : "border-border/50 bg-white/65 text-muted-foreground hover:bg-white",
-              ].join(" ")}
+    <PageShell className="py-10 sm:py-14">
+      <section className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
+        <div>
+          <p className="font-sketch text-3xl font-bold text-primary">
+            Hi, I&apos;m {profile.name}
+          </p>
+          <h1 className="mt-4 max-w-4xl text-balance text-5xl font-black leading-[0.95] tracking-[-0.06em] text-foreground sm:text-7xl">
+            I build fullstack products. I&apos;m learning how smart contracts break.
+          </h1>
+
+          <p className="mt-7 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
+            {profile.intro}
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button
+              asChild
+              size="lg"
+              className="h-11 rounded-none bg-foreground px-5 text-background hover:bg-foreground/85"
             >
-              <Icon className="h-4 w-4" />
-              <span>{label}</span>
-            </Link>
-          ))}
-        </nav>
+              <Link href="/builds">
+                See builds
+                <Boxes className="h-4 w-4" />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="h-11 rounded-none border-border/40 bg-transparent px-5"
+            >
+              <a href="mailto:hello@0xsomto.xyz">
+                Contact
+                <Mail className="h-4 w-4" />
+              </a>
+            </Button>
+          </div>
+        </div>
 
-        <div className="order-1 grid gap-4 lg:order-none">
-          <section className="rounded-2xl bg-white/72 p-5 sm:p-7">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-              <div>
-                <p className="font-sketch text-3xl font-bold text-primary">
-                  Hi, I&apos;m {profile.name}
-                </p>
-                <h1 className="mt-3 max-w-3xl text-balance text-4xl font-extrabold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-5xl">
-                  I build useful web products and I&apos;m growing into smart contract security.
-                </h1>
-              </div>
-              <StatusBadge status={profile.status} />
-            </div>
-
-            <p className="mt-5 max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
-              {profile.intro}
-            </p>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button
-                asChild
-                size="lg"
-                className="h-11 rounded-xl border border-border bg-[#ffc7e8] px-5 text-foreground shadow-sm hover:bg-[#ffb7e2]"
-              >
-                <Link href="/builds">
-                  See builds
-                  <Boxes className="h-4 w-4" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="h-11 rounded-xl border border-border bg-white px-5 shadow-sm"
-              >
-                <Link href="/security-lab">
-                  Security lab
-                  <ShieldCheck className="h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </section>
-
-          <section className="grid gap-3 border-y border-border/30 py-5 sm:grid-cols-3">
+        <aside className="border-l-0 border-border/20 lg:border-l lg:pl-6">
+          <p className="text-xs font-black uppercase tracking-[0.16em] text-primary">
+            Margin note
+          </p>
+          <div className="mt-4 space-y-5">
             {snapshotItems.map((item) => (
               <div key={item.label}>
                 <p className="text-xs font-black uppercase tracking-[0.14em] text-muted-foreground">
                   {item.label}
                 </p>
-                <p className="mt-2 text-sm font-semibold leading-6 text-foreground/82">
+                <p className="mt-2 text-sm font-semibold leading-6">
                   {item.value}
                 </p>
               </div>
             ))}
-          </section>
+          </div>
+        </aside>
+      </section>
 
-          <section className="py-3">
-            <div className="mb-3 flex items-center justify-between gap-4">
-              <div>
-                <p className="font-sketch text-3xl font-bold text-primary">Selected work</p>
-                <h2 className="text-2xl font-extrabold">Proof, not decoration</h2>
-              </div>
-              <Link href="/builds" className="inline-flex items-center gap-1 text-sm font-bold">
-                All builds
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
+      <section className="mt-14 grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <div>
+          <div className="flex items-end justify-between gap-4 border-b border-border/20 pb-3">
+            <div>
+              <p className="font-sketch text-3xl font-bold text-primary">Selected work</p>
+              <h2 className="text-2xl font-black tracking-[-0.03em]">Proof, not decoration</h2>
             </div>
-            <div className="divide-y divide-border/30">
-              {featuredBuilds.map((build) => (
-                <article key={build.index} className="py-5 first:pt-2 last:pb-0">
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
-                      <p className="text-xs font-black uppercase tracking-[0.14em] text-muted-foreground">
-                        {build.category}
-                      </p>
-                      <h3 className="mt-2 text-xl font-extrabold text-foreground">
-                        {build.name}
-                      </h3>
-                    </div>
-                    <span className="w-fit rounded-full border border-border/50 bg-white/70 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em]">
-                      {build.status}
-                    </span>
-                  </div>
-                  <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">
-                    {build.description}
+            <Link href="/builds" className="inline-flex items-center gap-1 text-sm font-bold">
+              All builds
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="divide-y divide-border/20">
+            {featuredBuilds.map((build) => (
+              <article key={build.index} className="py-6">
+                <div className="grid gap-4 sm:grid-cols-[6rem_minmax(0,1fr)]">
+                  <p className="font-sketch text-3xl font-bold text-primary">
+                    {build.index}
                   </p>
-                  <div className="mt-4">
-                    <SkillTags items={build.stack} />
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-[0.14em] text-muted-foreground">
+                      {build.category}
+                    </p>
+                    <h3 className="mt-2 text-xl font-black tracking-[-0.02em]">
+                      {build.name}
+                    </h3>
+                    <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">
+                      {build.description}
+                    </p>
+                    <div className="mt-4">
+                      <SkillTags items={build.stack} />
+                    </div>
                   </div>
-                </article>
-              ))}
-            </div>
-          </section>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
 
-        <aside className="order-3 grid gap-4 lg:order-none">
-          <section className="rounded-2xl bg-[#dff7ff]/70 p-5">
-            <p className="font-sketch text-3xl font-bold">Now</p>
-            <p className="mt-2 text-sm font-semibold leading-6">
-              Fullstack proof stays visible while I build public Solidity and security-review artifacts.
+        <aside className="space-y-10">
+          <section>
+            <p className="font-sketch text-3xl font-bold text-primary">Current study</p>
+            <p className="mt-3 text-sm font-semibold leading-6">
+              The smart-contract track is shown as active study until there is stronger public proof.
             </p>
-            <Separator className="my-4 bg-border" />
-            <div className="space-y-3 text-sm leading-6 text-muted-foreground">
-              <p>
-                <span className="font-bold text-foreground">Now:</span>{" "}
-                {securityLab[0].title}
-              </p>
-              <p>{securityLab[0].description}</p>
-              <Link
-                href="/security-lab"
-                className="inline-flex items-center gap-2 font-bold text-foreground"
-              >
-                Open lab
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </div>
+            <ul className="mt-4 space-y-2 text-sm leading-6 text-muted-foreground">
+              {currentStudy.map((item) => (
+                <li key={item} className="border-b border-border/15 pb-2">
+                  {item}
+                </li>
+              ))}
+            </ul>
           </section>
 
-          <section className="rounded-2xl border border-border/40 bg-white/64 p-5">
+          <section>
             <p className="font-sketch text-3xl font-bold text-primary">Toolbox</p>
             <div className="mt-5 grid gap-5">
               {skillGroups.map((group) => (
@@ -200,24 +163,18 @@ export function ProfileCommand() {
             </div>
           </section>
 
-          <section className="flex flex-wrap gap-2">
+          <section className="flex flex-wrap gap-3">
             {socialLinks.map(({ href, label, icon: Icon }) => (
-              <Button
+              <a
                 key={label}
-                asChild
-                variant="outline"
-                size="sm"
-                className="h-10 rounded-full border border-border/70 bg-white"
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noreferrer noopener" : undefined}
+                className="inline-flex items-center gap-2 border-b border-border/40 py-1 text-xs font-black uppercase tracking-[0.12em] hover:text-primary"
               >
-                <a
-                  href={href}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noreferrer noopener" : undefined}
-                >
-                  <Icon className="h-4 w-4" />
-                  {label}
-                </a>
-              </Button>
+                <Icon className="h-4 w-4" />
+                {label}
+              </a>
             ))}
           </section>
         </aside>

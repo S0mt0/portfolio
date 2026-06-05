@@ -1,10 +1,8 @@
 import { ArrowUpRight } from "lucide-react";
 
 import { PageShell } from "@/components/common/page-shell";
-import { RegistryCard } from "@/components/common/registry-card";
 import { SectionHeading } from "@/components/common/section-heading";
 import { SkillTags } from "@/components/common/skill-tags";
-import { Separator } from "@/components/ui/separator";
 import { builds, pageIntros } from "@/lib/portfolio-data";
 
 export function BuildRegistry() {
@@ -14,38 +12,41 @@ export function BuildRegistry() {
     <PageShell>
       <SectionHeading {...intro} />
 
-      <section className="mt-8 grid gap-5">
-        {builds.map((build) => (
-          <RegistryCard
+      <section className="mt-8 grid gap-6 lg:grid-cols-3">
+        {builds.map((build, index) => (
+          <article
             key={build.index}
-            index={build.index}
-            title={build.name}
-            meta={build.category}
-            status={build.status}
+            className={index === 0 ? "lg:col-span-2" : undefined}
           >
-            <p className="text-sm leading-7 text-muted-foreground">{build.description}</p>
-            <Separator className="my-5" />
-            <div className="grid gap-5 lg:grid-cols-[1fr_0.75fr]">
-              <div>
-                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                  {"// tech stack"}
-                </p>
+            <div className="border-t border-border/35 pt-5">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-black uppercase tracking-[0.14em] text-muted-foreground">
+                    {build.category}
+                  </p>
+                  <h2 className="mt-2 text-2xl font-extrabold">{build.name}</h2>
+                </div>
+                <span className="font-sketch text-3xl font-bold text-primary">
+                  {build.index}
+                </span>
+              </div>
+              <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                {build.description}
+              </p>
+              <p className="mt-4 text-sm font-semibold leading-7 text-foreground/80">
+                {build.proof}
+              </p>
+              <div className="mt-5">
                 <SkillTags items={build.stack} />
               </div>
-              <div>
-                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                  {"// proof signal"}
-                </p>
-                <p className="text-sm leading-7 text-muted-foreground">{build.proof}</p>
-              </div>
             </div>
-          </RegistryCard>
+          </article>
         ))}
       </section>
 
-      <section className="mt-8 border border-border bg-card/72 p-5">
+      <section className="mt-10 bg-white/42 p-5">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-          {"// next upload"}
+          Next upload
         </p>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground">
           Real repository links, demos, and case-study breakdowns can be attached as soon as the curated project list is finalized.

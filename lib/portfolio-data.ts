@@ -88,7 +88,6 @@ export const navItems: NavItem[] = [
   { href: "/", label: "Profile", code: "home" },
   { href: "/experience", label: "Experience", code: "xp" },
   { href: "/builds", label: "Builds", code: "builds" },
-  { href: "/security-lab", label: "Security Lab", code: "lab" },
   { href: "/notes", label: "Notes", code: "notes" },
 ];
 
@@ -228,21 +227,21 @@ export const builds: BuildItem[] = [
   },
   {
     index: "002",
-    name: "Portfolio Security Workstation",
+    name: "Personal Portfolio",
     category: "Personal site",
     status: "active",
     description:
-      "A multi-page portfolio built as a lab interface for fullstack work, smart contract learning, and future security research.",
+      "A personal web presence shaped around clear writing, selected fullstack proof, and the transition into smart contract security.",
     stack: ["Next.js 16", "React 19", "shadcn", "Tailwind CSS"],
     proof: "Shows design direction, modular code structure, and personal technical positioning.",
   },
   {
     index: "003",
-    name: "Solidity Practice Registry",
-    category: "Security lab",
+    name: "Solidity Practice Track",
+    category: "Current study",
     status: "lab",
     description:
-      "A growing set of small contracts, tests, and notes focused on learning how protocol logic fails before claiming formal audit experience.",
+      "A growing set of small contracts, tests, and study notes focused on understanding how protocol logic fails.",
     stack: ["Solidity", "Foundry", "EVM", "Tests"],
     proof: "In progress; intended to become public proof as exercises mature.",
   },
