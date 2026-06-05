@@ -11,7 +11,7 @@ export function SkillTags({ items }: SkillTagsProps) {
         <Badge
           key={item}
           variant="outline"
-          className="rounded-full bg-white/72 px-2 py-0.5 text-[0.66rem] normal-case tracking-normal"
+          className="rounded-none bg-background/55 px-2 py-0.5 text-[0.66rem] normal-case tracking-normal"
         >
           {item}
         </Badge>

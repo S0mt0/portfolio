@@ -1,15 +1,11 @@
 import type { LucideIcon } from "lucide-react";
 import {
-  BookOpen,
   Boxes,
   BriefcaseBusiness,
   Code2,
-  GraduationCap,
   Mail,
   Network,
   NotebookText,
-  ShieldCheck,
-  Terminal,
   X,
 } from "lucide-react";
 
@@ -63,25 +59,19 @@ export type BuildItem = {
   description: string;
   stack: string[];
   proof: string;
-};
-
-export type SecurityLabItem = {
-  index: string;
-  title: string;
-  mode: string;
-  status: "active" | "queued" | "documented";
-  description: string;
-  tags: string[];
+  githubHref?: string;
+  liveHref?: string;
 };
 
 export type NoteItem = {
   index: string;
+  slug: string;
   title: string;
   date: string;
   readTime: string;
   status: "drafting" | "planned" | "published";
   excerpt: string;
-  href: string;
+  body: string[];
 };
 
 export const navItems: NavItem[] = [
@@ -89,6 +79,7 @@ export const navItems: NavItem[] = [
   { href: "/experience", label: "Experience", code: "xp" },
   { href: "/builds", label: "Builds", code: "builds" },
   { href: "/notes", label: "Notes", code: "notes" },
+  { href: "/contact", label: "Contact", code: "hello" },
 ];
 
 export const profile: ProfileInfo = {
@@ -99,13 +90,13 @@ export const profile: ProfileInfo = {
   location: "Nigeria / remote",
   availability: "Open to fullstack, Web3, Solidity, and junior audit-facing roles",
   intro:
-    "I build production web systems, then study how protocol logic breaks. The current mission is to turn fullstack delivery experience into smart contract development and security depth.",
+    "I build web products end to end. Lately I have been spending more time with Solidity, Foundry, and the small mistakes that make protocol logic unsafe.",
   summary:
-    "Since 2022 I have worked across product interfaces, backend flows, dashboards, and Web3-adjacent systems. This portfolio is structured as a live operating log: what I have shipped, what I am studying, and where the security track is becoming real proof.",
+    "Since 2022 I have worked across interfaces, backend flows, dashboards, and Web3-adjacent systems. This site is a simple working note: what I have shipped, what I am learning, and the direction I am taking next.",
   stats: [
     { label: "since", value: "2022", note: "fullstack development" },
     { label: "track", value: "EVM", note: "Solidity + auditing" },
-    { label: "mode", value: "Lab", note: "proof over claims" },
+    { label: "mode", value: "Practice", note: "proof over claims" },
   ],
 };
 
@@ -118,7 +109,7 @@ export const socialLinks: SocialLink[] = [
 
 export const skillGroups: SkillGroup[] = [
   {
-    title: "Fullstack Engineering",
+    title: "Build apps",
     skills: [
       "Next.js",
       "React",
@@ -133,7 +124,7 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "Frontend State & UI",
+    title: "Shape interfaces",
     skills: [
       "Zustand",
       "Redux Toolkit",
@@ -146,7 +137,7 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "Web3 & Smart Contracts",
+    title: "Work with chains",
     skills: [
       "Solidity",
       "Foundry",
@@ -160,7 +151,7 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "Security Practice",
+    title: "Study security",
     skills: [
       "Invariant thinking",
       "Access control",
@@ -224,6 +215,8 @@ export const builds: BuildItem[] = [
       "A polished foundation web experience with public pages, CMS-driven content, donation flows, events, blogs, gallery, and admin-facing management surfaces.",
     stack: ["Next.js", "TypeScript", "Tailwind", "CMS", "Payments"],
     proof: "Shows production frontend taste, content architecture, and end-to-end delivery.",
+    liveHref: "https://zitaonyekafoundation.org",
+    githubHref: "https://github.com/0xsomto",
   },
   {
     index: "002",
@@ -234,6 +227,8 @@ export const builds: BuildItem[] = [
       "A personal web presence shaped around clear writing, selected fullstack proof, and the transition into smart contract security.",
     stack: ["Next.js 16", "React 19", "shadcn", "Tailwind CSS"],
     proof: "Shows design direction, modular code structure, and personal technical positioning.",
+    liveHref: "https://0xsomto.xyz",
+    githubHref: "https://github.com/0xsomto/portfolio",
   },
   {
     index: "003",
@@ -244,61 +239,46 @@ export const builds: BuildItem[] = [
       "A growing set of small contracts, tests, and study notes focused on understanding how protocol logic fails.",
     stack: ["Solidity", "Foundry", "EVM", "Tests"],
     proof: "In progress; intended to become public proof as exercises mature.",
-  },
-];
-
-export const securityLab: SecurityLabItem[] = [
-  {
-    index: "001",
-    title: "Access Control Review Practice",
-    mode: "audit drill",
-    status: "active",
-    description:
-      "Mapping role boundaries, privileged flows, and unsafe assumptions in small Solidity systems.",
-    tags: ["Solidity", "Roles", "Threat model"],
-  },
-  {
-    index: "002",
-    title: "Reentrancy and External Call Notes",
-    mode: "vulnerability class",
-    status: "documented",
-    description:
-      "Studying call ordering, state transitions, and defensive patterns through small reproducible examples.",
-    tags: ["Reentrancy", "Foundry", "CEI"],
-  },
-  {
-    index: "003",
-    title: "Invariant Testing Routine",
-    mode: "testing practice",
-    status: "queued",
-    description:
-      "Turning protocol expectations into testable invariants before writing longer security reports.",
-    tags: ["Invariant", "Fuzzing", "Foundry"],
+    githubHref: "https://github.com/0xsomto",
   },
 ];
 
 export const notes: NoteItem[] = [
   {
     index: "01",
+    slug: "from-fullstack-assumptions-to-protocol-assumptions",
     title: "From fullstack assumptions to protocol assumptions",
     date: "Drafting",
     readTime: "6 min",
     status: "drafting",
     excerpt:
       "A practical note on how product engineering instincts transfer into smart contract review, and where they do not.",
-    href: "#",
+    body: [
+      "Fullstack work teaches you to think about users, states, permissions, and failure paths. That maps well into smart contract work, but it does not transfer perfectly.",
+      "In a web app, a bad assumption can often be patched behind an API, a dashboard, or a database migration. In a protocol, the assumption may already be public, funded, and hard to reverse.",
+      "That is the shift I am practicing: less trust in happy paths, more attention to who can call what, when state changes, and what value can move when the system is under pressure.",
+    ],
   },
   {
     index: "02",
+    slug: "what-i-check-first-in-a-small-solidity-contract",
     title: "What I check first in a small Solidity contract",
     date: "Planned",
     readTime: "8 min",
     status: "planned",
     excerpt:
       "A repeatable review path for access control, external calls, state transitions, and accounting assumptions.",
-    href: "#",
+    body: [
+      "For a small Solidity contract, I start by reading the permission model before reading the clever parts. Who owns the contract, who can change settings, and which functions move value?",
+      "After that, I look at external calls and state updates. If the contract sends ETH, calls tokens, or depends on another contract, the ordering matters more than the surface-level intent.",
+      "Then I write down the assumptions in plain language. If the contract expects balances, roles, or totals to stay true, those expectations should become tests or invariants.",
+    ],
   },
 ];
+
+export function getNoteBySlug(slug: string) {
+  return notes.find((note) => note.slug === slug);
+}
 
 export const pageIntros = {
   experience: {
@@ -310,17 +290,10 @@ export const pageIntros = {
   },
   builds: {
     icon: Boxes,
-    eyebrow: "project registry",
-    heading: "Systems shipped, labs in progress.",
+    eyebrow: "project notes",
+    heading: "A few things I can point to.",
     description:
-      "Selected work is grouped by proof. Some entries are shipped products; some are intentionally labeled as learning infrastructure.",
-  },
-  securityLab: {
-    icon: ShieldCheck,
-    eyebrow: "security lab",
-    heading: "Audit practice without fake audit claims.",
-    description:
-      "This page tracks the vulnerability classes, Foundry routines, and security notes that will become stronger public proof over time.",
+      "A small set of work notes. Some are shipped products; some are learning tracks that are clearly marked as in progress.",
   },
   notes: {
     icon: NotebookText,
@@ -329,26 +302,29 @@ export const pageIntros = {
     description:
       "Short, practical notes on fullstack engineering, smart contract development, and the path toward security review.",
   },
+  contact: {
+    icon: Mail,
+    eyebrow: "open desk",
+    heading: "Tell me what you want to build.",
+    description:
+      "Send a clear note about the work, the timeline, and what kind of help you need. I read useful details faster than vague intros.",
+  },
 };
 
 export const homeHighlights = [
   {
-    icon: Terminal,
     label: "Profile",
     value: "Fullstack base, security direction",
   },
   {
-    icon: ShieldCheck,
     label: "Security",
     value: "Solidity, Foundry, audit-style drills",
   },
   {
-    icon: BookOpen,
     label: "Research",
     value: "Writeups planned as proof improves",
   },
   {
-    icon: GraduationCap,
     label: "Growth",
     value: "Transition tracked in public",
   },

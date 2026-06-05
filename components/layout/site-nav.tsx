@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { cn } from "@/lib/utils";
 import { navItems, profile } from "@/lib/portfolio-data";
 
@@ -43,7 +44,7 @@ export function SiteNav() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "rounded-full border border-transparent px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:border-border/70 hover:bg-white",
+                  "rounded-none border border-transparent px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:border-border/40 hover:bg-secondary/50",
                   isActive && "text-primary"
                 )}
               >
@@ -53,17 +54,20 @@ export function SiteNav() {
           })}
         </nav>
 
-        <Button
-          type="button"
-          size="icon-lg"
-          variant="outline"
-          aria-label={open ? "Close navigation" : "Open navigation"}
-          aria-expanded={open}
-          className="rounded-none border border-border/30 bg-transparent lg:hidden"
-          onClick={() => setOpen((value) => !value)}
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </Button>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <Button
+            type="button"
+            size="icon-lg"
+            variant="outline"
+            aria-label={open ? "Close navigation" : "Open navigation"}
+            aria-expanded={open}
+            className="rounded-none border border-border/30 bg-transparent lg:hidden"
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
+        </div>
       </div>
 
       {open ? (

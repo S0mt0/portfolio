@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { PageShell } from "@/components/common/page-shell";
@@ -34,10 +35,13 @@ export function NotesArchive() {
               <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
                 {note.excerpt}
               </p>
-              <a href={note.href} className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
-                Read when published / {note.readTime}
+              <Link
+                href={`/notes/${note.slug}`}
+                className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
+              >
+                Read note / {note.readTime}
                 <ArrowUpRight className="h-4 w-4" />
-              </a>
+              </Link>
             </div>
           </article>
         ))}

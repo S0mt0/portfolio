@@ -3,6 +3,7 @@ import { Caveat, JetBrains_Mono, Raleway } from "next/font/google";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteNav } from "@/components/layout/site-nav";
+import { ThemeProvider } from "@/components/layout/theme-provider";
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
@@ -30,11 +31,11 @@ const caveat = Caveat({
 
 export const metadata: Metadata = {
   title: {
-    default: "0xSomto | Fullstack Developer & Smart Contract Security Lab",
+    default: "0xSomto | Fullstack Developer",
     template: "%s | 0xSomto",
   },
   description:
-    "Somto's portfolio: fullstack engineering work, Web3 builds, Solidity learning, and a transparent smart contract security lab.",
+    "Somto's portfolio: fullstack engineering work, Web3 builds, Solidity learning, and practical notes.",
 };
 
 export default function RootLayout({
@@ -46,6 +47,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
+      suppressHydrationWarning
       className={cn(
         "h-full scroll-smooth antialiased",
         raleway.variable,
@@ -54,9 +56,11 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full text-foreground">
-        <SiteNav />
-        {children}
-        <SiteFooter />
+        <ThemeProvider>
+          <SiteNav />
+          {children}
+          <SiteFooter />
+        </ThemeProvider>
       </body>
     </html>
   );
