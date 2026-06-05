@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
-import { NotesArchive } from "./_components/notes-archive";
+import { PageShell } from "@/components/common/page-shell";
+import { SectionHeading } from "@/components/common/section-heading";
+import { pageIntros } from "@/lib/portfolio-data";
+import { NotesList } from "./_components/notes-list";
 
 export const metadata: Metadata = {
   title: "Notes",
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function NotesPage() {
-  return <NotesArchive />;
+  return (
+    <PageShell>
+      <SectionHeading {...pageIntros.notes} tag="NOTE" />
+      <NotesList />
+    </PageShell>
+  );
 }

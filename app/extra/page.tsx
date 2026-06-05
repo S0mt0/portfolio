@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-import { ExtraRoom } from "./_components/extra-room";
+import { PageShell } from "@/components/common/page-shell";
+import { SectionHeading } from "@/components/common/section-heading";
+import { pageIntros } from "@/lib/portfolio-data";
+import { ExtraAside } from "./_components/extra-aside";
+import { ExtraGrid } from "./_components/extra-grid";
 
 export const metadata: Metadata = {
   title: "Extra",
@@ -9,5 +13,13 @@ export const metadata: Metadata = {
 };
 
 export default function ExtraPage() {
-  return <ExtraRoom />;
+  return (
+    <PageShell>
+      <SectionHeading {...pageIntros.extra} tag="PLAY" />
+      <section className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
+        <ExtraGrid />
+        <ExtraAside />
+      </section>
+    </PageShell>
+  );
 }

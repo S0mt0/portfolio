@@ -86,16 +86,18 @@ export const navItems: NavItem[] = [
   { href: "/experience", label: "Experience", code: "xp" },
   { href: "/builds", label: "Builds", code: "builds" },
   { href: "/notes", label: "Notes", code: "notes" },
+  { href: "/contact", label: "Contact", code: "contact" },
   { href: "/extra", label: "Extra", code: "extra" },
 ];
 
 export const profile: ProfileInfo = {
   name: "Somto",
-  handle: "0xSomto",
+  handle: "Somto",
   role: "Fullstack developer transitioning into smart contract engineering and security review",
   status: "building",
   location: "Nigeria / remote",
-  availability: "Open to fullstack, Web3, Solidity, and junior audit-facing roles",
+  availability:
+    "Open to fullstack, Web3, Solidity, and junior audit-facing roles",
   intro:
     "I build web products end to end. Lately I have been spending more time with Solidity, Foundry, and the small mistakes that make protocol logic unsafe.",
   summary:
@@ -221,7 +223,8 @@ export const builds: BuildItem[] = [
     description:
       "A polished foundation web experience with public pages, CMS-driven content, donation flows, events, blogs, gallery, and admin-facing management surfaces.",
     stack: ["Next.js", "TypeScript", "Tailwind", "CMS", "Payments"],
-    proof: "Shows production frontend taste, content architecture, and end-to-end delivery.",
+    proof:
+      "Shows production frontend taste, content architecture, and end-to-end delivery.",
     liveHref: "https://zitaonyekafoundation.org",
     githubHref: "https://github.com/0xsomto",
   },
@@ -233,7 +236,8 @@ export const builds: BuildItem[] = [
     description:
       "A personal web presence shaped around clear writing, selected fullstack proof, and the transition into smart contract security.",
     stack: ["Next.js 16", "React 19", "shadcn", "Tailwind CSS"],
-    proof: "Shows design direction, modular code structure, and personal technical positioning.",
+    proof:
+      "Shows design direction, modular code structure, and personal technical positioning.",
     liveHref: "https://0xsomto.xyz",
     githubHref: "https://github.com/0xsomto/portfolio",
   },

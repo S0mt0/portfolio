@@ -29,16 +29,19 @@ export function SiteNav() {
             <Cookie className="h-4 w-4" />
           </span>
           <span className="min-w-0">
-            <span className="block truncate text-sm font-black uppercase tracking-[0.16em] leading-none">
+            <span className="block truncate font-black capitalize text-2xl tracking-[0.16em] leading-none font-sketch">
               {profile.handle}
             </span>
-            <span className="block truncate text-[0.68rem] font-bold uppercase tracking-[0.16em] text-muted-foreground">
+            <span className="block truncate text-[0.5rem] font-bold uppercase tracking-[0.16em] text-muted-foreground">
               {activeItem?.code ?? "home"} note
             </span>
           </span>
         </Link>
 
-        <nav aria-label="Primary navigation" className="hidden items-center gap-1 lg:flex">
+        <nav
+          aria-label="Primary navigation"
+          className="hidden items-center gap-1 lg:flex"
+        >
           {navItems.map((item) => {
             const isActive = isActivePath(pathname, item.href);
 
@@ -74,7 +77,10 @@ export function SiteNav() {
       </div>
 
       {open ? (
-        <nav aria-label="Mobile navigation" className="border-t border-border/15 bg-background lg:hidden">
+        <nav
+          aria-label="Mobile navigation"
+          className="border-t border-border/15 bg-background lg:hidden"
+        >
           <div className="mx-auto grid max-w-6xl px-5 py-3 sm:px-8">
             {navItems.map((item) => {
               const isActive = isActivePath(pathname, item.href);

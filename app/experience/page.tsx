@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-import { ExperienceRegistry } from "./_components/experience-registry";
+import { PageShell } from "@/components/common/page-shell";
+import { SectionHeading } from "@/components/common/section-heading";
+import { pageIntros } from "@/lib/portfolio-data";
+import { ExperienceTimeline } from "./_components/experience-timeline";
+import { OperatingNote } from "./_components/operating-note";
 
 export const metadata: Metadata = {
   title: "Experience",
@@ -9,5 +13,11 @@ export const metadata: Metadata = {
 };
 
 export default function ExperiencePage() {
-  return <ExperienceRegistry />;
+  return (
+    <PageShell>
+      <SectionHeading {...pageIntros.experience} tag="XP" />
+      <ExperienceTimeline />
+      <OperatingNote />
+    </PageShell>
+  );
 }

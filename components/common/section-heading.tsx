@@ -22,7 +22,7 @@ export function SectionHeading({
         aria-hidden="true"
         className="absolute right-0 top-1 hidden rotate-3 border border-border/30 bg-accent px-3 py-1 text-[0.65rem] font-black uppercase tracking-[0.16em] text-accent-foreground sm:block"
       >
-        <TiPin className="absolute -left-3 -top-4 h-5 w-5 rotate-12 fill-red-500 text-red-500" />
+        <TiPin className="absolute -left-1 -top-3 h-5 w-5 rotate-12 fill-red-500 text-red-500" />
         {tag ?? "note"}
       </span>
       <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">

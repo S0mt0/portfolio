@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-import { ContactDesk } from "./_components/contact-desk";
+import { PageShell } from "@/components/common/page-shell";
+import { SectionHeading } from "@/components/common/section-heading";
+import { pageIntros } from "@/lib/portfolio-data";
+import { ContactAside } from "./_components/contact-aside";
+import { ContactForm } from "./_components/contact-form";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -9,5 +13,13 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactDesk />;
+  return (
+    <PageShell>
+      <SectionHeading {...pageIntros.contact} tag="HOLA" />
+      <section className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
+        <ContactForm />
+        <ContactAside />
+      </section>
+    </PageShell>
+  );
 }
