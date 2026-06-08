@@ -1,26 +1,23 @@
 import { MotionBlock } from "@/components/common/motion-primitives";
-import { skillGroups, socialLinks } from "@/lib/portfolio-data";
+import type { LandingContent } from "@/lib/landing-content";
+import { socialLinks } from "@/lib/portfolio-data";
 
-const currentStudy = [
-  "Solidity fundamentals",
-  "Foundry tests",
-  "Access control",
-  "Reentrancy",
-  "Protocol assumptions",
-];
+type LandingAsideProps = {
+  content: LandingContent["aside"];
+};
 
-export function LandingAside() {
+export function LandingAside({ content }: LandingAsideProps) {
   return (
     <aside className="space-y-10">
       <MotionBlock>
         <p className="font-sketch text-3xl font-bold text-primary">
-          Current study
+          {content.studyTitle}
         </p>
         <p className="mt-3 text-sm font-semibold leading-6">
-          I am treating smart contract security as practice first, proof later.
+          {content.studyDescription}
         </p>
         <ul className="mt-4 space-y-2 text-sm leading-6 text-muted-foreground">
-          {currentStudy.map((item) => (
+          {content.studyItems.map((item) => (
             <li key={item} className="border-b border-border/15 pb-2">
               {item}
             </li>
@@ -29,9 +26,11 @@ export function LandingAside() {
       </MotionBlock>
 
       <MotionBlock>
-        <p className="font-sketch text-3xl font-bold text-primary">Toolbox</p>
+        <p className="font-sketch text-3xl font-bold text-primary">
+          {content.toolboxTitle}
+        </p>
         <div className="mt-4 divide-y divide-border/20 border-y border-border/20">
-          {skillGroups.map((group) => (
+          {content.skillGroups.map((group) => (
             <div key={group.title} className="py-4">
               <p className="text-xs font-black uppercase tracking-[0.14em]">
                 {group.title}

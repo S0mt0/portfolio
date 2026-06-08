@@ -5,27 +5,34 @@ import { MotionItem, MotionList } from "@/components/common/motion-primitives";
 import { SkillTags } from "@/components/common/skill-tags";
 import { Button } from "@/components/ui/button";
 import { builds } from "@/lib/portfolio-data";
+import type { LandingContent } from "@/lib/landing-content";
 import { EmojiCursorArea } from "./emoji-cursor-area";
 
-export function SelectedWorksSection() {
-  const featuredBuilds = builds.slice(0, 2);
+type SelectedWorksSectionProps = {
+  content: LandingContent["selectedWorks"];
+};
+
+export function SelectedWorksSection({ content }: SelectedWorksSectionProps) {
+  const featuredBuilds = content.featuredIndexes
+    .map((index) => builds.find((build) => build.index === index))
+    .filter((build): build is (typeof builds)[number] => Boolean(build));
 
   return (
     <EmojiCursorArea>
       <div className="flex items-end justify-between gap-4 border-b border-border/20 pb-3">
         <div>
           <p className="font-sketch text-3xl font-bold text-primary">
-            Selected work
+            {content.eyebrow}
           </p>
           <h2 className="text-2xl font-black tracking-[-0.03em]">
-            Small proof I can explain
+            {content.title}
           </h2>
         </div>
         <Link
-          href="/builds"
+          href={content.linkHref}
           className="inline-flex items-center gap-1 text-sm font-bold"
         >
-          All builds
+          {content.linkLabel}
           <ArrowUpRight className="h-4 w-4" />
         </Link>
       </div>

@@ -5,15 +5,18 @@ import { useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 type HeroPortraitCursorProps = {
   children: ReactNode;
   className?: string;
+  imageUrl?: string;
 };
 
 export function HeroPortraitCursor({
   children,
   className,
+  imageUrl = "/dp.png",
 }: HeroPortraitCursorProps) {
   const [visible, setVisible] = useState(false);
   const cursorX = useMotionValue(0);
@@ -60,18 +63,21 @@ export function HeroPortraitCursor({
         }}
       >
         <div
-          className="h-full w-full -translate-x-1/2 -translate-y-1/2 overflow-hidden border border-border/30 bg-card shadow-sm"
+          className="h-full w-full -translate-x-1/2 -translate-y-1/2 overflow-hidden border-3 border-border/30 bg-card shadow-sm"
           style={{
             borderRadius: "47% 53% 42% 58% / 55% 44% 56% 45%",
           }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/dp.png"
+          <Image
+            src={imageUrl}
             alt=""
-            className="h-full w-full scale-110 object-cover"
+            className="h-full w-full scale-110 object-cover object-center"
             style={{ objectPosition: "50% 28%" }}
+            loading="eager"
+            width={400}
+            height={400}
             draggable={false}
+            priority
           />
         </div>
       </motion.div>

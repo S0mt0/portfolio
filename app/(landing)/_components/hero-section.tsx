@@ -3,42 +3,33 @@ import { Boxes, Mail } from "lucide-react";
 
 import { MotionBlock } from "@/components/common/motion-primitives";
 import { Button } from "@/components/ui/button";
-import { profile } from "@/lib/portfolio-data";
+import type { LandingContent } from "@/lib/landing-content";
 import { HeroPortraitCursor } from "./hero-portrait-cursor";
 
-const snapshotItems = [
-  {
-    label: "Started",
-    value: "Fullstack work since 2022.",
-  },
-  {
-    label: "Now",
-    value: "Building deeper Solidity and security habits.",
-  },
-  {
-    label: "Open to",
-    value: "Product engineering, Web3 frontend, and early security-facing work.",
-  },
-];
+type HeroSectionProps = {
+  content: LandingContent["hero"];
+};
 
-export function HeroSection() {
+export function HeroSection({ content }: HeroSectionProps) {
   return (
-    <HeroPortraitCursor className="border-b border-border/25 py-8 sm:py-12">
+    <HeroPortraitCursor
+      imageUrl={content.portraitImageUrl}
+      className="border-b border-border/25 py-8 sm:py-12"
+    >
       <div className="relative z-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_17rem] lg:items-start">
         <MotionBlock>
           <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
-            Page 01 / working note
+            {content.pageLabel}
           </p>
           <p className="font-sketch text-3xl font-bold text-primary">
-            Hi, I&apos;m {profile.name}
+            {content.greeting}
           </p>
-          <h1 className="mt-4 max-w-4xl text-balance text-4xl font-black leading-[0.95] tracking-[-0.06em] text-foreground sm:text-5xl lg:text-6xl">
-            I build useful web products and I&apos;m growing into smart contract
-            security.
+          <h1 className="mt-4 max-w-4xl text-balance text-4xl font-black leading-[0.95] tracking-[-0.06em] text-foreground">
+            {content.headline}
           </h1>
 
           <p className="mt-7 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
-            {profile.intro}
+            {content.intro}
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -47,8 +38,8 @@ export function HeroSection() {
               size="lg"
               className="h-11 rounded-none bg-foreground px-5 text-background hover:bg-foreground/85"
             >
-              <Link href="/builds">
-                See builds
+              <Link href={content.primaryCta.href}>
+                {content.primaryCta.label}
                 <Boxes className="h-4 w-4" />
               </Link>
             </Button>
@@ -58,8 +49,8 @@ export function HeroSection() {
               variant="outline"
               className="h-11 rounded-none border-border/40 bg-transparent px-5"
             >
-              <Link href="/contact">
-                Contact
+              <Link href={content.secondaryCta.href}>
+                {content.secondaryCta.label}
                 <Mail className="h-4 w-4" />
               </Link>
             </Button>
@@ -71,7 +62,7 @@ export function HeroSection() {
             Side notes
           </p>
           <div className="mt-4 space-y-5">
-            {snapshotItems.map((item) => (
+            {content.snapshots.map((item) => (
               <div key={item.label}>
                 <p className="text-xs font-black uppercase tracking-[0.14em] text-muted-foreground">
                   {item.label}

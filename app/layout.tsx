@@ -31,8 +31,8 @@ const caveat = Caveat({
 
 export const metadata: Metadata = {
   title: {
-    default: "0xSomto | Fullstack Developer",
-    template: "%s | 0xSomto",
+    default: "Somto | Fullstack Developer",
+    template: "%s | Somto",
   },
   description:
     "Somto's portfolio: fullstack engineering work, Web3 builds, Solidity learning, and practical notes.",

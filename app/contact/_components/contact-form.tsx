@@ -1,6 +1,6 @@
 "use client";
 
-import type { FormEvent } from "react";
+import type { ChangeEvent } from "react";
 import { Download, Send } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -10,7 +10,7 @@ const fieldClassName =
   "w-full rounded-none border border-border/30 bg-background/55 px-3 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-primary";
 
 export function ContactForm() {
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
@@ -32,7 +32,7 @@ export function ContactForm() {
       details,
     ].join("\n");
 
-    window.location.href = `mailto:hello@0xsomto.xyz?subject=${encodeURIComponent(
+    window.location.href = `mailto:talktosomto@gmail.com?subject=${encodeURIComponent(
       "Work request for 0xSomto"
     )}&body=${encodeURIComponent(body)}`;
   };

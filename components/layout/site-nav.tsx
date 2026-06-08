@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { cn } from "@/lib/utils";
 import { navItems, profile } from "@/lib/portfolio-data";
+import Image from "next/image";
+import { TiPin } from "react-icons/ti";
 
 const isActivePath = (pathname: string, href: string) => {
   if (href === "/") return pathname === "/";
@@ -25,11 +27,19 @@ export function SiteNav() {
     <header className="sticky top-0 z-40 border-b border-border/15 bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:px-8 lg:px-10">
         <Link href="/" className="group inline-flex min-w-0 items-center gap-3">
-          <span className="grid h-9 w-9 shrink-0 place-items-center border border-border/35 bg-accent text-accent-foreground transition-transform group-hover:-rotate-6">
-            <Cookie className="h-4 w-4" />
+          <span className="grid size-10 shrink-0 place-items-center border-2 border-border/30 bg-accent text-accent-foreground transition-transform group-hover:-rotate-6 overflow-hidden rounded-2xl">
+            {/* <Cookie className="h-4 w-4" /> */}
+            <Image
+              alt="Logo avatar"
+              src={"/avatar.png"}
+              height={200}
+              width={200}
+              priority
+            />
           </span>
           <span className="min-w-0">
-            <span className="block truncate font-black capitalize text-2xl tracking-[0.16em] leading-none font-sketch">
+            <span className="block  font-black capitalize text-2xl tracking-[0.16em] leading-none font-sketch relative">
+              <TiPin className="absolute -right-2 -top-1 h-5 w-5 rotate-12 fill-red-500 text-red-500" />
               {profile.handle}
             </span>
             <span className="block truncate text-[0.5rem] font-bold uppercase tracking-[0.16em] text-muted-foreground">

@@ -2,28 +2,35 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { MotionItem, MotionList } from "@/components/common/motion-primitives";
+import type { LandingContent } from "@/lib/landing-content";
 import { notes } from "@/lib/portfolio-data";
 import { EmojiCursorArea } from "./emoji-cursor-area";
 
-export function SelectedNotesSection() {
-  const featuredNotes = notes.slice(0, 2);
+type SelectedNotesSectionProps = {
+  content: LandingContent["selectedNotes"];
+};
+
+export function SelectedNotesSection({ content }: SelectedNotesSectionProps) {
+  const featuredNotes = content.featuredSlugs
+    .map((slug) => notes.find((note) => note.slug === slug))
+    .filter((note): note is (typeof notes)[number] => Boolean(note));
 
   return (
     <EmojiCursorArea item="📝">
       <div className="flex items-end justify-between gap-4 border-b border-border/20 py-3">
         <div>
           <p className="font-sketch text-3xl font-bold text-primary">
-            Selected notes
+            {content.eyebrow}
           </p>
           <h2 className="text-2xl font-black tracking-[-0.03em]">
-            Writing on engineering, Web3, and other fun stuff (maybe 😉)
+            {content.title}
           </h2>
         </div>
         <Link
-          href="/notes"
+          href={content.linkHref}
           className="inline-flex items-center gap-1 text-sm font-bold"
         >
-          All notes
+          {content.linkLabel}
           <ArrowUpRight className="h-4 w-4" />
         </Link>
       </div>
