@@ -28,7 +28,7 @@ type ILandingContent = {
     linkLabel: string;
     linkHref: string;
     featuredCount: number;
-    items?: {
+    items: {
       id: string;
       title: string;
       category: string;
@@ -50,7 +50,7 @@ type ILandingContent = {
     linkLabel: string;
     linkHref: string;
     featuredCount: number;
-    items?: {
+    items: {
       id: string;
       title: string;
       slug: string;

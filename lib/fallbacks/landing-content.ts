@@ -1,7 +1,5 @@
 import { profile, skillGroups } from "@/lib/fallbacks/portfolio-data";
 
-export type LandingContent = ILandingContent;
-
 export const fallbackLandingContent: ILandingContent = {
   hero: {
     pageLabel: "Page 01 / working note",
@@ -44,6 +42,7 @@ export const fallbackLandingContent: ILandingContent = {
     linkLabel: "All builds",
     linkHref: "/builds",
     featuredCount: 2,
+    items: [],
   },
   selectedNotes: {
     eyebrow: "Selected notes",
@@ -51,6 +50,7 @@ export const fallbackLandingContent: ILandingContent = {
     linkLabel: "All notes",
     linkHref: "/notes",
     featuredCount: 2,
+    items: [],
   },
   aside: {
     studyTitle: "Current study",

@@ -21,6 +21,8 @@ export const metadata: Metadata = {
     "Somto's fullstack development timeline and transition into smart contract security.",
 };
 
+export const revalidate = 900;
+
 export default async function ExperiencePage() {
   const response = await getExperienceContent();
   const content = response?.data;

@@ -13,7 +13,8 @@ type ContactAsideProps = {
 };
 
 export function ContactAside({ helperNote, socials }: ContactAsideProps) {
-  const links = socials ? getSocialLinks(socials) : fallbackSocialLinks;
+  const cmsLinks = socials ? getSocialLinks(socials) : [];
+  const links = cmsLinks.length ? cmsLinks : fallbackSocialLinks;
 
   return (
     <aside className="space-y-8">

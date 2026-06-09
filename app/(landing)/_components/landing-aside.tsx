@@ -1,9 +1,7 @@
 import { MotionBlock } from "@/components/common/motion-primitives";
-import { socialLinks } from "@/lib/fallbacks";
-import type { LandingContent } from "@/lib/fallbacks/landing-content";
 
 type LandingAsideProps = {
-  content: LandingContent["aside"];
+  content: ILandingContent["aside"];
 };
 
 export function LandingAside({ content }: LandingAsideProps) {
@@ -13,9 +11,11 @@ export function LandingAside({ content }: LandingAsideProps) {
         <p className="font-sketch text-3xl font-bold text-primary">
           {content.studyTitle}
         </p>
-        <p className="mt-3 text-sm font-semibold leading-6">
-          {content.studyDescription}
-        </p>
+        {content.studyDescription ? (
+          <p className="mt-3 text-sm font-semibold leading-6">
+            {content.studyDescription}
+          </p>
+        ) : null}
         <ul className="mt-4 space-y-2 text-sm leading-6 text-muted-foreground">
           {content.studyItems.map((item) => (
             <li key={item} className="border-b border-border/15 pb-2">
@@ -29,9 +29,12 @@ export function LandingAside({ content }: LandingAsideProps) {
         <p className="font-sketch text-3xl font-bold text-primary">
           {content.toolboxTitle}
         </p>
-        <p className="mt-3 text-sm font-semibold leading-6">
-          {content.toolboxDescription}
-        </p>
+        {content.toolboxDescription ? (
+          <p className="mt-3 text-sm font-semibold leading-6">
+            {content.toolboxDescription}
+          </p>
+        ) : null}
+
         <div className="mt-4 divide-y divide-border/20 border-y border-border/20">
           {content.skillGroups.map((group) => (
             <div key={group.title} className="py-4">
@@ -49,21 +52,6 @@ export function LandingAside({ content }: LandingAsideProps) {
             </div>
           ))}
         </div>
-      </MotionBlock>
-
-      <MotionBlock className="flex flex-wrap gap-3">
-        {socialLinks.map(({ href, label, icon: Icon }) => (
-          <a
-            key={label}
-            href={href}
-            target={href.startsWith("http") ? "_blank" : undefined}
-            rel={href.startsWith("http") ? "noreferrer noopener" : undefined}
-            className="inline-flex items-center gap-2 border-b border-border/40 py-1 text-xs font-black uppercase tracking-[0.12em] hover:text-primary"
-          >
-            <Icon className="h-4 w-4" />
-            {label}
-          </a>
-        ))}
       </MotionBlock>
     </aside>
   );

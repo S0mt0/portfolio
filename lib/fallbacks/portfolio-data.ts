@@ -24,8 +24,8 @@ export const navItems: NavItem[] = [
   { href: "/experience", label: "Experience", code: "xp" },
   { href: "/builds", label: "Builds", code: "builds" },
   { href: "/notes", label: "Notes", code: "notes" },
-  { href: "/contact", label: "Contact", code: "contact" },
   { href: "/extra", label: "Extra", code: "extra" },
+  { href: "/contact", label: "Resume", code: "contact" },
 ];
 
 export const profile: ProfileInfo = {

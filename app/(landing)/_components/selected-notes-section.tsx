@@ -2,16 +2,15 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { MotionItem, MotionList } from "@/components/common/motion-primitives";
-import type { LandingContent } from "@/lib/fallbacks/landing-content";
-import { notes } from "@/lib/fallbacks/portfolio-data";
 import { EmojiCursorArea } from "./emoji-cursor-area";
+import Image from "next/image";
 
 type SelectedNotesSectionProps = {
-  content: LandingContent["selectedNotes"];
+  content: ILandingContent["selectedNotes"];
 };
 
 export function SelectedNotesSection({ content }: SelectedNotesSectionProps) {
-  const featuredNotes = content.items?.length
+  const featuredNotes = content.items.length
     ? content.items.map((note, index) => ({
         index: String(index + 1).padStart(2, "0"),
         slug: note.slug,
@@ -20,8 +19,11 @@ export function SelectedNotesSection({ content }: SelectedNotesSectionProps) {
         readTime: note.readTime,
         status: "published",
         excerpt: note.excerpt || "",
+        primaryTag: note.tags[0] || "Article",
       }))
-    : notes.slice(0, content.featuredCount || 2);
+    : [];
+
+  if (!featuredNotes.length) return null;
 
   return (
     <EmojiCursorArea item="📝">
@@ -36,7 +38,7 @@ export function SelectedNotesSection({ content }: SelectedNotesSectionProps) {
         </div>
         <Link
           href={content.linkHref}
-          className="inline-flex items-center gap-1 text-sm font-bold"
+          className="inline-flex items-center gap-1 text-sm font-bold shrink-0"
         >
           {content.linkLabel}
           <ArrowUpRight className="h-4 w-4" />
@@ -49,32 +51,34 @@ export function SelectedNotesSection({ content }: SelectedNotesSectionProps) {
             key={note.slug}
             className="group py-6 transition-colors hover:bg-secondary/30"
           >
-            <div className="grid gap-4 sm:grid-cols-[6rem_minmax(0,1fr)]">
+            <div className="grid gap-4 sm:grid-cols-[4rem_minmax(0,1fr)]">
               <p className="font-sketch text-3xl font-bold text-primary transition-transform group-hover:-rotate-6">
                 {note.index}
               </p>
-              <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-xs font-black uppercase tracking-[0.14em] text-muted-foreground">
-                    {note.date}
+              <div className="flex gap-2 flex-nowrap">
+                <div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-xs font-black uppercase tracking-[0.14em] text-muted-foreground">
+                      {note.date}
+                    </p>
+                    <span className="border border-border/25 bg-accent/65 px-2 py-1 text-[0.65rem] font-black uppercase tracking-[0.14em]">
+                      {note.primaryTag}
+                    </span>
+                  </div>
+                  <h3 className="mt-2 text-xl font-black tracking-[-0.02em]">
+                    {note.title}
+                  </h3>
+                  <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground line-clamp-1">
+                    {note.excerpt}
                   </p>
-                  <span className="border border-border/25 bg-accent/65 px-2 py-1 text-[0.65rem] font-black uppercase tracking-[0.14em]">
-                    {note.status}
-                  </span>
+                  <Link
+                    href={`/notes/${note.slug}`}
+                    className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary"
+                  >
+                    Read note / {note.readTime}
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Link>
                 </div>
-                <h3 className="mt-2 text-xl font-black tracking-[-0.02em]">
-                  {note.title}
-                </h3>
-                <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">
-                  {note.excerpt}
-                </p>
-                <Link
-                  href={`/notes/${note.slug}`}
-                  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary"
-                >
-                  Read note / {note.readTime}
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
               </div>
             </div>
           </MotionItem>

@@ -3,8 +3,14 @@ export type ContactSocials = {
   github?: string;
   x?: string;
   linkedin?: string;
+  instagram?: string;
   youtube?: string;
   tiktok?: string;
+  medium?: string;
+  facebook?: string;
+  threads?: string;
+  whatsapp?: string;
+  telegram?: string;
   website?: string;
 };
 

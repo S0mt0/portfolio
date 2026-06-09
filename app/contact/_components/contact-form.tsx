@@ -86,10 +86,13 @@ export function ContactForm({ cvUrl }: ContactFormProps) {
             <option value="" disabled>
               Choose one
             </option>
+            <option>Backend system</option>
+            <option>Frontend product</option>
             <option>Fullstack product</option>
-            <option>Web3 frontend</option>
             <option>Solidity support</option>
             <option>Code review</option>
+            <option>Mentorship</option>
+            <option>Collaboration</option>
           </select>
         </label>
         <label className="grid gap-2 text-sm font-bold">

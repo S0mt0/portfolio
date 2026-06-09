@@ -13,6 +13,8 @@ export const metadata: Metadata = {
     "Selected fullstack, Web3, and smart contract learning builds from Somto.",
 };
 
+export const revalidate = 900;
+
 export default async function BuildsPage() {
   const response = await getBuildsContent();
   const content = response?.data;

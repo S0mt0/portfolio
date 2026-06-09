@@ -13,6 +13,8 @@ export const metadata: Metadata = {
     "Contact Somto for fullstack, Web3 frontend, Solidity, and early security-facing work.",
 };
 
+export const revalidate = 900;
+
 export default async function ContactPage() {
   const response = await getContactContent();
   const contact = response?.data;
@@ -30,7 +32,10 @@ export default async function ContactPage() {
       <SectionHeading {...intro} tag="HOLA" />
       <section className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <ContactForm cvUrl={contact?.cvUrl} />
-        <ContactAside helperNote={contact?.helperNote} socials={contact?.socials} />
+        <ContactAside
+          helperNote={contact?.helperNote}
+          socials={contact?.socials}
+        />
       </section>
     </PageShell>
   );

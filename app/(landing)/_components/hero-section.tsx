@@ -3,11 +3,10 @@ import { Boxes, Mail } from "lucide-react";
 
 import { MotionBlock } from "@/components/common/motion-primitives";
 import { Button } from "@/components/ui/button";
-import type { LandingContent } from "@/lib/fallbacks/landing-content";
 import { HeroPortraitCursor } from "./hero-portrait-cursor";
 
 type HeroSectionProps = {
-  content: LandingContent["hero"];
+  content: ILandingContent["hero"];
 };
 
 export function HeroSection({ content }: HeroSectionProps) {

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Caveat, JetBrains_Mono, Raleway } from "next/font/google";
 
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -36,6 +36,12 @@ export const metadata: Metadata = {
   },
   description:
     "Somto's portfolio: fullstack engineering work, Web3 builds, Solidity learning, and practical notes.",
+};
+
+export const viewport: Viewport = {
+  userScalable: false,
+  maximumScale: 1.0,
+  initialScale: 1,
 };
 
 export default function RootLayout({

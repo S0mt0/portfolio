@@ -22,17 +22,3 @@ export const getContactContent = () =>
 
 export const sendContactMessage = (payload: ContactMessagePayload) =>
   apiPost<ApiResponse<null>>("/contact", payload);
-
-// export const getFaqs = () => apiFetch<ApiResponse<ILandingFaqItem[]>>("/faqs");
-
-// export const getTestimonials = () =>
-//   apiFetch<ApiResponse<ILandingTestimonialItem[]>>("/testimonials");
-
-// export const getAboutPageContent = () =>
-//   apiFetch<ApiResponse<IAboutPageContent>>("/about");
-
-// export const getBlogsPageContent = () =>
-//   apiFetch<ApiResponse<IBlogsPageContent>>("/blogs/sections");
-
-// export const getEventsPageContent = () =>
-//   apiFetch<ApiResponse<IEventsPageContent>>("/events/sections");

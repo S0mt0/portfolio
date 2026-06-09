@@ -4,16 +4,14 @@ import { ArrowUpRight, Code2, ExternalLink } from "lucide-react";
 import { MotionItem, MotionList } from "@/components/common/motion-primitives";
 import { SkillTags } from "@/components/common/skill-tags";
 import { Button } from "@/components/ui/button";
-import { builds } from "@/lib/fallbacks";
-import type { LandingContent } from "@/lib/fallbacks/landing-content";
 import { EmojiCursorArea } from "./emoji-cursor-area";
 
 type SelectedWorksSectionProps = {
-  content: LandingContent["selectedWorks"];
+  content: ILandingContent["selectedWorks"];
 };
 
 export function SelectedWorksSection({ content }: SelectedWorksSectionProps) {
-  const featuredBuilds = content.items?.length
+  const featuredBuilds = content.items.length
     ? content.items.map((build, index) => ({
         index: String(index + 1).padStart(3, "0"),
         name: build.title,
@@ -23,7 +21,9 @@ export function SelectedWorksSection({ content }: SelectedWorksSectionProps) {
         githubHref: build.githubUrl,
         liveHref: build.liveUrl,
       }))
-    : builds.slice(0, content.featuredCount || 2);
+    : [];
+
+  if (!featuredBuilds.length) return null;
 
   return (
     <EmojiCursorArea>
@@ -38,7 +38,7 @@ export function SelectedWorksSection({ content }: SelectedWorksSectionProps) {
         </div>
         <Link
           href={content.linkHref}
-          className="inline-flex items-center gap-1 text-sm font-bold"
+          className="inline-flex items-center gap-1 text-sm font-bold shrink-0"
         >
           {content.linkLabel}
           <ArrowUpRight className="h-4 w-4" />
@@ -51,7 +51,7 @@ export function SelectedWorksSection({ content }: SelectedWorksSectionProps) {
             key={build.index}
             className="group py-6 transition-colors hover:bg-accent/20"
           >
-            <div className="grid gap-4 sm:grid-cols-[6rem_minmax(0,1fr)]">
+            <div className="grid gap-4 sm:grid-cols-[5rem_minmax(0,1fr)]">
               <p className="font-sketch text-3xl font-bold text-primary transition-transform group-hover:-rotate-3">
                 {build.index}
               </p>

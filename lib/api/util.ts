@@ -25,7 +25,7 @@ export async function apiFetch<T>(
       }
     });
 
-    const res = await fetch(url.toString());
+    const res = await fetch(url.toString(), { cache: "no-store" });
     return readJsonResponse<T>(res);
   } catch (err) {
     console.error(`API fetch failed for ${path}:`, err);
