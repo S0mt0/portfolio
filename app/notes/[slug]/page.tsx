@@ -10,6 +10,7 @@ import { RichTextContentRenderer } from "@/components/common/render-richtext";
 import { Badge } from "@/components/ui/badge";
 import { getNoteContent } from "@/lib/api/pages";
 import { NoteComments } from "./_components/note-comments";
+import { NoteShare } from "./_components/note-share";
 import { RelatedNotes } from "./_components/related-notes";
 
 type NotePageProps = {
@@ -94,6 +95,8 @@ export default async function NotePage({ params }: NotePageProps) {
               </span>
             </div>
           </header>
+
+          <NoteShare title={note.title} excerpt={note.excerpt} />
 
           {note.bannerImage ? (
             <figure className="space-y-3">

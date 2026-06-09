@@ -21,6 +21,23 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export const normalizeExternalHref = (value?: string | null) => {
+  const trimmed = value?.trim();
+  if (!trimmed) return "";
+
+  if (
+    trimmed.startsWith("/") ||
+    trimmed.startsWith("#") ||
+    /^[a-z][a-z0-9+.-]*:/i.test(trimmed)
+  ) {
+    return trimmed;
+  }
+
+  if (trimmed.startsWith("//")) return `https:${trimmed}`;
+
+  return `https://${trimmed}`;
+};
+
 export const socialConfigs: SocialConfig[] = [
   {
     key: "email",

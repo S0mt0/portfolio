@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Caveat, JetBrains_Mono, Raleway } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteNav } from "@/components/layout/site-nav";
@@ -67,6 +69,13 @@ export default function RootLayout({
           {children}
           <SiteFooter />
         </ThemeProvider>
+        <SpeedInsights />
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="0f53e08e-cb77-4a0b-b333-a012452c8958"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

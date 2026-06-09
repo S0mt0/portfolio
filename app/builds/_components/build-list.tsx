@@ -56,6 +56,8 @@ export function BuildList({ items }: { items: BuildItem[] }) {
                     href={build.githubHref}
                     target="_blank"
                     rel="noreferrer noopener"
+                    data-umami-event="project_github_clicked"
+                    data-umami-event-project={build.name}
                   >
                     GitHub
                     <Code2 className="h-3.5 w-3.5" />
@@ -72,6 +74,8 @@ export function BuildList({ items }: { items: BuildItem[] }) {
                     href={build.liveHref}
                     target="_blank"
                     rel="noreferrer noopener"
+                    data-umami-event="project_live_view_clicked"
+                    data-umami-event-project={build.liveHref}
                   >
                     View project
                     <ExternalLink className="h-3.5 w-3.5" />

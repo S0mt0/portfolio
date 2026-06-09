@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/common/section-heading";
 import { getBuildsContent } from "@/lib/api/pages";
 import { builds, pageIntros } from "@/lib/fallbacks/portfolio-data";
 import type { BuildItem, BuildsPageContent } from "@/lib/types/experience";
+import { normalizeExternalHref } from "@/lib/utils";
 import { BuildList } from "./_components/build-list";
 
 export const metadata: Metadata = {
@@ -36,8 +37,8 @@ export default async function BuildsPage() {
         description: build.summary || "",
         proof: build.proofNote || "",
         stack: build.stack || [],
-        githubHref: build.githubUrl || undefined,
-        liveHref: build.liveUrl || undefined,
+        githubHref: normalizeExternalHref(build.githubUrl) || undefined,
+        liveHref: normalizeExternalHref(build.liveUrl) || undefined,
       }))
     : builds;
 

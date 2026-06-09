@@ -41,7 +41,13 @@ export function NotesSearch({ defaultValue = "" }: NotesSearchProps) {
           className="h-11 w-full rounded-none border border-border/35 bg-background/40 pl-10 pr-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary"
         />
       </label>
-      <Button type="submit" variant="outline" disabled={isPending}>
+      <Button
+        type="submit"
+        variant="outline"
+        disabled={isPending}
+        data-umami-event="note_search_button_clicked"
+        data-umami-event-link={value}
+      >
         Search
       </Button>
     </form>

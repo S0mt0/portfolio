@@ -4,6 +4,7 @@ import { ArrowUpRight, Code2, ExternalLink } from "lucide-react";
 import { MotionItem, MotionList } from "@/components/common/motion-primitives";
 import { SkillTags } from "@/components/common/skill-tags";
 import { Button } from "@/components/ui/button";
+import { normalizeExternalHref } from "@/lib/utils";
 import { EmojiCursorArea } from "./emoji-cursor-area";
 
 type SelectedWorksSectionProps = {
@@ -18,8 +19,8 @@ export function SelectedWorksSection({ content }: SelectedWorksSectionProps) {
         category: build.category,
         description: build.summary || "",
         stack: build.stack || [],
-        githubHref: build.githubUrl,
-        liveHref: build.liveUrl,
+        githubHref: normalizeExternalHref(build.githubUrl),
+        liveHref: normalizeExternalHref(build.liveUrl),
       }))
     : [];
 
@@ -77,6 +78,8 @@ export function SelectedWorksSection({ content }: SelectedWorksSectionProps) {
                         href={build.githubHref}
                         target="_blank"
                         rel="noreferrer noopener"
+                        data-umami-event="project_github_clicked"
+                        data-umami-event-project={build.name}
                       >
                         GitHub
                         <Code2 className="h-3.5 w-3.5" />
@@ -93,6 +96,8 @@ export function SelectedWorksSection({ content }: SelectedWorksSectionProps) {
                         href={build.liveHref}
                         target="_blank"
                         rel="noreferrer noopener"
+                        data-umami-event="project_live_view_clicked"
+                        data-umami-event-project={build.liveHref}
                       >
                         View
                         <ExternalLink className="h-3.5 w-3.5" />
