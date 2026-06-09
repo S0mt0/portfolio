@@ -1,6 +1,6 @@
 import { MotionBlock } from "@/components/common/motion-primitives";
-import type { LandingContent } from "@/lib/landing-content";
-import { socialLinks } from "@/lib/portfolio-data";
+import { socialLinks } from "@/lib/fallbacks";
+import type { LandingContent } from "@/lib/fallbacks/landing-content";
 
 type LandingAsideProps = {
   content: LandingContent["aside"];
@@ -29,12 +29,20 @@ export function LandingAside({ content }: LandingAsideProps) {
         <p className="font-sketch text-3xl font-bold text-primary">
           {content.toolboxTitle}
         </p>
+        <p className="mt-3 text-sm font-semibold leading-6">
+          {content.toolboxDescription}
+        </p>
         <div className="mt-4 divide-y divide-border/20 border-y border-border/20">
           {content.skillGroups.map((group) => (
             <div key={group.title} className="py-4">
               <p className="text-xs font-black uppercase tracking-[0.14em]">
                 {group.title}
               </p>
+              {group.description ? (
+                <p className="mt-2 text-xs leading-5 text-muted-foreground">
+                  {group.description}
+                </p>
+              ) : null}
               <p className="mt-2 text-sm leading-7 text-muted-foreground">
                 {group.skills.join(" / ")}
               </p>

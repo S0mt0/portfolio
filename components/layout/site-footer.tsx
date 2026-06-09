@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { navItems, profile, socialLinks } from "@/lib/portfolio-data";
+import { navItems, profile, socialLinks } from "@/lib/fallbacks/portfolio-data";
 
 export function SiteFooter() {
   return (
@@ -13,7 +13,11 @@ export function SiteFooter() {
           </p>
           <nav aria-label="Footer navigation" className="flex flex-wrap gap-4">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href} className="transition-colors hover:text-primary">
+              <Link
+                key={item.href}
+                href={item.href}
+                className="transition-colors hover:text-primary"
+              >
                 {item.label}
               </Link>
             ))}

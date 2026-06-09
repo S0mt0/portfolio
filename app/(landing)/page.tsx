@@ -3,21 +3,24 @@ import { HeroSection } from "./_components/hero-section";
 import { LandingAside } from "./_components/landing-aside";
 import { SelectedNotesSection } from "./_components/selected-notes-section";
 import { SelectedWorksSection } from "./_components/selected-works-section";
-import { getLandingContent } from "@/lib/landing-content";
+import { getLandingContent } from "@/lib/api/pages";
+import { fallbackLandingContent } from "@/lib/fallbacks";
+
+export const revalidate = 900;
 
 export default async function HomePage() {
-  const landingContent = await getLandingContent();
+  const data = (await getLandingContent())?.data ?? fallbackLandingContent;
 
   return (
     <PageShell className="cursor-default py-10 sm:py-16">
-      <HeroSection content={landingContent.hero} />
+      <HeroSection content={data.hero} />
 
       <section className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <div className="space-y-12">
-          <SelectedWorksSection content={landingContent.selectedWorks} />
-          <SelectedNotesSection content={landingContent.selectedNotes} />
+          <SelectedWorksSection content={data.selectedWorks} />
+          <SelectedNotesSection content={data.selectedNotes} />
         </div>
-        <LandingAside content={landingContent.aside} />
+        <LandingAside content={data.aside} />
       </section>
     </PageShell>
   );

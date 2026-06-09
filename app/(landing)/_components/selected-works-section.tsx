@@ -4,8 +4,8 @@ import { ArrowUpRight, Code2, ExternalLink } from "lucide-react";
 import { MotionItem, MotionList } from "@/components/common/motion-primitives";
 import { SkillTags } from "@/components/common/skill-tags";
 import { Button } from "@/components/ui/button";
-import { builds } from "@/lib/portfolio-data";
-import type { LandingContent } from "@/lib/landing-content";
+import { builds } from "@/lib/fallbacks";
+import type { LandingContent } from "@/lib/fallbacks/landing-content";
 import { EmojiCursorArea } from "./emoji-cursor-area";
 
 type SelectedWorksSectionProps = {
@@ -13,9 +13,17 @@ type SelectedWorksSectionProps = {
 };
 
 export function SelectedWorksSection({ content }: SelectedWorksSectionProps) {
-  const featuredBuilds = content.featuredIndexes
-    .map((index) => builds.find((build) => build.index === index))
-    .filter((build): build is (typeof builds)[number] => Boolean(build));
+  const featuredBuilds = content.items?.length
+    ? content.items.map((build, index) => ({
+        index: String(index + 1).padStart(3, "0"),
+        name: build.title,
+        category: build.category,
+        description: build.summary || "",
+        stack: build.stack || [],
+        githubHref: build.githubUrl,
+        liveHref: build.liveUrl,
+      }))
+    : builds.slice(0, content.featuredCount || 2);
 
   return (
     <EmojiCursorArea>

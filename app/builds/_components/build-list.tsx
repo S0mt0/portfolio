@@ -3,12 +3,12 @@ import { Code2, ExternalLink } from "lucide-react";
 import { MotionItem, MotionList } from "@/components/common/motion-primitives";
 import { SkillTags } from "@/components/common/skill-tags";
 import { Button } from "@/components/ui/button";
-import { builds } from "@/lib/portfolio-data";
+import type { BuildItem } from "@/lib/types/experience";
 
-export function BuildList() {
+export function BuildList({ items }: { items: BuildItem[] }) {
   return (
     <MotionList className="mt-10 border-y border-border/25">
-      {builds.map((build) => (
+      {items.map((build) => (
         <MotionItem
           key={build.index}
           className="group grid gap-5 border-b border-border/20 py-8 transition-colors hover:bg-accent/20 last:border-b-0 md:grid-cols-[8rem_minmax(0,1fr)_14rem]"

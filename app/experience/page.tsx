@@ -2,7 +2,16 @@ import type { Metadata } from "next";
 
 import { PageShell } from "@/components/common/page-shell";
 import { SectionHeading } from "@/components/common/section-heading";
-import { pageIntros } from "@/lib/portfolio-data";
+import { getExperienceContent } from "@/lib/api/pages";
+import {
+  experience,
+  pageIntros,
+  profile,
+} from "@/lib/fallbacks/portfolio-data";
+import type {
+  ExperienceItem,
+  ExperiencePageContent,
+} from "@/lib/types/experience";
 import { ExperienceTimeline } from "./_components/experience-timeline";
 import { OperatingNote } from "./_components/operating-note";
 
@@ -12,12 +21,37 @@ export const metadata: Metadata = {
     "Somto's fullstack development timeline and transition into smart contract security.",
 };
 
-export default function ExperiencePage() {
+export default async function ExperiencePage() {
+  const response = await getExperienceContent();
+  const content = response?.data;
+  const intro = content?.hero
+    ? {
+        ...pageIntros.experience,
+        eyebrow: content.hero.eyebrow,
+        heading: content.hero.title,
+        description: content.hero.description,
+      }
+    : pageIntros.experience;
+  const items: ExperienceItem[] = content?.items?.length
+    ? content.items.map(
+        (item: ExperiencePageContent["items"][number], index) => ({
+          index: String(index + 1).padStart(2, "0"),
+          period: item.period,
+          role: item.role,
+          websiteUrl: item.websiteUrl || undefined,
+          status: index === 0 ? "active" : "building",
+          summary: item.summary || "",
+          signals: item.signals || [],
+        })
+      )
+    : experience;
+  const operatingNote = content?.hero.operatingNote || profile.summary;
+
   return (
     <PageShell>
-      <SectionHeading {...pageIntros.experience} tag="XP" />
-      <ExperienceTimeline />
-      <OperatingNote />
+      <SectionHeading {...intro} tag="XP" />
+      <ExperienceTimeline items={items} />
+      <OperatingNote note={operatingNote} />
     </PageShell>
   );
 }

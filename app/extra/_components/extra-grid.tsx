@@ -1,5 +1,5 @@
 import { MotionItem, MotionList } from "@/components/common/motion-primitives";
-import { extraItems } from "@/lib/portfolio-data";
+import { extraItems } from "@/lib/fallbacks/portfolio-data";
 
 export function ExtraGrid() {
   return (

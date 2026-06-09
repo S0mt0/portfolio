@@ -1,16 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { Cookie, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { cn } from "@/lib/utils";
-import { navItems, profile } from "@/lib/portfolio-data";
+import { navItems, profile } from "@/lib/fallbacks/portfolio-data";
 import Image from "next/image";
-import { TiPin } from "react-icons/ti";
 
 const isActivePath = (pathname: string, href: string) => {
   if (href === "/") return pathname === "/";
@@ -39,7 +38,7 @@ export function SiteNav() {
           </span>
           <span className="min-w-0">
             <span className="block  font-black capitalize text-2xl tracking-[0.16em] leading-none font-sketch relative">
-              <TiPin className="absolute -right-2 -top-1 h-5 w-5 rotate-12 fill-red-500 text-red-500" />
+              {/* <TiPin className="absolute -right-2 -top-1 h-5 w-5 rotate-12 fill-red-500 text-red-500" /> */}
               {profile.handle}
             </span>
             <span className="block truncate text-[0.5rem] font-bold uppercase tracking-[0.16em] text-muted-foreground">

@@ -10,7 +10,7 @@ import {
 } from "@/components/common/motion-primitives";
 import { PageShell } from "@/components/common/page-shell";
 import { Badge } from "@/components/ui/badge";
-import { getNoteBySlug, notes } from "@/lib/portfolio-data";
+import { getNoteBySlug, notes } from "@/lib/fallbacks/portfolio-data";
 
 type NotePageProps = {
   params: Promise<{ slug: string }>;

@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 
 import { MotionItem, MotionList } from "@/components/common/motion-primitives";
 import { Badge } from "@/components/ui/badge";
-import { notes } from "@/lib/portfolio-data";
+import { notes } from "@/lib/fallbacks/portfolio-data";
 
 export function NotesList() {
   return (

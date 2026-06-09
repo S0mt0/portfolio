@@ -1,4 +1,3 @@
-import type { LucideIcon } from "lucide-react";
 import {
   Boxes,
   BriefcaseBusiness,
@@ -9,77 +8,16 @@ import {
   NotebookText,
   X,
 } from "lucide-react";
-
-export type NavItem = {
-  href: string;
-  label: string;
-  code: string;
-};
-
-export type SocialLink = {
-  href: string;
-  label: string;
-  icon: LucideIcon;
-};
-
-export type ProfileInfo = {
-  name: string;
-  handle: string;
-  role: string;
-  status: string;
-  location: string;
-  availability: string;
-  intro: string;
-  summary: string;
-  stats: {
-    label: string;
-    value: string;
-    note: string;
-  }[];
-};
-
-export type SkillGroup = {
-  title: string;
-  skills: string[];
-};
-
-export type ExperienceItem = {
-  index: string;
-  role: string;
-  period: string;
-  status: "active" | "archived" | "building";
-  summary: string;
-  signals: string[];
-};
-
-export type BuildItem = {
-  index: string;
-  name: string;
-  category: string;
-  status: "shipped" | "active" | "lab";
-  description: string;
-  stack: string[];
-  proof: string;
-  githubHref?: string;
-  liveHref?: string;
-};
-
-export type NoteItem = {
-  index: string;
-  slug: string;
-  title: string;
-  date: string;
-  readTime: string;
-  status: "drafting" | "planned" | "published";
-  excerpt: string;
-  body: string[];
-};
-
-export type ExtraItem = {
-  title: string;
-  note: string;
-  color: string;
-};
+import {
+  BuildItem,
+  ExperienceItem,
+  ExtraItem,
+  NavItem,
+  NoteItem,
+  ProfileInfo,
+  SkillGroup,
+  SocialLink,
+} from "../types/experience";
 
 export const navItems: NavItem[] = [
   { href: "/", label: "Profile", code: "home" },

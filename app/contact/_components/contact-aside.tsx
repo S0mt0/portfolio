@@ -3,9 +3,18 @@
 import { Mail } from "lucide-react";
 import { motion } from "framer-motion";
 
-import { socialLinks } from "@/lib/portfolio-data";
+import { socialLinks as fallbackSocialLinks } from "@/lib/fallbacks/portfolio-data";
+import type { ContactSocials } from "@/lib/types/contact";
+import { getSocialLinks } from "@/lib/utils";
 
-export function ContactAside() {
+type ContactAsideProps = {
+  helperNote?: string;
+  socials?: ContactSocials;
+};
+
+export function ContactAside({ helperNote, socials }: ContactAsideProps) {
+  const links = socials ? getSocialLinks(socials) : fallbackSocialLinks;
+
   return (
     <aside className="space-y-8">
       <motion.section
@@ -16,7 +25,7 @@ export function ContactAside() {
       >
         <p className="font-sketch text-3xl font-bold text-primary">Handles</p>
         <div className="mt-5 grid gap-3">
-          {socialLinks.map(({ href, label, icon: Icon }) => (
+          {links.map(({ href, label, icon: Icon }) => (
             <a
               key={label}
               href={href}
@@ -45,8 +54,8 @@ export function ContactAside() {
         <div className="absolute right-4 top-4 h-12 w-12 rotate-6 border border-border/35 bg-secondary" />
         <Mail className="h-5 w-5 text-primary" />
         <p className="mt-5 text-sm font-semibold leading-7">
-          A useful first message has the goal, the current state, the rough
-          deadline, and where I can be most helpful.
+          {helperNote ||
+            "A useful first message has the goal, the current state, the rough deadline, and where I can be most helpful."}
         </p>
       </motion.section>
     </aside>

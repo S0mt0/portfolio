@@ -2,8 +2,8 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { MotionItem, MotionList } from "@/components/common/motion-primitives";
-import type { LandingContent } from "@/lib/landing-content";
-import { notes } from "@/lib/portfolio-data";
+import type { LandingContent } from "@/lib/fallbacks/landing-content";
+import { notes } from "@/lib/fallbacks/portfolio-data";
 import { EmojiCursorArea } from "./emoji-cursor-area";
 
 type SelectedNotesSectionProps = {
@@ -11,9 +11,17 @@ type SelectedNotesSectionProps = {
 };
 
 export function SelectedNotesSection({ content }: SelectedNotesSectionProps) {
-  const featuredNotes = content.featuredSlugs
-    .map((slug) => notes.find((note) => note.slug === slug))
-    .filter((note): note is (typeof notes)[number] => Boolean(note));
+  const featuredNotes = content.items?.length
+    ? content.items.map((note, index) => ({
+        index: String(index + 1).padStart(2, "0"),
+        slug: note.slug,
+        title: note.title,
+        date: note.publishedAt ? formatShortDate(note.publishedAt) : "Recent",
+        readTime: note.readTime,
+        status: "published",
+        excerpt: note.excerpt || "",
+      }))
+    : notes.slice(0, content.featuredCount || 2);
 
   return (
     <EmojiCursorArea item="📝">
@@ -74,4 +82,12 @@ export function SelectedNotesSection({ content }: SelectedNotesSectionProps) {
       </MotionList>
     </EmojiCursorArea>
   );
+}
+
+function formatShortDate(value: string) {
+  return new Intl.DateTimeFormat("en", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(new Date(value));
 }

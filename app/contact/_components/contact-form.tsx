@@ -1,40 +1,48 @@
 "use client";
 
-import type { ChangeEvent } from "react";
+import { useState, useTransition, type FormEvent } from "react";
 import { Download, Send } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
+import { sendContactMessage } from "@/lib/api/pages";
 
 const fieldClassName =
   "w-full rounded-none border border-border/30 bg-background/55 px-3 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-primary";
 
-export function ContactForm() {
-  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+type ContactFormProps = {
+  cvUrl?: string;
+};
+
+export function ContactForm({ cvUrl }: ContactFormProps) {
+  const [status, setStatus] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    const name = String(formData.get("name") ?? "");
-    const email = String(formData.get("email") ?? "");
-    const workType = String(formData.get("workType") ?? "");
-    const timeline = String(formData.get("timeline") ?? "");
-    const budget = String(formData.get("budget") ?? "");
-    const details = String(formData.get("details") ?? "");
+    const form = event.currentTarget;
 
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Work type: ${workType}`,
-      `Timeline: ${timeline}`,
-      `Budget: ${budget}`,
-      "",
-      "Project details:",
-      details,
-    ].join("\n");
+    startTransition(async () => {
+      setStatus(null);
+      const response = await sendContactMessage({
+        name: String(formData.get("name") ?? ""),
+        email: String(formData.get("email") ?? ""),
+        workType: String(formData.get("workType") ?? ""),
+        timeline: String(formData.get("timeline") ?? ""),
+        budget: String(formData.get("budget") ?? ""),
+        details: String(formData.get("details") ?? ""),
+      });
 
-    window.location.href = `mailto:talktosomto@gmail.com?subject=${encodeURIComponent(
-      "Work request for 0xSomto"
-    )}&body=${encodeURIComponent(body)}`;
+      if (!response?.success) {
+        setStatus(response?.message || "Message did not send. Try again.");
+        return;
+      }
+
+      form.reset();
+      setStatus(response.message || "Message sent.");
+    });
   };
 
   return (
@@ -117,23 +125,31 @@ export function ContactForm() {
         <Button
           type="submit"
           size="lg"
+          disabled={isPending}
           className="h-11 rounded-none bg-foreground px-5 text-background hover:bg-foreground/85"
         >
-          Draft email
+          {isPending ? "Sending..." : "Send message"}
           <Send className="h-4 w-4" />
         </Button>
-        <Button
-          asChild
-          size="lg"
-          variant="outline"
-          className="h-11 rounded-none border-border/40 bg-transparent px-5"
-        >
-          <a href="/somto-cv.pdf" download>
-            Download CV
-            <Download className="h-4 w-4" />
-          </a>
-        </Button>
+        {cvUrl ? (
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="h-11 rounded-none border-border/40 bg-transparent px-5"
+          >
+            <a href={cvUrl} download>
+              Download CV
+              <Download className="h-4 w-4" />
+            </a>
+          </Button>
+        ) : null}
       </div>
+      {status ? (
+        <p className="mt-4 border-l-2 border-primary pl-3 text-sm font-semibold text-muted-foreground">
+          {status}
+        </p>
+      ) : null}
     </motion.form>
   );
 }

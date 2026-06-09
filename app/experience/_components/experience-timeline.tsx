@@ -1,12 +1,12 @@
 import { CheckCircle2 } from "lucide-react";
 
 import { MotionItem, MotionList } from "@/components/common/motion-primitives";
-import { experience } from "@/lib/portfolio-data";
+import { ExperienceItem } from "@/lib/types/experience";
 
-export function ExperienceTimeline() {
+export function ExperienceTimeline({ items }: { items: ExperienceItem[] }) {
   return (
     <MotionList className="mt-8 grid gap-6">
-      {experience.map((item) => (
+      {items.map((item) => (
         <MotionItem
           key={item.index}
           className="group grid gap-4 border-b border-border/30 pb-6 transition-colors hover:bg-secondary/25 last:border-b-0 md:grid-cols-[9rem_minmax(0,1fr)]"
@@ -26,20 +26,32 @@ export function ExperienceTimeline() {
                 {item.status}
               </span>
             </div>
+            {item.websiteUrl ? (
+              <a
+                href={item.websiteUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="mt-2 inline-flex text-xs font-bold text-primary underline underline-offset-4"
+              >
+                {item.websiteUrl}
+              </a>
+            ) : null}
             <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
               {item.summary}
             </p>
-            <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-              {item.signals.map((signal) => (
-                <li
-                  key={signal}
-                  className="flex gap-3 text-sm leading-6 text-muted-foreground"
-                >
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                  <span>{signal}</span>
-                </li>
-              ))}
-            </ul>
+            {item.signals.length ? (
+              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+                {item.signals.map((signal) => (
+                  <li
+                    key={signal}
+                    className="flex gap-3 text-sm leading-6 text-muted-foreground"
+                  >
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <span>{signal}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </div>
         </MotionItem>
       ))}

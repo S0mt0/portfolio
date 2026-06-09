@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { PageShell } from "@/components/common/page-shell";
 import { SectionHeading } from "@/components/common/section-heading";
-import { pageIntros } from "@/lib/portfolio-data";
+import { pageIntros } from "@/lib/fallbacks/portfolio-data";
 import { NotesList } from "./_components/notes-list";
 
 export const metadata: Metadata = {

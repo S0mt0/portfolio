@@ -3,7 +3,7 @@ import { Boxes, Mail } from "lucide-react";
 
 import { MotionBlock } from "@/components/common/motion-primitives";
 import { Button } from "@/components/ui/button";
-import type { LandingContent } from "@/lib/landing-content";
+import type { LandingContent } from "@/lib/fallbacks/landing-content";
 import { HeroPortraitCursor } from "./hero-portrait-cursor";
 
 type HeroSectionProps = {
@@ -24,7 +24,7 @@ export function HeroSection({ content }: HeroSectionProps) {
           <p className="font-sketch text-3xl font-bold text-primary">
             {content.greeting}
           </p>
-          <h1 className="mt-4 max-w-4xl text-balance text-4xl font-black leading-[0.95] tracking-[-0.06em] text-foreground">
+          <h1 className="mt-4 max-w-4xl text-balance text-3xl sm:text-4xl font-black leading-[0.95] tracking-[-0.06em] text-foreground">
             {content.headline}
           </h1>
 
@@ -33,27 +33,31 @@ export function HeroSection({ content }: HeroSectionProps) {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button
-              asChild
-              size="lg"
-              className="h-11 rounded-none bg-foreground px-5 text-background hover:bg-foreground/85"
-            >
-              <Link href={content.primaryCta.href}>
-                {content.primaryCta.label}
-                <Boxes className="h-4 w-4" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="h-11 rounded-none border-border/40 bg-transparent px-5"
-            >
-              <Link href={content.secondaryCta.href}>
-                {content.secondaryCta.label}
-                <Mail className="h-4 w-4" />
-              </Link>
-            </Button>
+            {content.primaryCta.published !== false ? (
+              <Button
+                asChild
+                size="lg"
+                className="h-11 rounded-none bg-foreground px-5 text-background hover:bg-foreground/85"
+              >
+                <Link href={content.primaryCta.href}>
+                  {content.primaryCta.label}
+                  <Boxes className="h-4 w-4" />
+                </Link>
+              </Button>
+            ) : null}
+            {content.secondaryCta.published !== false ? (
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="h-11 rounded-none border-border/40 bg-transparent px-5"
+              >
+                <Link href={content.secondaryCta.href}>
+                  {content.secondaryCta.label}
+                  <Mail className="h-4 w-4" />
+                </Link>
+              </Button>
+            ) : null}
           </div>
         </MotionBlock>
 
