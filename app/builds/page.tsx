@@ -26,6 +26,7 @@ export default async function BuildsPage() {
         description: content.hero.description,
       }
     : pageIntros.builds;
+
   const items: BuildItem[] = content?.items?.length
     ? content.items.map((build: BuildsPageContent["items"][number], index) => ({
         index: String(index + 1).padStart(3, "0"),
@@ -42,7 +43,7 @@ export default async function BuildsPage() {
 
   return (
     <PageShell>
-      <SectionHeading {...intro} tag="LOGS" />
+      <SectionHeading {...intro} tag="SAMPLES" />
       <BuildList items={items} />
     </PageShell>
   );

@@ -3,13 +3,15 @@ interface ApiResponse<T> {
   message: string;
   data?: T;
 }
-interface ApiPaginatedResponse<T> extends ApiResponse {
-  data: T[];
+interface ApiPaginatedResponse<T> extends ApiResponse<T> {
+  data?: T;
   pagination: {
     total: number;
     page: number;
     limit: number;
     totalPages: number;
+    showingStart?: number;
+    showingEnd?: number;
   };
 }
 

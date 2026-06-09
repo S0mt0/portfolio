@@ -23,8 +23,8 @@ export const navItems: NavItem[] = [
   { href: "/", label: "Profile", code: "home" },
   { href: "/experience", label: "Experience", code: "xp" },
   { href: "/builds", label: "Builds", code: "builds" },
-  { href: "/notes", label: "Notes", code: "notes" },
-  { href: "/extra", label: "Extra", code: "extra" },
+  { href: "/notes", label: "Notes", code: "articles" },
+  { href: "/extra", label: "Extra", code: "extras" },
   { href: "/contact", label: "Resume", code: "contact" },
 ];
 

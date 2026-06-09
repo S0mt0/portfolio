@@ -134,4 +134,58 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .notes-prose :where(h1, h2, h3, h4) {
+    margin-block: 2rem 0.8rem;
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+  }
+
+  .notes-prose h1 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .notes-prose h2 {
+    font-size: clamp(1.65rem, 3vw, 2.5rem);
+  }
+
+  .notes-prose h3 {
+    font-size: clamp(1.35rem, 2vw, 1.9rem);
+  }
+
+  .notes-prose :where(p, ul, ol, blockquote, pre, iframe) {
+    margin-block: 1rem;
+  }
+
+  .notes-prose :where(ul, ol) {
+    padding-left: 1.25rem;
+  }
+
+  .notes-prose ul {
+    list-style: disc;
+  }
+
+  .notes-prose ol {
+    list-style: decimal;
+  }
+
+  .notes-prose a {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .notes-prose img,
+  .notes-prose iframe {
+    max-width: 100%;
+    border: 1px solid color-mix(in oklch, var(--border), transparent 70%);
+  }
+
+  .notes-prose blockquote {
+    border-left: 3px solid var(--primary);
+    padding-left: 1rem;
+    color: var(--muted-foreground);
+  }
 }

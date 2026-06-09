@@ -42,7 +42,12 @@ export function SiteNav() {
               {profile.handle}
             </span>
             <span className="block truncate text-[0.5rem] font-bold uppercase tracking-[0.16em] text-muted-foreground">
-              {activeItem?.code ?? "home"} note
+              {activeItem?.code
+                ? activeItem.code === "articles"
+                  ? "My"
+                  : activeItem.code
+                : "home"}{" "}
+              note
             </span>
           </span>
         </Link>

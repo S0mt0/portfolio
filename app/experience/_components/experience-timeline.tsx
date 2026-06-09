@@ -1,4 +1,4 @@
-import { CheckCircle2 } from "lucide-react";
+import { Check } from "lucide-react";
 
 import { MotionItem, MotionList } from "@/components/common/motion-primitives";
 import { ExperienceItem } from "@/lib/types/experience";
@@ -39,14 +39,15 @@ export function ExperienceTimeline({ items }: { items: ExperienceItem[] }) {
             <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
               {item.summary}
             </p>
+
             {item.signals.length ? (
-              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+              <ul className="mt-5">
                 {item.signals.map((signal) => (
                   <li
                     key={signal}
                     className="flex gap-3 text-sm leading-6 text-muted-foreground"
                   >
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                     <span>{signal}</span>
                   </li>
                 ))}

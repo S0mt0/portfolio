@@ -34,6 +34,7 @@ export default async function ExperiencePage() {
         description: content.hero.description,
       }
     : pageIntros.experience;
+
   const items: ExperienceItem[] = content?.items?.length
     ? content.items.map(
         (item: ExperiencePageContent["items"][number], index) => ({
