@@ -1,10 +1,14 @@
 "use client";
 
-import { Heart, Send } from "lucide-react";
-import { useState, useTransition } from "react";
+import { Heart, MessageCircle, Send, X } from "lucide-react";
+import { useEffect, useState, useTransition } from "react";
 
 import { Button } from "@/components/ui/button";
-import { likeNoteComment, sendNoteComment } from "@/lib/api/pages";
+import {
+  getNoteContent,
+  likeNoteComment,
+  sendNoteComment,
+} from "@/lib/api/pages";
 import type { PublicNoteComment } from "@/lib/types/notes";
 
 type NoteCommentsProps = {
@@ -27,8 +31,17 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
     website: "",
     content: "",
   });
+  const [replyTarget, setReplyTarget] = useState<PublicNoteComment | null>(
+    null
+  );
   const [message, setMessage] = useState("");
   const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    getNoteContent(slug).then((response) => {
+      if (response?.data?.comments) setComments(response.data.comments);
+    });
+  }, [slug]);
 
   const updateField =
     (key: keyof typeof form) =>
@@ -41,15 +54,21 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
     setMessage("");
 
     startTransition(async () => {
-      const response = await sendNoteComment(slug, form);
+      const payload = { ...form, parentId: replyTarget?.id || null };
+      const response = await sendNoteComment(slug, payload);
 
       if (!response?.success || !response.data) {
         setMessage(response?.message || "Could not post comment.");
         return;
       }
 
-      setComments((prev) => [response.data!, ...prev]);
+      setComments((prev) =>
+        replyTarget
+          ? addReply(prev, replyTarget.id, response.data!)
+          : [response.data!, ...prev]
+      );
       setForm({ name: "", email: "", website: "", content: "" });
+      setReplyTarget(null);
       setMessage("Comment posted.");
     });
   };
@@ -60,14 +79,71 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
       if (!response?.data) return;
 
       setComments((prev) =>
-        prev.map((comment) =>
-          comment.id === id
-            ? { ...comment, likes: response.data?.likes || comment.likes }
-            : comment
-        )
+        updateComment(prev, id, (comment) => ({
+          ...comment,
+          likes: response.data?.likes ?? comment.likes,
+          liked: response.data?.liked ?? comment.liked,
+        }))
       );
     });
   };
+
+  const renderComment = (comment: PublicNoteComment, depth = 0) => (
+    <article
+      key={comment.id}
+      className="grid gap-3 border-b border-border/20 pb-5 sm:grid-cols-[3rem_minmax(0,1fr)]"
+    >
+      <div className="flex h-11 w-11 items-center justify-center bg-accent font-black">
+        {comment.name.charAt(0).toUpperCase()}
+      </div>
+      <div>
+        <div className="flex flex-wrap items-center gap-2">
+          <p className="font-bold">{comment.name}</p>
+          <span className="text-xs text-muted-foreground">
+            {formatDate(comment.createdAt)}
+          </span>
+        </div>
+        <p className="mt-2 text-sm leading-7 text-muted-foreground">
+          {comment.content}
+        </p>
+        <div className="mt-2 flex flex-wrap items-center gap-3">
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => onLike(comment.id)}
+            className="h-8 px-0 text-muted-foreground hover:text-primary"
+          >
+            <Heart
+              className={`h-4 w-4 ${
+                comment.liked ? "fill-primary text-primary" : ""
+              }`}
+            />
+            {comment.likes}
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => setReplyTarget(comment)}
+            className="h-8 px-0 text-muted-foreground hover:text-primary"
+          >
+            <MessageCircle className="h-4 w-4" />
+            Reply
+          </Button>
+        </div>
+        {comment.replies?.length ? (
+          <div
+            className={`mt-5 space-y-5 border-l border-border/25 pl-4 ${
+              depth > 1 ? "ml-0" : "sm:ml-3"
+            }`}
+          >
+            {comment.replies.map((reply) => renderComment(reply, depth + 1))}
+          </div>
+        ) : null}
+      </div>
+    </article>
+  );
 
   return (
     <section className="border-t border-border/20 pt-10">
@@ -89,6 +165,21 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
         onSubmit={onSubmit}
         className="mt-5 grid gap-3 border border-border/25 bg-card/45 p-4"
       >
+        {replyTarget ? (
+          <div className="flex items-center justify-between gap-3 bg-accent/45 px-3 py-2 text-sm">
+            <span>
+              Replying to <strong>{replyTarget.name}</strong>
+            </span>
+            <button
+              type="button"
+              onClick={() => setReplyTarget(null)}
+              className="text-muted-foreground hover:text-primary"
+              aria-label="Cancel reply"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        ) : null}
         <div className="grid gap-3 sm:grid-cols-3">
           <input
             value={form.name}
@@ -132,39 +223,35 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
 
       {comments.length ? (
         <div className="mt-6 space-y-5">
-          {comments.map((comment) => (
-            <article
-              key={comment.id}
-              className="grid gap-3 border-b border-border/20 pb-5 sm:grid-cols-[3rem_minmax(0,1fr)]"
-            >
-              <div className="flex h-11 w-11 items-center justify-center bg-accent font-black">
-                {comment.name.charAt(0).toUpperCase()}
-              </div>
-              <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className="font-bold">{comment.name}</p>
-                  <span className="text-xs text-muted-foreground">
-                    {formatDate(comment.createdAt)}
-                  </span>
-                </div>
-                <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                  {comment.content}
-                </p>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => onLike(comment.id)}
-                  className="mt-2 h-8 px-0 text-muted-foreground hover:text-primary"
-                >
-                  <Heart className="h-4 w-4" />
-                  {comment.likes}
-                </Button>
-              </div>
-            </article>
-          ))}
+          {comments.map((comment) => renderComment(comment))}
         </div>
       ) : null}
     </section>
   );
+}
+
+function updateComment(
+  comments: PublicNoteComment[],
+  id: string,
+  updater: (comment: PublicNoteComment) => PublicNoteComment
+): PublicNoteComment[] {
+  return comments.map((comment) => {
+    if (comment.id === id) return updater(comment);
+
+    return {
+      ...comment,
+      replies: updateComment(comment.replies || [], id, updater),
+    };
+  });
+}
+
+function addReply(
+  comments: PublicNoteComment[],
+  parentId: string,
+  reply: PublicNoteComment
+): PublicNoteComment[] {
+  return updateComment(comments, parentId, (comment) => ({
+    ...comment,
+    replies: [...(comment.replies || []), reply],
+  }));
 }

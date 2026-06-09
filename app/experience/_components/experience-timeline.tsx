@@ -22,9 +22,6 @@ export function ExperienceTimeline({ items }: { items: ExperienceItem[] }) {
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <h2 className="text-2xl font-extrabold">{item.role}</h2>
-              <span className="border border-border/25 bg-accent/45 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em]">
-                {item.status}
-              </span>
             </div>
             {item.websiteUrl ? (
               <a

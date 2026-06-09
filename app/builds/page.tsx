@@ -32,7 +32,7 @@ export default async function BuildsPage() {
         index: String(index + 1).padStart(3, "0"),
         name: build.title,
         category: build.category,
-        status: build.featured ? "active" : "shipped",
+        status: build.status || "active",
         description: build.summary || "",
         proof: build.proofNote || "",
         stack: build.stack || [],

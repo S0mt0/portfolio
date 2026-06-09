@@ -115,7 +115,6 @@ export const experience: ExperienceItem[] = [
     index: "01",
     role: "Fullstack Developer",
     period: "2022 - present",
-    status: "active",
     summary:
       "Building web applications end to end: public interfaces, admin systems, API flows, data models, and production polish.",
     signals: [
@@ -128,7 +127,6 @@ export const experience: ExperienceItem[] = [
     index: "02",
     role: "Web3 / Smart Contract Learner",
     period: "current track",
-    status: "building",
     summary:
       "Moving from application delivery into Solidity development, Foundry workflows, and audit-style reasoning.",
     signals: [
@@ -141,7 +139,6 @@ export const experience: ExperienceItem[] = [
     index: "03",
     role: "Independent Builder",
     period: "ongoing",
-    status: "active",
     summary:
       "Maintaining a portfolio of shipped and in-progress systems that show engineering judgment beyond isolated UI work.",
     signals: [
@@ -183,7 +180,7 @@ export const builds: BuildItem[] = [
     index: "003",
     name: "Solidity Practice Track",
     category: "Current study",
-    status: "lab",
+    status: "in-progress",
     description:
       "A growing set of small contracts, tests, and study notes focused on understanding how protocol logic fails.",
     stack: ["Solidity", "Foundry", "EVM", "Tests"],

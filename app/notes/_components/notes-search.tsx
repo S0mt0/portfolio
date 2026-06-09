@@ -37,7 +37,7 @@ export function NotesSearch({ defaultValue = "" }: NotesSearchProps) {
         <input
           value={value}
           onChange={(event) => setValue(event.target.value)}
-          placeholder="Search title or tag"
+          placeholder="Search here..."
           className="h-11 w-full rounded-none border border-border/35 bg-background/40 pl-10 pr-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary"
         />
       </label>

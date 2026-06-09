@@ -18,7 +18,7 @@ export function BuildList({ items }: { items: BuildItem[] }) {
               {build.index}
             </span>
             <p className="mt-2 text-xs font-black uppercase tracking-[0.14em] text-muted-foreground">
-              {build.status}
+              {build.status.replace("-", " ")}
             </p>
           </div>
 

@@ -32,6 +32,7 @@ type ILandingContent = {
       id: string;
       title: string;
       category: string;
+      status?: "active" | "in-progress";
       summary?: string;
       proofNote?: string;
       githubUrl?: string;

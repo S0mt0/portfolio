@@ -28,6 +28,7 @@ export type BuildsPageContent = {
     id: string;
     title: string;
     category: string;
+    status: "active" | "in-progress";
     summary?: string;
     proofNote?: string;
     githubUrl?: string;
@@ -79,7 +80,6 @@ export type ExperienceItem = {
   role: string;
   period: string;
   websiteUrl?: string;
-  status: "active" | "archived" | "building";
   summary: string;
   signals: string[];
 };
@@ -88,7 +88,7 @@ export type BuildItem = {
   index: string;
   name: string;
   category: string;
-  status: "shipped" | "active" | "lab";
+  status: "active" | "in-progress";
   description: string;
   stack: string[];
   proof: string;

@@ -42,7 +42,6 @@ export default async function ExperiencePage() {
           period: item.period,
           role: item.role,
           websiteUrl: item.websiteUrl || undefined,
-          status: index === 0 ? "active" : "building",
           summary: item.summary || "",
           signals: item.signals || [],
         })

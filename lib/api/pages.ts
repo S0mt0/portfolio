@@ -39,6 +39,6 @@ export const sendNoteComment = (slug: string, payload: NoteCommentPayload) =>
   apiPost<ApiResponse<PublicNoteComment>>(`/notes/${slug}/comments`, payload);
 
 export const likeNoteComment = (slug: string, id: string) =>
-  apiPost<ApiResponse<{ id: string; likes: number }>>(
+  apiPost<ApiResponse<{ id: string; likes: number; liked: boolean }>>(
     `/notes/${slug}/comments/${id}/like`
   );

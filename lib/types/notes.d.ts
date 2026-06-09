@@ -18,11 +18,14 @@ export type PublicNoteListItem = {
 
 export type PublicNoteComment = {
   id: string;
+  parentId?: string | null;
   name: string;
   website?: string;
   content: string;
   likes: number;
+  liked: boolean;
   createdAt: string;
+  replies: PublicNoteComment[];
 };
 
 export type PublicNoteDetail = PublicNoteListItem & {
@@ -44,6 +47,7 @@ export type PublicNotesContent = {
 };
 
 export type NoteCommentPayload = {
+  parentId?: string | null;
   name: string;
   email: string;
   website?: string;

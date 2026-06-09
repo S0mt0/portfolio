@@ -1,8 +1,14 @@
 import Link from "next/link";
 
+import { getContactContent } from "@/lib/api/pages";
 import { navItems, profile, socialLinks } from "@/lib/fallbacks/portfolio-data";
+import { getSocialLinks } from "@/lib/utils";
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const contact = await getContactContent();
+  const cmsLinks = getSocialLinks(contact?.data?.socials);
+  const links = cmsLinks.length ? cmsLinks : socialLinks;
+
   return (
     <footer className="border-t border-border/15">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-8 text-sm text-muted-foreground sm:px-8 lg:px-10">
@@ -24,7 +30,7 @@ export function SiteFooter() {
           </nav>
         </div>
         <div className="flex flex-wrap gap-3 px-1">
-          {socialLinks.map(({ href, label, icon: Icon }) => (
+          {links.map(({ href, label, icon: Icon }) => (
             <a
               key={label}
               href={href}

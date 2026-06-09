@@ -25,7 +25,10 @@ export async function apiFetch<T>(
       }
     });
 
-    const res = await fetch(url.toString(), { cache: "no-store" });
+    const res = await fetch(url.toString(), {
+      cache: "no-store",
+      credentials: "include",
+    });
     return readJsonResponse<T>(res);
   } catch (err) {
     console.error(`API fetch failed for ${path}:`, err);
@@ -40,6 +43,7 @@ export async function apiPost<T>(
   try {
     const res = await fetch(`${API_BASE_URL}${path}`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
