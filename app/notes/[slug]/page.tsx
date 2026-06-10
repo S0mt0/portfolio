@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Clock, UserRound } from "lucide-react";
@@ -12,10 +12,66 @@ import { getNoteContent } from "@/lib/api/pages";
 import { NoteComments } from "./_components/note-comments";
 import { NoteShare } from "./_components/note-share";
 import { RelatedNotes } from "./_components/related-notes";
+import { VERSION } from "@/lib/constants";
 
 type NotePageProps = {
   params: Promise<{ slug: string }>;
 };
+
+export async function generateMetadata(
+  { params }: NotePageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { slug } = await params;
+
+  const note = (await getNoteContent(slug))?.data;
+
+  if (!note) return { title: "Note not found" };
+
+  const previousImages = (await parent).openGraph?.images || [];
+
+  const imageUrl = note.bannerImage
+    ? `${note.bannerImage}?v=${VERSION}`
+    : `/blank-book.jpg?v=${VERSION}`;
+
+  const description = note.excerpt || "Read the latest notes by Somto";
+
+  return {
+    alternates: {
+      canonical: `/notes/${slug}`,
+    },
+
+    title: note.title,
+    description,
+
+    openGraph: {
+      title: note.title,
+      description,
+      url: `/notes/${slug}`,
+      type: "article",
+      publishedTime: note.publishedAt
+        ? new Date(note.publishedAt).toISOString()
+        : undefined,
+      authors: note.author?.name ? [note.author.name] : ["Somtochukwu Nkem"],
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: note.title,
+        },
+        ...previousImages,
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: note.title,
+      description,
+      images: [imageUrl],
+    },
+  };
+}
 
 const formatDate = (value?: string | null) =>
   value
@@ -26,20 +82,15 @@ const formatDate = (value?: string | null) =>
       }).format(new Date(value))
     : "Unpublished";
 
-export async function generateMetadata({
-  params,
-}: NotePageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const response = await getNoteContent(slug);
-  const note = response?.data;
+const getSiteUrl = () => {
+  const explicitUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  if (explicitUrl) return explicitUrl.replace(/\/$/, "");
 
-  if (!note) return { title: "Note" };
+  const vercelUrl = process.env.VERCEL_URL;
+  if (vercelUrl) return `https://${vercelUrl.replace(/\/$/, "")}`;
 
-  return {
-    title: note.title,
-    description: note.excerpt,
-  };
-}
+  return "https://talktosomto.xyz";
+};
 
 export default async function NotePage({ params }: NotePageProps) {
   const { slug } = await params;
@@ -47,6 +98,8 @@ export default async function NotePage({ params }: NotePageProps) {
   const note = response?.data;
 
   if (!note) notFound();
+
+  const shareUrl = `${getSiteUrl()}/notes/${note.slug}`;
 
   return (
     <PageShell>
@@ -96,11 +149,11 @@ export default async function NotePage({ params }: NotePageProps) {
             </div>
           </header>
 
-          <NoteShare title={note.title} excerpt={note.excerpt} />
+          <NoteShare url={shareUrl} title={note.title} excerpt={note.excerpt} />
 
           {note.bannerImage ? (
             <figure className="space-y-3">
-              <div className="relative aspect-[16/9] overflow-hidden border border-border/25 bg-accent/35">
+              <div className="relative aspect-video overflow-hidden border border-border/25 bg-accent/35">
                 <Image
                   src={note.bannerImage}
                   alt={note.title}
@@ -125,7 +178,10 @@ export default async function NotePage({ params }: NotePageProps) {
         </article>
 
         {note.allowComments ? (
-          <NoteComments slug={note.slug} initialComments={note.comments || []} />
+          <NoteComments
+            slug={note.slug}
+            initialComments={note.comments || []}
+          />
         ) : null}
 
         <RelatedNotes notes={note.relatedPosts || []} />

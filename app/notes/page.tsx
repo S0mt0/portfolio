@@ -11,21 +11,29 @@ import { NotesEmptyState } from "./_components/notes-empty-state";
 export const metadata: Metadata = {
   title: "Notes",
   description:
-    "Somto's planned and drafted technical notes on fullstack engineering, smart contract development, and security review.",
+    "Explore some of my technical notes on fullstack engineering, smart contract development, and security review.",
+  alternates: {
+    canonical: "/notes",
+  },
 };
 
 type NotesPageProps = {
   searchParams: Promise<{
     page?: string;
     q?: string;
+    limit?: string;
   }>;
 };
+
+const NOTE_LIMIT = 10;
 
 export default async function NotesPage({ searchParams }: NotesPageProps) {
   const params = await searchParams;
   const page = Math.max(Number(params.page || 1), 1);
   const q = params.q?.trim() || "";
-  const response = await getNotesContent({ page, q });
+  const limit = Number(params?.limit) || NOTE_LIMIT;
+
+  const response = await getNotesContent({ page, q, limit });
   const content = response?.data;
   const pagination = response?.pagination;
 
@@ -33,7 +41,9 @@ export default async function NotesPage({ searchParams }: NotesPageProps) {
     <PageShell>
       <SectionHeading
         eyebrow={content?.hero.eyebrow || "Research notes"}
-        heading={content?.hero.title || "A quiet archive for technical writing."}
+        heading={
+          content?.hero.title || "A quiet archive for technical writing."
+        }
         description={content?.hero.description}
         tag="NOTE"
       />

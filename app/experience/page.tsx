@@ -18,7 +18,10 @@ import { OperatingNote } from "./_components/operating-note";
 export const metadata: Metadata = {
   title: "Experience",
   description:
-    "Somto's fullstack development timeline and transition into smart contract security.",
+    "Explore my fullstack development timeline and transition into smart contract security.",
+  alternates: {
+    canonical: "/experience",
+  },
 };
 
 export const revalidate = 900;

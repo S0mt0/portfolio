@@ -10,6 +10,7 @@ import type {
   NoteCommentPayload,
   PublicNoteComment,
   PublicNoteDetail,
+  PublicNoteListItem,
   PublicNotesContent,
 } from "@/lib/types/notes";
 import { apiFetch, apiPost } from "./util";
@@ -29,8 +30,12 @@ export const getContactContent = () =>
 export const sendContactMessage = (payload: ContactMessagePayload) =>
   apiPost<ApiResponse<null>>("/contact", payload);
 
-export const getNotesContent = (query?: { page?: number; q?: string }) =>
-  apiFetch<ApiPaginatedResponse<PublicNotesContent>>("/notes", query);
+export const getNotesContent = (query?: {
+  page?: number;
+  q?: string;
+  limit?: number;
+  fields?: (keyof PublicNoteListItem)[];
+}) => apiFetch<ApiPaginatedResponse<PublicNotesContent>>("/notes", query);
 
 export const getNoteContent = (slug: string) =>
   apiFetch<ApiResponse<PublicNoteDetail>>(`/notes/${slug}`);

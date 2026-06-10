@@ -9,6 +9,7 @@ import { ThemeProvider } from "@/components/layout/theme-provider";
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
+import { jsonLd, seoMetadata } from "@/lib/seo";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -31,19 +32,13 @@ const caveat = Caveat({
   variable: "--font-caveat",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Somto | Fullstack Developer",
-    template: "%s | Somto",
-  },
-  description:
-    "Somto's portfolio: fullstack engineering work, Web3 builds, Solidity learning, and practical notes.",
-};
+export const metadata: Metadata = seoMetadata;
 
 export const viewport: Viewport = {
   userScalable: false,
   maximumScale: 1.0,
   initialScale: 1,
+  width: "device-width",
 };
 
 export default function RootLayout({
@@ -63,6 +58,14 @@ export default function RootLayout({
         caveat.variable
       )}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
+          }}
+        />
+      </head>
       <body className="min-h-full text-foreground">
         <ThemeProvider>
           <SiteNav />
@@ -71,7 +74,6 @@ export default function RootLayout({
         </ThemeProvider>
         <SpeedInsights />
         <Script
-          defer
           src="https://cloud.umami.is/script.js"
           data-website-id="0f53e08e-cb77-4a0b-b333-a012452c8958"
           strategy="afterInteractive"

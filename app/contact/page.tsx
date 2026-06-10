@@ -9,8 +9,11 @@ import { ContactForm } from "./_components/contact-form";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description:
-    "Contact Somto for fullstack, Web3 frontend, Solidity, and early security-facing work.",
+  description: "Get in touch with me for projects and collaborations.",
+
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 export const revalidate = 900;

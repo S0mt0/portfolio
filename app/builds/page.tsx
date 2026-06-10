@@ -11,7 +11,11 @@ import { BuildList } from "./_components/build-list";
 export const metadata: Metadata = {
   title: "Builds",
   description:
-    "Selected fullstack, Web3, and smart contract learning builds from Somto.",
+    "Get to see a selected few of my completed and ongoing projects.",
+
+  alternates: {
+    canonical: "/builds",
+  },
 };
 
 export const revalidate = 900;

@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   EmailIcon,
   EmailShareButton,
@@ -17,6 +16,7 @@ import {
 } from "react-share";
 
 type NoteShareProps = {
+  url: string;
   title: string;
   excerpt?: string;
 };
@@ -24,13 +24,7 @@ type NoteShareProps = {
 const shareButtonClass =
   "transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
-export function NoteShare({ title, excerpt }: NoteShareProps) {
-  const [url, setUrl] = useState("");
-
-  useEffect(() => {
-    setUrl(window.location.href);
-  }, []);
-
+export function NoteShare({ url, title, excerpt }: NoteShareProps) {
   if (!url) return null;
 
   return (
@@ -44,6 +38,7 @@ export function NoteShare({ title, excerpt }: NoteShareProps) {
         separator=" - "
         className={shareButtonClass}
         aria-label="Share on WhatsApp"
+        data-umami-event="whatsapp_share_button_clicked"
       >
         <WhatsappIcon size={34} round />
       </WhatsappShareButton>
@@ -52,6 +47,7 @@ export function NoteShare({ title, excerpt }: NoteShareProps) {
         title={title}
         className={shareButtonClass}
         aria-label="Share on X"
+        data-umami-event="x_share_button_clicked"
       >
         <XIcon size={34} round />
       </XShareButton>
@@ -61,6 +57,7 @@ export function NoteShare({ title, excerpt }: NoteShareProps) {
         summary={excerpt}
         className={shareButtonClass}
         aria-label="Share on LinkedIn"
+        data-umami-event="linkedin_share_button_clicked"
       >
         <LinkedinIcon size={34} round />
       </LinkedinShareButton>
@@ -69,6 +66,7 @@ export function NoteShare({ title, excerpt }: NoteShareProps) {
         title={title}
         className={shareButtonClass}
         aria-label="Share on Telegram"
+        data-umami-event="telegram_share_button_clicked"
       >
         <TelegramIcon size={34} round />
       </TelegramShareButton>
@@ -77,6 +75,7 @@ export function NoteShare({ title, excerpt }: NoteShareProps) {
         hashtag="#SomtoNotes"
         className={shareButtonClass}
         aria-label="Share on Facebook"
+        data-umami-event="fb_share_button_clicked"
       >
         <FacebookIcon size={34} round />
       </FacebookShareButton>
@@ -86,6 +85,7 @@ export function NoteShare({ title, excerpt }: NoteShareProps) {
         body={excerpt}
         className={shareButtonClass}
         aria-label="Share by email"
+        data-umami-event="email_share_button_clicked"
       >
         <EmailIcon size={34} round />
       </EmailShareButton>
