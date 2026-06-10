@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { MobileCoffeeLink } from "@/components/layout/buy-me-coffee-link";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { cn } from "@/lib/utils";
 import { navItems, profile } from "@/lib/fallbacks/portfolio-data";
@@ -114,6 +115,7 @@ export function SiteNav() {
                 </Link>
               );
             })}
+            <MobileCoffeeLink onClick={() => setOpen(false)} />
           </div>
         </nav>
       ) : null}

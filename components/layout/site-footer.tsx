@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { FooterCoffeeLink } from "@/components/layout/buy-me-coffee-link";
+import { NewsletterSignup } from "@/components/common/newsletter-signup";
 import { getContactContent } from "@/lib/api/pages";
 import { navItems, profile, socialLinks } from "@/lib/fallbacks/portfolio-data";
 import { getSocialLinks } from "@/lib/utils";
@@ -30,6 +32,8 @@ export async function SiteFooter() {
           </nav>
         </div>
         <div className="flex flex-wrap gap-3 px-1">
+          <FooterCoffeeLink />
+          <NewsletterSignup />
           {links.map(({ href, label, icon: Icon }) => (
             <a
               key={label}

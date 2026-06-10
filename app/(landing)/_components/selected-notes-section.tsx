@@ -3,7 +3,6 @@ import { ArrowUpRight } from "lucide-react";
 
 import { MotionItem, MotionList } from "@/components/common/motion-primitives";
 import { EmojiCursorArea } from "./emoji-cursor-area";
-import Image from "next/image";
 
 type SelectedNotesSectionProps = {
   content: ILandingContent["selectedNotes"];

@@ -47,3 +47,14 @@ export const likeNoteComment = (slug: string, id: string) =>
   apiPost<ApiResponse<{ id: string; likes: number; liked: boolean }>>(
     `/notes/${slug}/comments/${id}/like`
   );
+
+export const trackNoteRead = (slug: string) =>
+  apiPost<ApiResponse<{ views: number; counted: boolean }>>(
+    `/notes/${slug}/read`
+  );
+
+export const subscribeToNewsletter = (payload: {
+  email: string;
+  source?: string;
+  page?: string;
+}) => apiPost<ApiResponse<{ subscribed: boolean }>>("/newsletter", payload);

@@ -12,6 +12,7 @@ export type PublicNoteListItem = {
   bannerImage?: string;
   tags: string[];
   readTime: string;
+  views: number;
   publishedAt: string | null;
   updatedAt: string;
 };

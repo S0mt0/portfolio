@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 
 import "./globals.css";
 import { jsonLd, seoMetadata } from "@/lib/seo";
+import { isDevelopment } from "@/lib/constants";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -73,11 +74,13 @@ export default function RootLayout({
           <SiteFooter />
         </ThemeProvider>
         <SpeedInsights />
-        <Script
-          src="https://cloud.umami.is/script.js"
-          data-website-id="0f53e08e-cb77-4a0b-b333-a012452c8958"
-          strategy="afterInteractive"
-        />
+        {!isDevelopment ? (
+          <Script
+            src="https://cloud.umami.is/script.js"
+            data-website-id="0f53e08e-cb77-4a0b-b333-a012452c8958"
+            strategy="afterInteractive"
+          />
+        ) : null}
       </body>
     </html>
   );

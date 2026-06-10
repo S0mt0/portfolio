@@ -1,7 +1,7 @@
 import type { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Clock, UserRound } from "lucide-react";
+import { ArrowLeft, Clock, Eye, UserRound } from "lucide-react";
 import { notFound } from "next/navigation";
 
 import { MotionBlock } from "@/components/common/motion-primitives";
@@ -10,9 +10,11 @@ import { RichTextContentRenderer } from "@/components/common/render-richtext";
 import { Badge } from "@/components/ui/badge";
 import { getNoteContent } from "@/lib/api/pages";
 import { NoteComments } from "./_components/note-comments";
+import { NoteReadTracker } from "./_components/note-read-tracker";
 import { NoteShare } from "./_components/note-share";
 import { RelatedNotes } from "./_components/related-notes";
 import { VERSION } from "@/lib/constants";
+import { NewsletterSignup } from "@/components/common/newsletter-signup";
 
 type NotePageProps = {
   params: Promise<{ slug: string }>;
@@ -112,9 +114,9 @@ export default async function NotePage({ params }: NotePageProps) {
           Back to notes
         </Link>
 
-        <article className="space-y-8">
+        <article id="note-article" className="space-y-8">
           <header className="border-b border-border/20 pb-8">
-            <div className="flex flex-wrap items-center gap-2">
+            {/* <div className="flex flex-wrap items-center gap-2">
               {note.tags?.map((tag) => (
                 <Badge
                   key={tag}
@@ -124,7 +126,7 @@ export default async function NotePage({ params }: NotePageProps) {
                   {tag}
                 </Badge>
               ))}
-            </div>
+            </div> */}
 
             <h1 className="mt-5 max-w-4xl text-balance text-4xl font-black leading-[0.95] tracking-[-0.04em] sm:text-6xl">
               {note.title}
@@ -146,13 +148,17 @@ export default async function NotePage({ params }: NotePageProps) {
                 <Clock className="h-4 w-4 text-primary" />
                 {note.readTime}
               </span>
+              <span className="inline-flex items-center gap-2">
+                <Eye className="h-4 w-4 text-primary" />
+                {note.views || 0} {note.views > 0 ? "views" : "view"}
+              </span>
             </div>
           </header>
 
           <NoteShare url={shareUrl} title={note.title} excerpt={note.excerpt} />
 
           {note.bannerImage ? (
-            <figure className="space-y-3">
+            <figure className="space-y-3 mb-12">
               <div className="relative aspect-video overflow-hidden border border-border/25 bg-accent/35">
                 <Image
                   src={note.bannerImage}
@@ -176,6 +182,14 @@ export default async function NotePage({ params }: NotePageProps) {
             className="notes-prose max-w-none text-base leading-8 text-foreground/88"
           />
         </article>
+
+        <NoteReadTracker slug={note.slug} targetId="note-article" />
+        <NewsletterSignup
+          mode="prompt"
+          source={`note:${note.slug}`}
+          triggerAtHalfway
+          targetId="note-article"
+        />
 
         {note.allowComments ? (
           <NoteComments

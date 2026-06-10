@@ -11,7 +11,7 @@ export function RelatedNotes({ notes }: RelatedNotesProps) {
   if (!notes.length) return null;
 
   return (
-    <section className="border-t border-border/20 pt-10">
+    <section className="border-t border-border/20 pt-10 mb-10">
       <p className="font-sketch text-3xl font-bold text-primary">
         Related notes
       </p>
