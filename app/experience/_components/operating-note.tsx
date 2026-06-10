@@ -1,6 +1,8 @@
 import { MotionBlock } from "@/components/common/motion-primitives";
 
-export function OperatingNote({ note }: { note: string }) {
+export function OperatingNote({ note }: { note?: string }) {
+  if (!note) return null;
+
   return (
     <MotionBlock className="mt-8 border border-border/20 bg-card/45 p-5">
       <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">

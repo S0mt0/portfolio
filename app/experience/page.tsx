@@ -50,7 +50,7 @@ export default async function ExperiencePage() {
         })
       )
     : experience;
-  const operatingNote = content?.hero.operatingNote || profile.summary;
+  const operatingNote = content?.hero.operatingNote;
 
   return (
     <PageShell>

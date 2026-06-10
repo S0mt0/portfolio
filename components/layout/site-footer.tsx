@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FooterCoffeeLink } from "@/components/layout/buy-me-coffee-link";
 import { NewsletterSignup } from "@/components/common/newsletter-signup";
 import { getContactContent } from "@/lib/api/pages";
-import { navItems, profile, socialLinks } from "@/lib/fallbacks/portfolio-data";
+import { navItems, socialLinks } from "@/lib/fallbacks/portfolio-data";
 import { getSocialLinks } from "@/lib/utils";
 
 export async function SiteFooter() {
@@ -11,13 +11,15 @@ export async function SiteFooter() {
   const cmsLinks = getSocialLinks(contact?.data?.socials);
   const links = cmsLinks.length ? cmsLinks : socialLinks;
 
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-border/15">
+    <footer className="border-t border-border/15 mt-8">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-8 text-sm text-muted-foreground sm:px-8 lg:px-10">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <p>
-            {profile.handle} / {profile.name}. A small notebook for work,
-            learning, and next steps.
+            Somto &copy;{year} ・ A small notebook for work, learning, and next
+            steps.
           </p>
           <nav aria-label="Footer navigation" className="flex flex-wrap gap-4">
             {navItems.map((item) => (
