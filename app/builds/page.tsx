@@ -48,7 +48,7 @@ export default async function BuildsPage() {
 
   return (
     <PageShell>
-      <SectionHeading {...intro} tag="SAMPLES" />
+      <SectionHeading {...intro} tag="SHOWCASE" />
       <BuildList items={items} />
     </PageShell>
   );

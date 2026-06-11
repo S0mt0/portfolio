@@ -7,7 +7,13 @@ export const jsonLd = {
   "@type": "Person",
 
   name: "Somtochukwu Nkem",
-  alternateName: ["Somto Nkem", "talktosomto", "Sewkito"],
+  alternateName: [
+    "Somto Nkem",
+    "talktosomto",
+    "Sewkito",
+    "Somtochukwu",
+    "Somto",
+  ],
   url: BASE_URL,
   logo: `${BASE_URL}/avatar.png`,
   image: ogImage,

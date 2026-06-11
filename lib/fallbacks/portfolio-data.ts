@@ -24,7 +24,7 @@ export const navItems: NavItem[] = [
   { href: "/experience", label: "Experience", code: "xp" },
   { href: "/builds", label: "Builds", code: "builds" },
   { href: "/notes", label: "Notes", code: "articles" },
-  { href: "/extra", label: "Extra", code: "extras" },
+  // { href: "/extra", label: "Extra", code: "extras" },
   { href: "/contact", label: "Resume", code: "contact" },
 ];
 
@@ -258,7 +258,7 @@ export const pageIntros = {
   extra: {
     icon: Gamepad2,
     eyebrow: "after hours",
-    heading: "Not everything is work.",
+    heading: "The other stuff ",
     description:
       "A loose page for the parts of me that do not fit inside a project registry: games, music, taste, and random personal energy.",
   },

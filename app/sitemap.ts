@@ -34,13 +34,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    {
-      url: `${BASE_URL}/extra`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-      images: [`${BASE_URL}/dp.png?v=${VERSION}`],
-    },
+    // {
+    //   url: `${BASE_URL}/extra`,
+    //   lastModified: new Date(),
+    //   changeFrequency: "monthly",
+    //   priority: 0.7,
+    //   images: [`${BASE_URL}/dp.png?v=${VERSION}`],
+    // },
     {
       url: `${BASE_URL}/builds`,
       lastModified: new Date(),
