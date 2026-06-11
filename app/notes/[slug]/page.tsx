@@ -7,7 +7,6 @@ import { notFound } from "next/navigation";
 import { MotionBlock } from "@/components/common/motion-primitives";
 import { PageShell } from "@/components/common/page-shell";
 import { RichTextContentRenderer } from "@/components/common/render-richtext";
-import { Badge } from "@/components/ui/badge";
 import { getNoteContent } from "@/lib/api/pages";
 import { NoteComments } from "./_components/note-comments";
 import { NoteReadTracker } from "./_components/note-read-tracker";
@@ -143,14 +142,14 @@ export default async function NotePage({ params }: NotePageProps) {
                 {note.author?.name || "Somto"}
               </span>
               <span>{formatDate(note.publishedAt)}</span>
-              <span>Updated {formatDate(note.updatedAt)}</span>
+
               <span className="inline-flex items-center gap-2">
                 <Clock className="h-4 w-4 text-primary" />
                 {note.readTime}
               </span>
               <span className="inline-flex items-center gap-2">
                 <Eye className="h-4 w-4 text-primary" />
-                {note.views || 0} {note.views > 0 ? "views" : "view"}
+                {note.views || 0} {note.views > 1 ? "views" : "view"}
               </span>
             </div>
           </header>

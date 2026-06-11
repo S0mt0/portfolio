@@ -86,14 +86,13 @@
 
   body {
     @apply bg-background text-foreground;
-    background-image:
-      repeating-linear-gradient(
-        to bottom,
-        transparent 0,
-        transparent 2.35rem,
-        color-mix(in oklch, var(--border), transparent 90%) 2.35rem,
-        color-mix(in oklch, var(--border), transparent 90%) calc(2.35rem + 1px)
-      );
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2.35rem,
+      color-mix(in oklch, var(--border), transparent 90%) 2.35rem,
+      color-mix(in oklch, var(--border), transparent 90%) calc(2.35rem + 1px)
+    );
   }
 
   body::before {
@@ -187,5 +186,74 @@
     border-left: 3px solid var(--primary);
     padding-left: 1rem;
     color: var(--muted-foreground);
+  }
+
+  .notes-prose pre {
+    overflow-x: auto;
+    /* border-radius: 1rem; */
+    border: 1px solid color-mix(in oklch, var(--border), transparent 70%);
+    background: #161716;
+    padding: 1rem;
+    color: #d7dee7;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .notes-prose pre code {
+    display: block;
+    min-width: max-content;
+    font-family: inherit;
+  }
+
+  .notes-prose .hljs-keyword,
+  .notes-prose .hljs-literal,
+  .notes-prose .hljs-selector-tag {
+    color: #ff7b72;
+  }
+
+  .notes-prose .hljs-title,
+  .notes-prose .hljs-title.function_,
+  .notes-prose .hljs-function .hljs-title {
+    color: #d2a8ff;
+  }
+
+  .notes-prose .hljs-type,
+  .notes-prose .hljs-class .hljs-title,
+  .notes-prose .hljs-built_in {
+    color: #ffa657;
+  }
+
+  .notes-prose .hljs-attr,
+  .notes-prose .hljs-property,
+  .notes-prose .hljs-variable,
+  .notes-prose .hljs-template-variable {
+    color: #79c0ff;
+  }
+
+  .notes-prose .hljs-string,
+  .notes-prose .hljs-regexp,
+  .notes-prose .hljs-symbol {
+    color: #a5d6ff;
+  }
+
+  .notes-prose .hljs-number,
+  .notes-prose .hljs-boolean {
+    color: #79c0ff;
+  }
+
+  .notes-prose .hljs-comment,
+  .notes-prose .hljs-quote {
+    color: #8b949e;
+  }
+
+  .notes-prose .hljs-meta,
+  .notes-prose .hljs-doctag {
+    color: #7ee787;
+  }
+
+  .notes-prose .hljs-operator,
+  .notes-prose .hljs-punctuation {
+    color: #d7dee7;
   }
 }
