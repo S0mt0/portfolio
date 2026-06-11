@@ -65,10 +65,10 @@ type ILandingContent = {
   };
   aside: {
     studyTitle: string;
-    studyDescription: string;
+    studyDescription?: string;
     studyItems: string[];
     toolboxTitle: string;
-    toolboxDescription: string;
+    toolboxDescription?: string;
     skillGroups: {
       title: string;
       description?: string;

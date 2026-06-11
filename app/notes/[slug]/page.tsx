@@ -115,18 +115,6 @@ export default async function NotePage({ params }: NotePageProps) {
 
         <article id="note-article" className="space-y-8">
           <header className="border-b border-border/20 pb-8">
-            {/* <div className="flex flex-wrap items-center gap-2">
-              {note.tags?.map((tag) => (
-                <Badge
-                  key={tag}
-                  variant="outline"
-                  className="rounded-none bg-background/60"
-                >
-                  {tag}
-                </Badge>
-              ))}
-            </div> */}
-
             <h1 className="mt-5 max-w-4xl text-balance text-4xl font-black leading-[0.95] tracking-[-0.04em] sm:text-6xl">
               {note.title}
             </h1>

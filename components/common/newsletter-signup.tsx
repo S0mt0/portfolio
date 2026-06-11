@@ -46,7 +46,7 @@ export function NewsletterSignup({
 
       const rect = target.getBoundingClientRect();
       const targetTop = rect.top + window.scrollY;
-      const halfway = targetTop + target.offsetHeight * 0.5;
+      const halfway = targetTop + target.offsetHeight * 0.6;
       const viewportBottom = window.scrollY + window.innerHeight;
 
       if (viewportBottom < halfway) return;
@@ -79,7 +79,9 @@ export function NewsletterSignup({
       }
 
       window.localStorage.setItem(SUBSCRIBED_KEY, "1");
-      setMessage("You're in. I’ll only send useful notes.");
+      setMessage(
+        "You're in. I’ll only send notifications when I publish new notes."
+      );
       setEmail("");
       window.setTimeout(() => setOpen(false), 900);
     });
@@ -111,7 +113,8 @@ export function NewsletterSignup({
                 </p>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
                   I occasionally write about building products, backend
-                  engineering, and my journey into smart contract security.
+                  engineering, my journey into smart contract security, and
+                  other relevant articles or news in the tech ecosystem.
                 </p>
                 <p className="mt-2 text-sm font-semibold">
                   No spam. Just new articles and things I am learning.
@@ -121,7 +124,7 @@ export function NewsletterSignup({
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Close newsletter prompt"
-                className="text-muted-foreground hover:text-primary"
+                className="text-muted-foreground hover:text-primary cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>
