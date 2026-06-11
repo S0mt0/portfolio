@@ -51,6 +51,7 @@ export function HeroPortraitCursor({
       <motion.div
         aria-hidden="true"
         className="pointer-events-none absolute left-0 top-0 z-20 hidden h-36 w-36 lg:block"
+        initial={{ opacity: 0 }}
         animate={{
           opacity: visible ? 1 : 0,
           scale: visible ? 1 : 0.88,
@@ -70,7 +71,7 @@ export function HeroPortraitCursor({
         >
           <Image
             src={imageUrl}
-            alt=""
+            alt="Floating theme photo of myself"
             className="h-full w-full scale-110 object-cover object-center"
             style={{ objectPosition: "50% 28%" }}
             loading="eager"
