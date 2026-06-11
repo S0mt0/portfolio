@@ -3,12 +3,13 @@ import { ArrowUpRight } from "lucide-react";
 
 import { MotionItem, MotionList } from "@/components/common/motion-primitives";
 import { EmojiCursorArea } from "./emoji-cursor-area";
+import { NotesEmptyState } from "@/app/notes/_components/notes-empty-state";
 
-type SelectedNotesSectionProps = {
+type RecentNotesSectionProps = {
   content: ILandingContent["selectedNotes"];
 };
 
-export function SelectedNotesSection({ content }: SelectedNotesSectionProps) {
+export function RecentNotesSection({ content }: RecentNotesSectionProps) {
   const featuredNotes = content.items.length
     ? content.items.map((note, index) => ({
         index: String(index + 1).padStart(2, "0"),
@@ -22,7 +23,7 @@ export function SelectedNotesSection({ content }: SelectedNotesSectionProps) {
       }))
     : [];
 
-  if (!featuredNotes.length) return null;
+  if (!featuredNotes.length) return <NotesEmptyState />;
 
   return (
     <EmojiCursorArea item="📝">

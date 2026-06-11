@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { BASE_URL, VERSION } from "../constants";
 
 const siteName = "Somtochukwu Nkem";
-const title = "Somtochukwu Nkem — Full-Stack Developer";
+const title = "Welcome to my Developer Portfolio - Somtochukwu Nkem";
 const description =
   "Full-stack developer building web products, backend systems, and practical tools. I write about engineering, product building, and my path into smart contract security.";
 
@@ -14,7 +14,7 @@ export const seoMetadata: Metadata = {
 
   title: {
     default: title,
-    template: `%s — ${siteName}`,
+    template: `%s | ${siteName}`,
   },
 
   description,
@@ -75,7 +75,10 @@ export const seoMetadata: Metadata = {
 
   keywords: [
     "Somtochukwu Nkemakolam",
+    "Somtochukwu Nkem",
     "Somto Nkem",
+    "Somto",
+    "Somtochukwu",
     "talktosomto",
     "full-stack developer",
     "backend developer",

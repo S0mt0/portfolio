@@ -9,6 +9,7 @@ export const jsonLd = {
   name: "Somtochukwu Nkem",
   alternateName: ["Somto Nkem", "talktosomto", "Sewkito"],
   url: BASE_URL,
+  logo: `${BASE_URL}/avatar.png`,
   image: ogImage,
 
   jobTitle: "Full-Stack Developer",

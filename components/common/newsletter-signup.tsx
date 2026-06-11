@@ -92,12 +92,12 @@ export function NewsletterSignup({
           type="button"
           onClick={() => setOpen(true)}
           className={cn(
-            "inline-flex items-center gap-2 border-b border-border/40 py-1 text-xs font-bold uppercase tracking-[0.12em] transition-colors hover:text-primary",
+            "inline-flex cursor-pointer items-center gap-2 border-b border-border/40 py-1 text-xs font-bold uppercase tracking-[0.12em] transition-colors hover:text-primary",
             className
           )}
         >
           <Mail className="h-3.5 w-3.5" />
-          Newsletter
+          Newsletters
         </button>
       ) : null}
 

@@ -21,7 +21,7 @@ export function FooterCoffeeLink() {
       href={href}
       target="_blank"
       rel="noreferrer noopener"
-      className="group inline-flex items-center gap-3 rounded-full font-sketch mr-8 underline underline-offset-12 decoration-dashed text-base text-primary capitalize tracking-widest transition-transform hover:-rotate-1 hover:translate-y-0.5 font-bold"
+      className="group inline-flex items-center gap-3 rounded-full font-sketch mr-5 underline underline-offset-12 decoration-dashed text-base text-primary capitalize tracking-widest transition-transform hover:-rotate-1 hover:translate-y-0.5 font-bold"
     >
       <CoffeeMark />
       <span className="leading-none">Buy me a coffee</span>
