@@ -73,6 +73,8 @@ export function NewsletterSignup({
         page: typeof window === "undefined" ? undefined : window.location.href,
       });
 
+      console.log({ response });
+
       if (!response?.success) {
         setMessage(response?.message || "Could not subscribe yet.");
         return;

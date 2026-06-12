@@ -26,7 +26,6 @@ export async function apiFetch<T>(
     });
 
     const res = await fetch(url.toString(), {
-      cache: "no-store",
       credentials: "include",
     });
     return readJsonResponse<T>(res);
