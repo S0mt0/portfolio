@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 const SUBSCRIBED_KEY = "somto_newsletter_subscribed";
 const PROMPT_COUNT_KEY = "somto_newsletter_prompt_count";
-const MAX_PROMPTS = 3;
+const MAX_PROMPTS = 2;
 
 type NewsletterSignupProps = {
   mode?: "button" | "prompt";
