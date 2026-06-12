@@ -9,6 +9,10 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/private/"],
     },
-    sitemap: [`${BASE_URL}/sitemap.xml`, `${BASE_URL}/notes/sitemap.xml`],
+    sitemap: [
+      `${BASE_URL}/static-sitemap.xml`,
+      `${BASE_URL}/sitemap.xml`,
+      `${BASE_URL}/notes/sitemap.xml`,
+    ],
   };
 }

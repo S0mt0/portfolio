@@ -1,7 +1,7 @@
 "use client";
 
 import { Heart, MessageCircle, Send, X } from "lucide-react";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useOptimistic, useState, useTransition } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -37,6 +37,18 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
   const [message, setMessage] = useState("");
   const [isPending, startTransition] = useTransition();
 
+  const [optimisticComments, addOptimisticLike] = useOptimistic(
+    comments,
+    (currentComments, commentId: string) =>
+      updateComment(currentComments, commentId, (comment) => ({
+        ...comment,
+        liked: !comment.liked,
+        likes: comment.liked
+          ? Math.max(0, comment.likes - 1)
+          : comment.likes + 1,
+      }))
+  );
+
   useEffect(() => {
     getNoteContent(slug).then((response) => {
       if (response?.data?.comments) setComments(response.data.comments);
@@ -67,6 +79,7 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
           ? addReply(prev, replyTarget.id, response.data!)
           : [response.data!, ...prev]
       );
+
       setForm({ name: "", email: "", website: "", content: "" });
       setReplyTarget(null);
       setMessage("Comment posted.");
@@ -74,9 +87,17 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
   };
 
   const onLike = (id: string) => {
+    setMessage("");
+
     startTransition(async () => {
+      addOptimisticLike(id);
+
       const response = await likeNoteComment(slug, id);
-      if (!response?.data) return;
+
+      if (!response?.data) {
+        setMessage("Could not update like.");
+        return;
+      }
 
       setComments((prev) =>
         updateComment(prev, id, (comment) => ({
@@ -96,6 +117,7 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
       <div className="flex h-11 w-11 items-center justify-center bg-accent font-black">
         {comment.name.charAt(0).toUpperCase()}
       </div>
+
       <div>
         <div className="flex flex-wrap items-center gap-2">
           <p className="font-bold">{comment.name}</p>
@@ -103,9 +125,11 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
             {formatDate(comment.createdAt)}
           </span>
         </div>
+
         <p className="mt-2 text-sm leading-7 text-muted-foreground">
           {comment.content}
         </p>
+
         <div className="mt-2 flex flex-wrap items-center gap-3">
           <Button
             type="button"
@@ -121,6 +145,7 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
             />
             {comment.likes}
           </Button>
+
           <Button
             type="button"
             variant="ghost"
@@ -132,6 +157,7 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
             Reply
           </Button>
         </div>
+
         {comment.replies?.length ? (
           <div
             className={`mt-5 space-y-5 border-l border-border/25 pl-4 ${
@@ -156,8 +182,9 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
             Leave a useful note. Name and email are required.
           </p>
         </div>
+
         <span className="font-mono text-xs font-black uppercase tracking-[0.18em] text-muted-foreground">
-          {comments.length} total
+          {optimisticComments.length} total
         </span>
       </div>
 
@@ -180,6 +207,7 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
             </button>
           </div>
         ) : null}
+
         <div className="grid gap-3 sm:grid-cols-3">
           <input
             value={form.name}
@@ -188,6 +216,7 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
             required
             className="h-11 rounded-none border border-border/35 bg-background/50 px-3 text-sm outline-none focus:border-primary"
           />
+
           <input
             value={form.email}
             onChange={updateField("email")}
@@ -196,6 +225,7 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
             required
             className="h-11 rounded-none border border-border/35 bg-background/50 px-3 text-sm outline-none focus:border-primary"
           />
+
           <input
             value={form.website}
             onChange={updateField("website")}
@@ -203,6 +233,7 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
             className="h-11 rounded-none border border-border/35 bg-background/50 px-3 text-sm outline-none focus:border-primary"
           />
         </div>
+
         <textarea
           value={form.content}
           onChange={updateField("content")}
@@ -210,10 +241,12 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
           required
           className="min-h-32 rounded-none border border-border/35 bg-background/50 p-3 text-sm outline-none focus:border-primary"
         />
+
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="text-xs font-semibold text-muted-foreground">
             {message}
           </p>
+
           <Button type="submit" disabled={isPending} className="rounded-none">
             <Send className="h-4 w-4" />
             Post comment
@@ -221,9 +254,9 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
         </div>
       </form>
 
-      {comments.length ? (
+      {optimisticComments.length ? (
         <div className="mt-6 space-y-5">
-          {comments.map((comment) => renderComment(comment))}
+          {optimisticComments.map((comment) => renderComment(comment))}
         </div>
       ) : null}
     </section>

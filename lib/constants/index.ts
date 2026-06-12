@@ -4,7 +4,7 @@ export const isDevelopment = process.env.NODE_ENV === "development";
 
 export const BASE_URL =
   process.env.NEXT_PUBLIC_BASE_URL ||
-  (isDevelopment ? "http://localhost:3001" : "https://talktosomto.xyz");
+  (isDevelopment ? "http://localhost:3001" : "https://www.talktosomto.xyz");
 
 // export const API_BASE_URL = "https://admin.talktosomto.xyz/api/public";
 
