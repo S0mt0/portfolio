@@ -31,6 +31,7 @@ export function NewsletterSignup({
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
@@ -84,30 +85,29 @@ export function NewsletterSignup({
       }
 
       window.localStorage.setItem(SUBSCRIBED_KEY, "1");
-      setOpenConfetti(true);
-      setMessage(
-        response.message || "Check your email to confirm your subscription."
-      );
-      setEmail("");
 
+      setOpenConfetti(true);
+      setSuccess(true);
+      setMessage(
+        response.message || "Thank you for subscribing to my newsletters."
+      );
+
+      setEmail("");
       window.setTimeout(() => {
-        setOpenConfetti(false);
-      }, 5000);
+        setMessage("");
+        setSuccess(false);
+        setOpen(false);
+      }, 4000);
     });
+
+    setOpenConfetti(false);
   };
 
   return (
     <>
       {openConfetti ? (
         <Confetti
-          gravity={0.1}
-          initialVelocityX={2}
-          initialVelocityY={3.435}
-          numberOfPieces={200}
-          opacity={1}
           recycle={false}
-          run
-          wind={0}
           style={{
             position: "fixed",
             inset: 0,
@@ -177,7 +177,13 @@ export function NewsletterSignup({
               </Button>
 
               {message ? (
-                <p className="text-xs font-semibold text-muted-foreground">
+                <p
+                  className={cn(
+                    "text-xs font-semibold text-muted-foreground p-2",
+                    success ? "bg-secondary" : "bg-primary/10"
+                  )}
+                >
+                  <span className={cn("hidden", success && "inline")}>🎉 </span>
                   {message}
                 </p>
               ) : null}
