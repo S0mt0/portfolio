@@ -11,7 +11,6 @@ export default function robots(): MetadataRoute.Robots {
     },
     sitemap: [
       `${BASE_URL}/static-sitemap.xml`,
-      `${BASE_URL}/sitemap.xml`,
       `${BASE_URL}/notes/sitemap.xml`,
     ],
   };

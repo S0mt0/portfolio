@@ -247,7 +247,11 @@ export function NoteComments({ slug, initialComments }: NoteCommentsProps) {
             {message}
           </p>
 
-          <Button type="submit" disabled={isPending} className="rounded-none">
+          <Button
+            type="submit"
+            disabled={isPending}
+            className="rounded-none disabled:opacity-100 disabled:cursor-default"
+          >
             <Send className="h-4 w-4" />
             Post comment
           </Button>
