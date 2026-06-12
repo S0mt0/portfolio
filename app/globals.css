@@ -153,7 +153,7 @@
     font-size: clamp(1.35rem, 2vw, 1.9rem);
   }
 
-  .notes-prose :where(p, ul, ol, blockquote, pre, iframe) {
+  .notes-prose :where(p, ul, ol, blockquote, pre, iframe, figure) {
     margin-block: 1rem;
   }
 
@@ -180,6 +180,27 @@
   .notes-prose iframe {
     max-width: 100%;
     border: 1px solid color-mix(in oklch, var(--border), transparent 70%);
+  }
+
+  .notes-prose figure[data-type="image"],
+  .notes-prose figure.tiptap-image-figure {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .notes-prose figure[data-type="image"] img,
+  .notes-prose figure.tiptap-image-figure img {
+    margin: 0;
+  }
+
+  .notes-prose figcaption,
+  .notes-prose .tiptap-image-caption {
+    color: var(--muted-foreground);
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.5;
+    text-align: center;
   }
 
   .notes-prose blockquote {

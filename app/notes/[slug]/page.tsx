@@ -157,7 +157,7 @@ export default async function NotePage({ params }: NotePageProps) {
                 />
               </div>
               {note.bannerCaption ? (
-                <figcaption className="text-sm text-muted-foreground">
+                <figcaption className="text-sm text-muted-foreground text-center italic">
                   {note.bannerCaption}
                 </figcaption>
               ) : null}
