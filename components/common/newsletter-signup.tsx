@@ -2,6 +2,7 @@
 
 import { Mail, Send, X } from "lucide-react";
 import { useEffect, useState, useTransition } from "react";
+import Confetti from "react-confetti";
 
 import { Button } from "@/components/ui/button";
 import { subscribeToNewsletter } from "@/lib/api/pages";
@@ -26,6 +27,7 @@ export function NewsletterSignup({
   targetId,
   className,
 }: NewsletterSignupProps) {
+  const [openConfetti, setOpenConfetti] = useState(false);
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -80,17 +82,31 @@ export function NewsletterSignup({
         return;
       }
 
-      window.localStorage.setItem(SUBSCRIBED_KEY, "1");
-      setMessage(
-        "You're in. I’ll only send notifications when I publish new notes."
-      );
-      setEmail("");
-      window.setTimeout(() => setOpen(false), 900);
+      if (response.data?.subscribed) {
+        window.localStorage.setItem(SUBSCRIBED_KEY, "1");
+        setMessage(
+          response.message || "Thank you for signing up to my newsletters"
+        );
+        setEmail("");
+        window.setTimeout(() => setOpenConfetti(false), 7000);
+      }
     });
   };
 
   return (
     <>
+      {openConfetti ? (
+        <Confetti
+          gravity={0.1}
+          initialVelocityX={2}
+          initialVelocityY={3.435}
+          numberOfPieces={200}
+          opacity={1}
+          recycle
+          run
+          wind={0}
+        />
+      ) : null}
       {mode === "button" ? (
         <button
           type="button"
@@ -104,7 +120,6 @@ export function NewsletterSignup({
           Newsletters
         </button>
       ) : null}
-
       {open ? (
         <div className="fixed inset-0 z-50 grid place-items-center bg-background/35 px-4">
           <div className="w-full max-w-md border border-border/30 bg-background p-5 shadow-[8px_8px_0_hsl(var(--foreground)/0.08)]">
