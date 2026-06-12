@@ -9,18 +9,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
-      images: [
-        `${BASE_URL}/seo/opengraph-image.jpg?v=${VERSION}`,
-        `${BASE_URL}/avatar.png?v=${VERSION}`,
-        `${BASE_URL}/dp.png?v=${VERSION}`,
-      ],
     },
     {
       url: `${BASE_URL}/notes`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
-      images: [`${BASE_URL}/seo/blank-book.jpg?v=${VERSION}`],
     },
     {
       url: `${BASE_URL}/contact`,
@@ -39,7 +33,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     //   lastModified: new Date(),
     //   changeFrequency: "monthly",
     //   priority: 0.7,
-    //   images: [`${BASE_URL}/dp.png?v=${VERSION}`],
     // },
     {
       url: `${BASE_URL}/builds`,
