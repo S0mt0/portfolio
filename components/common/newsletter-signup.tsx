@@ -40,6 +40,7 @@ export function NewsletterSignup({
     const promptCount = Number(
       window.localStorage.getItem(PROMPT_COUNT_KEY) ?? "0"
     );
+
     if (promptCount >= MAX_PROMPTS) return;
 
     const onScroll = () => {
@@ -82,14 +83,16 @@ export function NewsletterSignup({
         return;
       }
 
-      if (response.data?.subscribed) {
-        window.localStorage.setItem(SUBSCRIBED_KEY, "1");
-        setMessage(
-          response.message || "Thank you for signing up to my newsletters"
-        );
-        setEmail("");
-        window.setTimeout(() => setOpenConfetti(false), 7000);
-      }
+      window.localStorage.setItem(SUBSCRIBED_KEY, "1");
+      setOpenConfetti(true);
+      setMessage(
+        response.message || "Check your email to confirm your subscription."
+      );
+      setEmail("");
+
+      window.setTimeout(() => {
+        setOpenConfetti(false);
+      }, 5000);
     });
   };
 
@@ -102,11 +105,18 @@ export function NewsletterSignup({
           initialVelocityY={3.435}
           numberOfPieces={200}
           opacity={1}
-          recycle
+          recycle={false}
           run
           wind={0}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 9999,
+            pointerEvents: "none",
+          }}
         />
       ) : null}
+
       {mode === "button" ? (
         <button
           type="button"
@@ -120,6 +130,7 @@ export function NewsletterSignup({
           Newsletters
         </button>
       ) : null}
+
       {open ? (
         <div className="fixed inset-0 z-50 grid place-items-center bg-background/35 px-4">
           <div className="w-full max-w-md border border-border/30 bg-background p-5 shadow-[8px_8px_0_hsl(var(--foreground)/0.08)]">
@@ -128,20 +139,23 @@ export function NewsletterSignup({
                 <p className="font-sketch text-3xl font-bold text-primary">
                   Stay in the loop.
                 </p>
+
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
                   I occasionally write about building products, backend
                   engineering, my journey into smart contract security, and
                   other relevant articles or news in the tech ecosystem.
                 </p>
+
                 <p className="mt-2 text-sm font-semibold">
                   No spam. Just new articles and things I am learning.
                 </p>
               </div>
+
               <button
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Close newsletter prompt"
-                className="text-muted-foreground hover:text-primary cursor-pointer"
+                className="cursor-pointer text-muted-foreground hover:text-primary"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -156,10 +170,12 @@ export function NewsletterSignup({
                 placeholder="you@example.com"
                 className="h-12 rounded-none border border-border/35 bg-background px-3 text-sm outline-none focus:border-primary"
               />
+
               <Button type="submit" disabled={isPending}>
                 <Send className="h-4 w-4" />
                 {isPending ? "Subscribing..." : "Subscribe"}
               </Button>
+
               {message ? (
                 <p className="text-xs font-semibold text-muted-foreground">
                   {message}
