@@ -1,4 +1,4 @@
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Clock, Eye, UserRound } from "lucide-react";
@@ -19,17 +19,14 @@ type NotePageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata(
-  { params }: NotePageProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: NotePageProps): Promise<Metadata> {
   const { slug } = await params;
 
   const note = (await getNoteContent(slug))?.data;
 
   if (!note) return { title: "Note not found" };
-
-  const previousImages = (await parent).openGraph?.images || [];
 
   const imageUrl = note.bannerImage
     ? `${note.bannerImage}?v=${VERSION}`
@@ -62,7 +59,6 @@ export async function generateMetadata(
           height: 630,
           alt: note.title,
         },
-        ...previousImages,
       ],
     },
 
@@ -77,22 +73,12 @@ export async function generateMetadata(
 
 const formatDate = (value?: string | null) =>
   value
-    ? new Intl.DateTimeFormat("en", {
+    ? new Intl.DateTimeFormat("en-NG", {
         day: "2-digit",
         month: "long",
         year: "numeric",
       }).format(new Date(value))
     : "Unpublished";
-
-const getSiteUrl = () => {
-  const explicitUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  if (explicitUrl) return explicitUrl.replace(/\/$/, "");
-
-  const vercelUrl = process.env.VERCEL_URL;
-  if (vercelUrl) return `https://${vercelUrl.replace(/\/$/, "")}`;
-
-  return "https://talktosomto.xyz";
-};
 
 export default async function NotePage({ params }: NotePageProps) {
   const { slug } = await params;
@@ -101,7 +87,9 @@ export default async function NotePage({ params }: NotePageProps) {
 
   if (!note) notFound();
 
-  const shareUrl = `${getSiteUrl()}/notes/${note.slug}`;
+  const shareUrl = `${
+    process.env.NEXT_PUBLIC_BASE_URL || "https://talktosomto.xyz"
+  }/notes/${note.slug}`;
 
   return (
     <PageShell>
