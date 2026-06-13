@@ -18,6 +18,7 @@ ${urls
     (url) => `  <url>
     <loc>${url}</loc>
     <lastmod>${now}</lastmod>
+    <changefreq>${url.includes("notes") ? "weekly" : "monthly"}</changefreq>
   </url>`
   )
   .join("\n")}

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, MoveUpRight } from "lucide-react";
 
 import { MotionItem, MotionList } from "@/components/common/motion-primitives";
 import { Badge } from "@/components/ui/badge";
@@ -45,7 +45,10 @@ export function NotesList({ notes, page }: NotesListProps) {
                 </h2>
               </Link>
               {note.tags?.[0] ? (
-                <Badge variant="outline" className="rounded-none bg-background/60">
+                <Badge
+                  variant="outline"
+                  className="rounded-none bg-background/60"
+                >
                   {note.tags[0]}
                 </Badge>
               ) : null}
@@ -57,7 +60,7 @@ export function NotesList({ notes, page }: NotesListProps) {
               href={`/notes/${note.slug}`}
               className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
             >
-              Read note / {note.readTime}
+              Read note <MoveUpRight />
               <ArrowUpRight className="h-4 w-4" />
             </Link>
           </div>
