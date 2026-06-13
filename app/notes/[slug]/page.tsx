@@ -124,10 +124,7 @@ export default async function NotePage({ params }: NotePageProps) {
                 <Clock className="h-4 w-4 text-primary" />
                 {note.readTime}
               </span>
-              <span className="inline-flex items-center gap-2">
-                <Eye className="h-4 w-4 text-primary" />
-                {note.views || 0} {note.views > 1 ? "views" : "view"}
-              </span>
+     
             </div>
           </header>
 
