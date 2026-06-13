@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, MoveUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import { MotionItem, MotionList } from "@/components/common/motion-primitives";
 import { EmojiCursorArea } from "./emoji-cursor-area";
@@ -75,7 +75,7 @@ export function RecentNotesSection({ content }: RecentNotesSectionProps) {
                     href={`/notes/${note.slug}`}
                     className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary"
                   >
-                    Read note <MoveUpRight />
+                    Read note
                     <ArrowUpRight className="h-4 w-4" />
                   </Link>
                 </div>
