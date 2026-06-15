@@ -122,7 +122,7 @@ export function NewsletterSignup({
           type="button"
           onClick={() => setOpen(true)}
           className={cn(
-            "inline-flex cursor-pointer items-center gap-2 border-b border-border/40 py-1 text-xs font-bold uppercase tracking-[0.12em] transition-colors hover:text-primary",
+            "inline-flex cursor-pointer items-center gap-2 py-1 text-xs font-bold uppercase tracking-[0.12em] transition-colors hover:text-primary",
             className
           )}
         >

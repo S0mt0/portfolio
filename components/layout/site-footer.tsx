@@ -35,6 +35,7 @@ export async function SiteFooter() {
         </div>
         <div className="flex flex-wrap gap-3 px-1">
           <FooterCoffeeLink />
+          <span className="self-center mx-4">►</span>
           <NewsletterSignup />
           <span className="self-center mx-4">►</span>
           {links.map(({ href, label, icon: Icon }) => (

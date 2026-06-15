@@ -1,5 +1,7 @@
 "use client";
 
+import { Check, Link } from "lucide-react";
+import { useState } from "react";
 import {
   EmailIcon,
   EmailShareButton,
@@ -14,6 +16,7 @@ import {
   XIcon,
   XShareButton,
 } from "react-share";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 type NoteShareProps = {
   url: string;
@@ -25,6 +28,8 @@ const shareButtonClass =
   "transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
 export function NoteShare({ url, title, excerpt }: NoteShareProps) {
+  const [copied, setCopied] = useState(false);
+
   if (!url) return null;
 
   return (
@@ -32,6 +37,7 @@ export function NoteShare({ url, title, excerpt }: NoteShareProps) {
       <p className="mr-1 font-mono text-xs font-black uppercase tracking-[0.16em] text-muted-foreground">
         Share
       </p>
+
       <WhatsappShareButton
         url={url}
         title={title}
@@ -89,6 +95,26 @@ export function NoteShare({ url, title, excerpt }: NoteShareProps) {
       >
         <EmailIcon size={34} round />
       </EmailShareButton>
+      <CopyToClipboard
+        text={url}
+        onCopy={() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1000);
+        }}
+      >
+        <button
+          className="inline-flex h-8.5 w-8.5 items-center justify-center rounded-full border border-border/30 bg-foreground text-background transition-transform hover:-translate-y-0.5 cursor-pointer"
+          aria-label={copied ? "Link copied" : "Copy link"}
+          data-umami-event="copy_link_button_clicked"
+          title="Copy note link to clipboard"
+        >
+          {copied ? (
+            <Check className="h-4 w-4 shrink-0" />
+          ) : (
+            <Link className="h-4 w-4 shrink-0" />
+          )}
+        </button>
+      </CopyToClipboard>
     </section>
   );
 }

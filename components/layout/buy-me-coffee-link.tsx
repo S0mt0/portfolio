@@ -1,6 +1,7 @@
 import { Coffee } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const href = "https://buymeacoffee.com/nsomto";
 
@@ -21,10 +22,20 @@ export function FooterCoffeeLink() {
       href={href}
       target="_blank"
       rel="noreferrer noopener"
-      className="group inline-flex items-center gap-3 rounded-full font-sketch mr-5 underline underline-offset-12 decoration-dashed text-base text-primary capitalize tracking-widest transition-transform hover:-rotate-1 hover:translate-y-0.5 font-bold"
+      className="group inline-flex items-center gap-2 py-1 text-xs font-bold uppercase tracking-[0.12em] transition-all hover:text-primary hover:-rotate-1 hover:translate-y-0.5"
     >
-      <CoffeeMark />
+      {/* <CoffeeMark /> */}
       <span className="leading-none">Buy me a coffee</span>
+
+      <div className="h-12 w-12">
+        <Image
+          src={"/bmc.png"}
+          width={100}
+          height={100}
+          alt="Steamy cup of coffee"
+          className="object-cover object-center"
+        />
+      </div>
     </a>
   );
 }
@@ -43,10 +54,20 @@ export function MobileCoffeeLink({
         target="_blank"
         rel="noreferrer noopener"
         onClick={onClick}
-        className="ml-auto inline-flex max-w-max items-center gap-2 rounded-full border border-foreground/20 bg-[#c9f29b] px-3 py-1.5 text-[0.65rem] font-black uppercase tracking-[0.12em] text-foreground shadow-[3px_3px_0_#111827] transition-transform hover:-rotate-2 dark:text-black"
+        // className="ml-auto inline-flex max-w-max items-center gap-2 rounded-full border border-foreground/20 bg-[#c9f29b] px-3 py-1.5 text-[0.65rem] font-black uppercase tracking-[0.12em] text-foreground shadow-[3px_3px_0_#111827] transition-transform hover:-rotate-2 dark:text-black"
+        className="ml-auto inline-flex max-w-max items-center gap-2 text-[0.65rem] font-black transition-transform hover:-rotate-2 uppercase"
       >
-        <CoffeeMark />
-        Buy Me A Coffee
+        {/* <CoffeeMark /> */}
+        <div className="h-12 w-12">
+          <Image
+            src={"/bmc.png"}
+            width={100}
+            height={100}
+            alt="Steamy cup of coffee"
+            className="object-cover object-center"
+          />
+        </div>
+        <span>Buy Me A Coffee ?</span>
       </a>
     </div>
   );

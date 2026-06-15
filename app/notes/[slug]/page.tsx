@@ -12,7 +12,7 @@ import { NoteComments } from "./_components/note-comments";
 import { NoteReadTracker } from "./_components/note-read-tracker";
 import { NoteShare } from "./_components/note-share";
 import { RelatedNotes } from "./_components/related-notes";
-import { VERSION } from "@/lib/constants";
+import { BASE_URL, VERSION } from "@/lib/constants";
 import { NewsletterSignup } from "@/components/common/newsletter-signup";
 
 type NotePageProps = {
@@ -28,15 +28,18 @@ export async function generateMetadata({
 
   if (!note) return { title: "Note not found" };
 
-  const imageUrl = note.bannerImage
-    ? `${note.bannerImage}?v=${VERSION}`
-    : `/blank-book.jpg?v=${VERSION}`;
+  const ogImageUrl = new URL(
+    `/notes/${slug}/opengraph-image?v=${VERSION}`,
+    BASE_URL
+  ).toString();
+
+  const noteUrl = new URL(`/notes/${slug}`, BASE_URL).toString();
 
   const description = note.excerpt || "Read the latest notes by Somto";
 
   return {
     alternates: {
-      canonical: `/notes/${slug}`,
+      canonical: noteUrl,
     },
 
     title: note.title,
@@ -46,7 +49,7 @@ export async function generateMetadata({
     openGraph: {
       title: note.title,
       description,
-      url: `/notes/${slug}`,
+      url: noteUrl,
       type: "article",
       publishedTime: note.publishedAt
         ? new Date(note.publishedAt).toISOString()
@@ -54,7 +57,7 @@ export async function generateMetadata({
       authors: note.author?.name ? [note.author.name] : ["Somtochukwu Nkem"],
       images: [
         {
-          url: imageUrl,
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: note.title,
@@ -66,7 +69,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: note.title,
       description,
-      images: [imageUrl],
+      images: [ogImageUrl],
     },
   };
 }
@@ -87,9 +90,7 @@ export default async function NotePage({ params }: NotePageProps) {
 
   if (!note) notFound();
 
-  const shareUrl = `${
-    process.env.NEXT_PUBLIC_BASE_URL || "https://talktosomto.xyz"
-  }/notes/${note.slug}`;
+  const shareUrl = new URL(`/notes/${slug}`, BASE_URL).toString();
 
   return (
     <PageShell>
@@ -123,10 +124,6 @@ export default async function NotePage({ params }: NotePageProps) {
               <span className="inline-flex items-center gap-2">
                 <Clock className="h-4 w-4 text-primary" />
                 {note.readTime}
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <Eye className="h-4 w-4 text-primary" />
-                {note.views || 0} {note.views > 1 ? "views" : "view"}
               </span>
             </div>
           </header>

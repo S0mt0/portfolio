@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { BASE_URL, VERSION } from "../constants";
 
 const siteName = "Somtochukwu Nkem";
-const title = "Welcome to my Developer Portfolio - Somtochukwu Nkem";
+const title = "Welcome to my Developer Portfolio";
 const description =
-  "Full-stack developer building web products, backend systems, and practical tools. I write about engineering, product building, and my path into smart contract security.";
+  "A personal site for my work, notes, experiments, and everything I am learning across software engineering and smart contract security.";
 
 const ogImage = `/seo/opengraph-image.png?v=${VERSION}`;
 
@@ -90,6 +90,7 @@ export const seoMetadata: Metadata = {
     "Solidity developer",
     "smart contract security",
     "developer portfolio Nigeria",
+    "Web3",
   ],
 
   category: "Technology",

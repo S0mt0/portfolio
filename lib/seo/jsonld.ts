@@ -20,7 +20,7 @@ export const jsonLd = {
 
   jobTitle: "Full-Stack Developer",
   description:
-    "Somtochukwu Nkem is a full-stack developer building web products and backend systems, with growing work in smart contract development and security.",
+    "Somtochukwu Nkem is a full-stack developer focused on web products and backend systems, with an active interest in smart contract development and security.",
 
   nationality: {
     "@type": "Country",
@@ -48,6 +48,7 @@ export const jsonLd = {
     "Foundry",
     "Smart contract development",
     "Smart contract security",
+    "web3",
   ],
 
   sameAs: [
