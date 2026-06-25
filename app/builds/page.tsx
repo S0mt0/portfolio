@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 900;
+export const revalidate = 1800;
 
 export default async function BuildsPage() {
   const response = await getBuildsContent();

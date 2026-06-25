@@ -78,8 +78,8 @@ export function SelectedWorksSection({ content }: SelectedWorksSectionProps) {
                         href={build.githubHref}
                         target="_blank"
                         rel="noreferrer noopener"
-                        data-umami-event="project_github_clicked"
-                        data-umami-event-project={build.name}
+                        data-umami-event="Project's Github Link Clicked"
+                        data-umami-event-project_name={build.name}
                       >
                         GitHub
                         <Code2 className="h-3.5 w-3.5" />
@@ -96,8 +96,8 @@ export function SelectedWorksSection({ content }: SelectedWorksSectionProps) {
                         href={build.liveHref}
                         target="_blank"
                         rel="noreferrer noopener"
-                        data-umami-event="project_live_view_clicked"
-                        data-umami-event-project={build.liveHref}
+                        data-umami-event="Project's Live URL Clicked"
+                        data-umami-event-project_link={build.liveHref}
                       >
                         View
                         <ExternalLink className="h-3.5 w-3.5" />

@@ -35,23 +35,27 @@ export async function SiteFooter() {
         </div>
         <div className="flex flex-wrap gap-3 px-1">
           <FooterCoffeeLink />
-          <span className="self-center mx-4">►</span>
+          <span className="self-center mx-4 hidden sm:inline-flex">►</span>
           <NewsletterSignup />
-          <span className="self-center mx-4">►</span>
-          {links.map(({ href, label, icon: Icon }) => (
-            <a
-              key={label}
-              href={href}
-              target={href.startsWith("http") ? "_blank" : undefined}
-              rel={href.startsWith("http") ? "noreferrer noopener" : undefined}
-              data-umami-event="social_link_clicked"
-              data-umami-event-link={label}
-              className="inline-flex items-center gap-2 border-b border-border/40 py-1 text-xs font-bold uppercase tracking-[0.12em] transition-colors hover:text-primary"
-            >
-              <Icon className="h-3.5 w-3.5" />
-              {label}
-            </a>
-          ))}
+          <span className="self-center mx-4 hidden sm:inline-flex">►</span>
+          <div className="flex items-center justify-center gap-6">
+            {links.map(({ href, label, icon: Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={
+                  href.startsWith("http") ? "noreferrer noopener" : undefined
+                }
+                data-umami-event="Social Link Clicked"
+                data-umami-event-link={label}
+                className="inline-flex items-center gap-2 border-b border-border/40 py-1 text-xs font-bold uppercase tracking-[0.12em] transition-colors hover:text-primary"
+              >
+                <Icon className="h-3.5 w-3.5" />
+                {label}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

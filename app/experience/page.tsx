@@ -3,11 +3,7 @@ import type { Metadata } from "next";
 import { PageShell } from "@/components/common/page-shell";
 import { SectionHeading } from "@/components/common/section-heading";
 import { getExperienceContent } from "@/lib/api/pages";
-import {
-  experience,
-  pageIntros,
-  profile,
-} from "@/lib/fallbacks/portfolio-data";
+import { experience, pageIntros } from "@/lib/fallbacks/portfolio-data";
 import type {
   ExperienceItem,
   ExperiencePageContent,
@@ -24,7 +20,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 900;
+export const revalidate = 1800;
 
 export default async function ExperiencePage() {
   const response = await getExperienceContent();

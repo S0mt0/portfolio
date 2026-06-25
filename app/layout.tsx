@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 import { jsonLd, seoMetadata } from "@/lib/seo";
 import { isDevelopment } from "@/lib/constants";
+import { ProgressBar } from "@/components/common/progress-bar";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -69,6 +70,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full text-foreground">
         <ThemeProvider>
+          <ProgressBar />
           <SiteNav />
           {children}
           <SiteFooter />
@@ -77,7 +79,7 @@ export default function RootLayout({
         {!isDevelopment ? (
           <Script
             src="https://cloud.umami.is/script.js"
-            data-website-id="0f53e08e-cb77-4a0b-b333-a012452c8958"
+            data-website-id={process.env.NEXT_PUBLIC_UMAMI_APP_ID}
             strategy="afterInteractive"
           />
         ) : null}

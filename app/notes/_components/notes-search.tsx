@@ -45,8 +45,8 @@ export function NotesSearch({ defaultValue = "" }: NotesSearchProps) {
         type="submit"
         variant="outline"
         disabled={isPending}
-        data-umami-event="note_search_button_clicked"
-        data-umami-event-link={value}
+        data-umami-event="Note Search Button Clicked"
+        data-umami-event-query={value}
       >
         Search
       </Button>

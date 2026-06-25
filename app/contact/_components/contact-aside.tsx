@@ -32,7 +32,7 @@ export function ContactAside({ helperNote, socials }: ContactAsideProps) {
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
               rel={href.startsWith("http") ? "noreferrer noopener" : undefined}
-              data-umami-event="social_link_clicked"
+              data-umami-event="Social Link Clicked"
               data-umami-event-link={label}
               className="group flex items-center justify-between border-b border-border/20 py-3 text-sm font-bold last:border-b-0 hover:text-primary"
             >

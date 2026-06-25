@@ -141,7 +141,7 @@ export function ContactForm({ cvUrl }: ContactFormProps) {
             variant="outline"
             className="h-11 rounded-none border-border/40 bg-transparent px-5"
           >
-            <a href={cvUrl} download data-umami-event="resume_downloaded">
+            <a href={cvUrl} download data-umami-event="Resume Downloaded">
               Download CV
               <Download className="h-4 w-4" />
             </a>
