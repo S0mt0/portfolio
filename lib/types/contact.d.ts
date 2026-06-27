@@ -19,7 +19,7 @@ export type ContactPageContent = {
   key: "contact";
   hero: {
     eyebrow: string;
-    title: string;
+    title?: string;
     description?: string;
   };
   cvUrl?: string;

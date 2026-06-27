@@ -3,7 +3,7 @@ import type { LucideIcon } from "lucide-react";
 export type ExperiencePageContent = {
   hero: {
     eyebrow: string;
-    title: string;
+    title?: string;
     description?: string;
     operatingNote?: string;
   };
@@ -21,7 +21,7 @@ export type ExperiencePageContent = {
 export type BuildsPageContent = {
   hero: {
     eyebrow: string;
-    title: string;
+    title?: string;
     description?: string;
   };
   items: Array<{
