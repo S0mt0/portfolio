@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { FooterCoffeeLink } from "@/components/layout/buy-me-coffee-link";
+// import { FooterCoffeeLink } from "@/components/layout/buy-me-coffee-link";
 import { NewsletterSignup } from "@/components/common/newsletter-signup";
 import { getContactContent } from "@/lib/api/pages";
 import { navItems, socialLinks } from "@/lib/fallbacks/portfolio-data";
@@ -34,7 +34,7 @@ export async function SiteFooter() {
           </nav>
         </div>
         <div className="flex flex-wrap gap-3 px-1">
-          <FooterCoffeeLink />
+          {/* <FooterCoffeeLink /> */}
           <span className="self-center mx-4 hidden sm:inline-flex">►</span>
           <NewsletterSignup />
           <span className="self-center mx-4 hidden sm:inline-flex">►</span>

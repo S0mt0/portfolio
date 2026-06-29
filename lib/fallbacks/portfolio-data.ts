@@ -20,7 +20,7 @@ import {
 } from "../types/experience";
 
 export const navItems: NavItem[] = [
-  { href: "/", label: "Profile", code: "home" },
+  { href: "/", label: "Profile", code: "welcome" },
   { href: "/experience", label: "Experience", code: "xp" },
   { href: "/builds", label: "Builds", code: "builds" },
   { href: "/notes", label: "Notes", code: "articles" },
