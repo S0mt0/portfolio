@@ -86,10 +86,9 @@ export function ContactForm({ cvUrl }: ContactFormProps) {
             <option value="" disabled>
               Choose one
             </option>
-            <option>Backend system</option>
-            <option>Frontend product</option>
-            <option>Fullstack product</option>
-            <option>Solidity support</option>
+            <option>Backend role</option>
+            <option>Frontend role</option>
+            <option>Fullstack role</option>
             <option>Code review</option>
             <option>Mentorship</option>
             <option>Collaboration</option>
