@@ -92,6 +92,7 @@ export function ContactForm({ cvUrl }: ContactFormProps) {
             <option>Code review</option>
             <option>Mentorship</option>
             <option>Collaboration</option>
+            <option>Full-time employment</option>
           </select>
         </label>
         <label className="grid gap-2 text-sm font-bold">
